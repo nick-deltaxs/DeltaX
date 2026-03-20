@@ -1,7 +1,6 @@
-# DeltaX Website Wireframes v3
+# DeltaX Website Wireframes
 
-> Full-scroll user experience for all 5 pages.
-> What the visitor sees when they open thesx.co in a browser.
+> Full-scroll user experience for all 5 pages. What the visitor sees when they open thesx.co in a browser.
 
 ---
 
@@ -12,7 +11,7 @@
 │ ○ ○ ○            thesx.co                                  ⟳    │
 ├──────────────────────────────────────────────────────────────────┤
 │                                                                  │
-│  ΔX         About    Services ▾    Contact   Book Your ΔX Audit →│
+│  ΔX         About    Services ▾    Contact   Join the Waitlist   │
 │                                                                  │
 │░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░│
 │░░░░░░░░░░░░░░ teal glow, breathing ░░░░░░░░░░░░░░░░░░░░░░░░░░░│
@@ -35,10 +34,13 @@
 │  into each other.                         ░░░░ ◤  ◣ ░░░░        │
 │                                            ░░░░░◤◣░░░░░         │
 │                                              ░░░░░░░░░          │
-│  ┌───────────────────────────┐                 ░░░░░            │
-│  │  Book Your ΔX Audit  →   │                                   │
-│  └───────────────────────────┘           breathing teal glow     │
-│                                          follows your cursor     │
+│  ┌────────────────────┐ ┌──────────────────────┐  ░░░░░         │
+│  │  Enter your email  │ │ Join the Waitlist  → │                 │
+│  └────────────────────┘ └──────────────────────┘                 │
+│                                          breathing teal glow     │
+│  Join 0+ founders waiting for            follows your cursor     │
+│  early access.                                                   │
+│                                                                  │
 │  Built for companies doing $500K–$10M                            │
 │  who've outgrown the agency model.                               │
 │                                                                  │
@@ -255,9 +257,11 @@
 │  ┌──────────────────────────────────────────────────────────┐    │
 │  │                                                          │    │
 │  │    Not sure which engines you need?                      │    │
-│  │    The audit will tell you.                              │    │
+│  │    Join the waitlist — we'll tell you.                   │    │
 │  │                                                          │    │
-│  │              [ Book Your ΔX Audit → ]                    │    │
+│  │      ┌────────────────────┐ ┌──────────────────────┐    │    │
+│  │      │  Enter your email  │ │ Join the Waitlist  → │    │    │
+│  │      └────────────────────┘ └──────────────────────┘    │    │
 │  │                                                          │    │
 │  └──────────────────────────────────────────────────────────┘    │
 │                                                                  │
@@ -384,11 +388,10 @@
 │       ████████████                                               │
 │       ████████████  large teal number                            │
 │                                                                  │
-│       Book Your ΔX Audit                                        │
+│       Join the Waitlist                                          │
 │                                                                  │
-│       We'll show you what's costing you.                         │
-│       No pitch. You talk, we diagnose.                           │
-│       15 minutes.                                                │
+│       Secure your spot. We're onboarding in                      │
+│       waves — early access means priority.                       │
 │                                                                  │
 │       │  teal timeline connector                                 │
 │       │                                                          │
@@ -418,7 +421,7 @@
 │                                                                  │
 │                  SECTION 7: YOUR PATH                             │
 │                  deep teal band, large staggered numbers          │
-│                  risk reversal in step 2                          │
+│                  waitlist entry in step 1                         │
 │░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░│
 │                                                                  │
 │━━━━━━━━━━ 1px teal border marks the transition ━━━━━━━━━━━━━━━━│
@@ -438,15 +441,13 @@
 │                                                                  │
 │                                                                  │
 │            YOU'VE SEEN THE SYSTEM.                                │
-│                 LET'S SCOPE YOURS.                                │
+│               JOIN THE WAITLIST.                                  │
 │                                                                  │
-│            Now accepting new engagements.                        │
+│            Be first in line when we launch.                      │
 │                                                                  │
-│            ┌───────────────────────────────┐                     │
-│            │                               │                     │
-│            │   Book Your ΔX Audit    →     │                     │
-│            │                               │                     │
-│            └───────────────────────────────┘                     │
+│            ┌────────────────────┐ ┌──────────────────────┐       │
+│            │  Enter your email  │ │ Join the Waitlist  → │       │
+│            └────────────────────┘ └──────────────────────┘       │
 │                  shimmer on hover                                │
 │                                                                  │
 │                  SECTION 8: FINAL CTA                            │
@@ -484,7 +485,7 @@
 │ ○ ○ ○            thesx.co/about                            ⟳    │
 ├──────────────────────────────────────────────────────────────────┤
 │                                                                  │
-│  ΔX         About    Services ▾    Contact   Book Your ΔX Audit →│
+│  ΔX         About    Services ▾    Contact   Join the Waitlist   │
 │                                                                  │
 │░░░░░░░░░░░░░░ teal atmosphere ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░│
 │                                                                  │
@@ -557,7 +558,9 @@
 │                                                                  │
 │            Ready to work with us?                                │
 │                                                                  │
-│            [ Book Your ΔX Audit → ]                              │
+│      ┌────────────────────┐ ┌──────────────────────┐             │
+│      │  Enter your email  │ │ Join the Waitlist  → │             │
+│      └────────────────────┘ └──────────────────────┘             │
 │                                                                  │
 │▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓│
 │                                                                  │
@@ -574,15 +577,15 @@
 │ ○ ○ ○            thesx.co/contact                          ⟳    │
 ├──────────────────────────────────────────────────────────────────┤
 │                                                                  │
-│  ΔX         About    Services ▾    Contact   Book Your ΔX Audit →│
+│  ΔX         About    Services ▾    Contact   Join the Waitlist   │
 │                                                                  │
 │░░░░░░░░░░░░░░ teal atmosphere ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░│
 │                                                                  │
 │                                                                  │
-│            Book Your ΔX Audit.                                  │
+│            Get In Touch.                                         │
 │                                                                  │
-│            15-minute call. No pitch.                             │
-│            We diagnose, you decide.                              │
+│            Have a question or want to reach out                  │
+│            directly? We'd love to hear from you.                 │
 │                                                                  │
 │            contact@thesx.co                                      │
 │            Bali, Indonesia                                       │
@@ -639,7 +642,7 @@
 │ ○ ○ ○            thesx.co/privacy                          ⟳    │
 ├──────────────────────────────────────────────────────────────────┤
 │                                                                  │
-│  ΔX         About    Services ▾    Contact   Book Your ΔX Audit →│
+│  ΔX         About    Services ▾    Contact   Join the Waitlist   │
 │                                                                  │
 │░░░░░░░░░░ subtle navy atmosphere + grid texture ░░░░░░░░░░░░░░░│
 │                                                                  │
@@ -677,7 +680,7 @@
 │ ○ ○ ○            thesx.co/oops                             ⟳    │
 ├──────────────────────────────────────────────────────────────────┤
 │                                                                  │
-│  ΔX         About    Services ▾    Contact   Book Your ΔX Audit →│
+│  ΔX         About    Services ▾    Contact   Join the Waitlist   │
 │                                                                  │
 │░░░░░░░░░░░░░░ subtle teal glow ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░│
 │                                                                  │
@@ -703,4 +706,4 @@
 
 ---
 
-*v3 wireframes — 5 pages, 8 home sections, every fix from 2 review rounds applied.*
+*Wireframes — 5 pages, 8 home sections, waitlist-driven CTAs throughout.*

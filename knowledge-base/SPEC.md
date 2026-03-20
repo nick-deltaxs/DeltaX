@@ -1,8 +1,10 @@
-# DeltaX Website Specification v3 — Build-Ready
+# DeltaX Website Specification — Final Build Spec
 
-> **This is the build spec.** Every decision is made. Every layout is defined.
+> **This is the single source of truth.** Every decision is made. Every layout is defined.
 > Every animation is specified. Every color is from the brand DNA.
 > Reviewed by 6 specialist teams across 2 rounds (47 + 36 issues resolved).
+> **CTA: "Join the Waitlist" — email capture on every CTA.**
+> **Companion files:** `knowledge-base/RULES.md` | `knowledge-base/WIREFRAMES.md`
 
 ---
 
@@ -19,17 +21,19 @@
 9. [404 Page](#9-404-page)
 10. [Navbar](#10-navbar)
 11. [Footer](#11-footer)
-12. [Technical Architecture](#12-technical-architecture)
-13. [Accessibility](#13-accessibility)
-14. [SEO & OG](#14-seo--og)
-15. [Responsive Strategy](#15-responsive-strategy)
-16. [Build Order & Timeline](#16-build-order--timeline)
+12. [CTA & Waitlist System](#12-cta--waitlist-system)
+13. [Technical Architecture](#13-technical-architecture)
+14. [Accessibility](#14-accessibility)
+15. [SEO & OG](#15-seo--og)
+16. [Responsive Strategy](#16-responsive-strategy)
+17. [Environment Variables](#17-environment-variables)
+18. [Build Order & Timeline](#18-build-order--timeline)
 
 ---
 
 ## 1. DESIGN SYSTEM
 
-### Colors (from DeltaX Brand DNA — NOT Arvin's palette)
+### Colors (DeltaX Brand DNA)
 
 **Backgrounds (60%)**
 ```
@@ -68,6 +72,12 @@
                               1. 10x stat in THE PROOF
                               2. Case study stats in THE PROOF
                               (nowhere else)
+```
+
+**Utility**
+```
+--success:       #22C55E     success states
+--error:         #EF4444     error states
 ```
 
 ### Typography
@@ -310,10 +320,15 @@ Subtext:    DeltaX replaces the 4 agencies that never
 
             Inter 400, 1.25rem, #E8E8E8
 
-CTA:        [ Book Your ΔX Audit → ]
-            Teal bg, dark text, visible glow shadow
+CTA:        [ Enter your email ] [ Join the Waitlist → ]
+            Email input + teal button, visible glow shadow
+            Uses WaitlistForm component (see Section 12)
 
-Qualifier:  Built for companies doing $500K–$10M
+Qualifier:  Join 0+ founders waiting for early access.
+
+            Inter 300, 0.75rem, rgba(255,255,255,0.50)
+
+Below:      Built for companies doing $500K–$10M
             who've outgrown the agency model.
 
             Inter 300, 0.75rem, rgba(255,255,255,0.50)
@@ -327,9 +342,6 @@ Logo: 200x167px, white, slight slow rotation (360° per 60s).
 Cursor proximity: teal glow follows cursor with 200ms lag.
 Abstract, atmospheric, branded — NOT a diagram.
 ```
-
-**Why "TOTAL TRANSFORMATION" instead of "COMPOUNDING RETURNS":**
-"Compounding" was never proven on the page. "Total Transformation" is the actual promise — and it's demonstrated across all 4 engine sections.
 
 **Breathing glow:** CSS `@keyframes`, NOT Framer Motion (infinite, no JS needed).
 ```css
@@ -603,10 +615,11 @@ Right 50%:
 **Post-Engine CTA (inline, after all 4 pillars):**
 ```
 Text:   Not sure which engines you need?
-        The audit will tell you.
+        Join the waitlist — we'll tell you.
         Inter 400, 1.25rem, #E8E8E8
 
-CTA:    [ Book Your ΔX Audit → ]
+CTA:    [ Enter your email ] [ Join the Waitlist → ]
+        Uses WaitlistForm component
 ```
 
 **Mobile (all pillars):** Stack to 100% width. Each pillar is a full-width block. Atmosphere crossfade becomes simple scroll-reveal (each pillar fades in on viewport entry, atmosphere is static per pillar — no crossfade on mobile for performance).
@@ -752,11 +765,11 @@ Badge colors match sub-brand: CORE=teal pill, CODE=grey pill, SCALE=red pill, ST
 Number:   01
           Days One, clamp(4rem, 10vw, 7.5rem), teal (#1A9BBF)
 
-Title:    Book Your ΔX Audit
+Title:    Join the Waitlist
           Days One, h3 scale, #FFFFFF
 
-Body:     We'll show you what's costing you.
-          No pitch. You talk, we diagnose. 15 minutes.
+Body:     Secure your spot. We're onboarding in waves —
+          early access means priority.
           Inter 400, 1rem, #E8E8E8
 ```
 
@@ -801,16 +814,15 @@ Body:     Strategy, tech, growth, and brand — designed together,
 Logo:       ΔX mark, 80x67px, white, centered
 
 Headline:   YOU'VE SEEN THE SYSTEM.
-            LET'S SCOPE YOURS.
+            JOIN THE WAITLIST.
             Days One, clamp(2rem, 7vw, 3.5rem), #FFFFFF
-            (clear, no metaphor to decode)
 
-Urgency:    Now accepting new engagements.
+Subtext:    Be first in line when we launch.
             Inter 400, 0.85rem, rgba(255,255,255,0.60)
-            (evergreen — no hardcoded date)
 
-CTA:        [ Book Your ΔX Audit → ]
-            Teal bg, scale 1.02 on hover, visible glow
+CTA:        [ Enter your email ] [ Join the Waitlist → ]
+            Uses WaitlistForm component
+            Teal bg button, scale 1.02 on hover, visible glow
 ```
 
 **Mobile:** Same centered layout, works natively.
@@ -854,7 +866,8 @@ Layout:     All 16 team members
 ```
 Background: --bg-secondary, teal glow
 Text:       Ready to work with us?
-CTA:        [ Book Your ΔX Audit → ]
+CTA:        [ Enter your email ] [ Join the Waitlist → ]
+            Uses WaitlistForm component
 ```
 
 ---
@@ -866,9 +879,10 @@ CTA:        [ Book Your ΔX Audit → ]
 **Section 1 — ContactHero**
 ```
 Background: --bg-primary, teal atmosphere
-Headline:   Book Your ΔX Audit.
+Headline:   Get In Touch.
             Days One, h1 scale, #FFFFFF
-Subtext:    15-minute call. No pitch. We diagnose, you decide.
+Subtext:    Have a question or want to reach out
+            directly? We'd love to hear from you.
             Inter 400, 1.25rem, #E8E8E8
 Info:       contact@thesx.co | Bali, Indonesia
             Social icons (monochrome, minimal)
@@ -940,12 +954,14 @@ Content:    ΔX logo (80px)
 ## 10. NAVBAR
 
 ```
-Structure:  ΔX | About | Services ▾ | Contact | [Book Your ΔX Audit →]
+Structure:  ΔX | About | Services ▾ | Contact | [Join the Waitlist]
 
 Logo:       ΔX mark (35x29px) + "ΔX" text (Days One, h3, #FFFFFF)
 Links:      Inter 400, 0.85rem, rgba(255,255,255,0.50)
             Hover: #E8E8E8, teal underline slide-in
 CTA:        Teal bg, py-2 px-6, smaller than hero CTA
+            Text: "Join the Waitlist"
+            Links to /#cta (scrolls to Final CTA section with WaitlistForm)
 
 Services dropdown (desktop):
   - Opens on hover AND on click/Enter/Space
@@ -977,7 +993,7 @@ Mobile (< md):
       Scale
       Style
       Contact
-      [Book Your ΔX Audit →] as button at bottom
+      [Join the Waitlist] as button at bottom
     Close on X or Escape
 ```
 
@@ -1018,15 +1034,215 @@ Mobile: 2-column, then 1-column for legal. Social icons centered.
 
 ---
 
-## 12. TECHNICAL ARCHITECTURE
+## 12. CTA & WAITLIST SYSTEM
+
+### CTA Placement
+
+The "Join the Waitlist" CTA appears in these locations:
+1. **Navbar** — button only (scrolls to nearest WaitlistForm)
+2. **Hero** — email input + button (WaitlistForm component)
+3. **Post-Engine** — email input + button (WaitlistForm component)
+4. **Final CTA** — email input + button (WaitlistForm component)
+5. **About page AboutCTA** — email input + button (WaitlistForm component)
+
+All WaitlistForm instances hit the same `/api/waitlist` endpoint.
+
+### User Flow
+
+```
+1. User enters email in input field
+2. Clicks "Join the Waitlist" (or presses Enter)
+3. Frontend validates email format (basic regex)
+4. If invalid format → show error inline, do NOT submit
+5. POST request to /api/waitlist { email }
+6. Button enters loading state (spinner)
+7. API validates email server-side
+8. API checks if email already exists in Supabase
+9. If new:
+   a. Insert into Supabase "waitlist" table
+   b. Trigger Resend welcome email
+   c. Return 201
+   d. Frontend shows success: "You're in. Watch your inbox."
+10. If duplicate:
+    a. Return 409
+    b. Frontend shows: "You're already on the list."
+11. If server error:
+    a. Return 500
+    b. Frontend shows: "Something went wrong. Try again."
+12. If invalid email (server-side):
+    a. Return 400
+    b. Frontend shows: "Please enter a valid email."
+```
+
+### Exact UI Messages
+
+| State | Message | Style |
+|-------|---------|-------|
+| Idle | (no message) | — |
+| Invalid (client) | "Please enter a valid email." | body-sm, #EF4444 |
+| Loading | (spinner replaces button text) | — |
+| Success | "You're in. Watch your inbox." | body-lg, #22C55E |
+| Duplicate | "You're already on the list." | body-sm, text-muted (not an error) |
+| Error | "Something went wrong. Try again." | body-sm, #EF4444 |
+
+### Form Submission Animations
+
+```
+Loading:
+  Button text fades out (opacity 0, 150ms)
+  Spinner fades in (opacity 1, 150ms)
+  Spinner: 16px, white, CSS spin animation, 600ms loop
+
+Success:
+  Entire form (input + button) fades out ({ opacity: 0, y: -10 }, 300ms)
+  Success message fades in ({ opacity: 0, y: 10 } → { opacity: 1, y: 0 }, 300ms, 200ms delay)
+
+Error:
+  Input border flashes red (#EF4444)
+  Error text appears below: slide down ({ opacity: 0, y: -5 } → { opacity: 1, y: 0 }, 200ms)
+```
+
+### Supabase Table Schemas
+
+**Waitlist table:**
+```sql
+CREATE TABLE waitlist (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  email TEXT UNIQUE NOT NULL,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+-- Enable Row Level Security
+ALTER TABLE waitlist ENABLE ROW LEVEL SECURITY;
+
+-- Policy: only server (service_role) can insert
+CREATE POLICY "Service role can insert" ON waitlist
+  FOR INSERT WITH CHECK (true);
+
+-- Policy: only server can read
+CREATE POLICY "Service role can read" ON waitlist
+  FOR SELECT USING (true);
+```
+
+**Contacts table (for Contact page form):**
+```sql
+CREATE TABLE contacts (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  name TEXT NOT NULL,
+  email TEXT NOT NULL,
+  company TEXT,
+  challenge TEXT,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+ALTER TABLE contacts ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "Service role can insert" ON contacts
+  FOR INSERT WITH CHECK (true);
+
+CREATE POLICY "Service role can read" ON contacts
+  FOR SELECT USING (true);
+```
+
+### API Route Specs
+
+**Waitlist API — `/api/waitlist`**
+```
+Method:         POST
+Content-Type:   application/json
+Body:           { "email": "user@example.com" }
+
+Responses:
+  201 Created:          { "message": "Success" }
+  400 Bad Request:      { "error": "Invalid email" }
+  409 Conflict:         { "error": "Email already exists" }
+  500 Server Error:     { "error": "Internal server error" }
+
+Validation:
+  - Email format: standard email regex
+  - Trim whitespace
+  - Convert to lowercase before storing
+  - Max length: 254 characters
+```
+
+**Contact API — `/api/contact`**
+```
+Method:         POST
+Content-Type:   application/json
+Body:           { "name": "...", "email": "...", "company": "...", "challenge": "..." }
+
+Responses:
+  201 Created:          { "message": "Success" }
+  400 Bad Request:      { "error": "Validation failed", "details": [...] }
+  429 Too Many:         { "error": "Rate limit exceeded" }
+  500 Server Error:     { "error": "Internal server error" }
+
+Validation (zod schema):
+  - name: string, required, max 100
+  - email: string, required, valid email, max 254
+  - company: string, optional, max 100
+  - challenge: string, optional, max 500
+  - honeypot field "website" must be empty
+
+Rate limiting: 3 per IP per hour
+```
+
+### Welcome Email (via Resend)
+
+```
+From:       DeltaX <hello@thesx.co>
+            (requires domain verification on Resend)
+
+Subject:    You're on the list. ΔX is coming.
+
+Body (plain text version):
+    You've secured your spot.
+
+    DeltaX is building something different — a system that connects
+    strategy, tech, growth, and brand into one engine for your business.
+
+    We're onboarding in waves. When it's your turn, you'll be the
+    first to know.
+
+    — The ΔX Team
+    thesx.co
+
+Email style:
+    Dark background (#0A0C0B)
+    White text (#E8E8E8)
+    ΔX logo at top (text-based, not image — for email compatibility)
+    Minimal layout, no heavy HTML
+    Accent line or small teal element as a divider
+    Font: system font stack (emails can't load custom fonts reliably)
+```
+
+### Contact Notification Email (via Resend)
+
+```
+From:       DeltaX <notifications@thesx.co>
+Subject:    New contact form submission from {name}
+To:         contact@thesx.co (internal notification)
+
+Body:
+    New contact form submission:
+    Name: {name}
+    Email: {email}
+    Company: {company || "Not provided"}
+    Challenge: {challenge || "Not provided"}
+    Submitted: {timestamp}
+```
+
+---
+
+## 13. TECHNICAL ARCHITECTURE
 
 **Stack:**
 - Next.js 14 (App Router)
 - TypeScript (strict)
 - Tailwind CSS (custom tokens in tailwind.config.ts)
 - Framer Motion (domMax for useScroll/useTransform)
-- Supabase (Postgres — contact form storage)
-- Resend (notification email on form submission)
+- Supabase (Postgres — waitlist storage + contact form storage)
+- Resend (welcome email on waitlist signup + contact form notification)
 
 **Key decisions:**
 ```
@@ -1069,7 +1285,7 @@ const inter = Inter({
 
 ---
 
-## 13. ACCESSIBILITY
+## 14. ACCESSIBILITY
 
 ```
 MotionConfig:           <MotionConfig reducedMotion="user"> wrapping all children
@@ -1090,18 +1306,18 @@ Color contrast:         #E8E8E8 on #0A0C0B = 17.4:1 (AAA pass)
 
 ---
 
-## 14. SEO & OG
+## 15. SEO & OG
 
 **Per-page metadata (Next.js Metadata API):**
 ```
 Home:     "DeltaX — One System. Four Engines. Total Transformation."
 About:    "About DeltaX — The Team Behind the System"
-Contact:  "Contact DeltaX — Book Your ΔX Audit"
+Contact:  "Contact DeltaX — Get In Touch"
 Privacy:  "Privacy Policy — DeltaX"
 Terms:    "Terms of Service — DeltaX"
 ```
 
-**Meta description:** "Strategy, technology, growth, and brand — engineered into one system. Built for companies doing $500K–$10M."
+**Meta description:** "Strategy, technology, growth, and brand — engineered into one system. Built for companies doing $500K–$10M. Join the waitlist."
 
 **OG image:** 1200x630, dark bg, ΔX logo, headline text.
 - Generate via `@vercel/og` (app/api/og/route.tsx)
@@ -1113,9 +1329,27 @@ Terms:    "Terms of Service — DeltaX"
 **Robots:** `app/robots.ts` — allow all, point to sitemap
 **Favicon:** ΔX mark, dark bg, teal accent. .ico + .svg + apple-touch-icon
 
+**AI SEO:**
+- `llms.txt` — research current standards and implement
+- Structured data / JSON-LD: Organization schema + WebSite schema
+- Research and implement any current AI-discovery best practices
+
+**Analytics:**
+- Choose and implement an analytics tool (Google Analytics 4, Plausible, Vercel Analytics, or similar)
+- Track: page views, waitlist signups, contact form submissions, scroll depth, CTA clicks
+- Event tracking for waitlist form:
+  - `waitlist_submit` — form submitted
+  - `waitlist_success` — email saved
+  - `waitlist_duplicate` — duplicate email
+  - `waitlist_error` — submission failed
+- Event tracking for contact form:
+  - `contact_submit` — form submitted
+  - `contact_success` — message saved
+  - `contact_error` — submission failed
+
 ---
 
-## 15. RESPONSIVE STRATEGY
+## 16. RESPONSIVE STRATEGY
 
 **Breakpoints (Tailwind defaults):**
 ```
@@ -1145,7 +1379,65 @@ xl:    1280px+    (desktops)
 
 ---
 
-## 16. BUILD ORDER & TIMELINE
+## 17. ENVIRONMENT VARIABLES
+
+### Required `.env.local` File
+
+Create inside `codebase/.env.local` — it is gitignored.
+
+```env
+# Supabase
+NEXT_PUBLIC_SUPABASE_URL=https://nbkbcntkqkmlpuwulmub.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=<ask project owner>
+SUPABASE_SERVICE_ROLE_KEY=<ask project owner>
+
+# Resend (backend dev sets this up)
+RESEND_API_KEY=<created by backend dev on resend.com>
+
+# Site
+NEXT_PUBLIC_SITE_URL=https://thesx.co
+```
+
+### Supabase Details
+
+| Property | Value |
+|----------|-------|
+| Organization | DeltaX Org |
+| Project name | DeltaX Landing Project |
+| Project ID | `nbkbcntkqkmlpuwulmub` |
+| URL | `https://nbkbcntkqkmlpuwulmub.supabase.co` |
+| Dashboard | `https://supabase.com/dashboard/project/nbkbcntkqkmlpuwulmub` |
+
+### Key Types
+
+| Key | Prefix | Visible to Browser? | Use |
+|-----|--------|---------------------|-----|
+| `NEXT_PUBLIC_SUPABASE_URL` | `NEXT_PUBLIC_` | Yes | Client-side Supabase connection |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | `NEXT_PUBLIC_` | Yes | Client-side queries (limited by RLS) |
+| `SUPABASE_SERVICE_ROLE_KEY` | None | No (server only) | Server-side admin operations (API routes) |
+| `RESEND_API_KEY` | None | No (server only) | Sending emails from API routes |
+
+### Who Needs What
+
+| Role | Needs These Vars | How They Get Them |
+|------|-----------------|-------------------|
+| **All frontend devs** | `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY` | From project owner (shared securely) |
+| **Backend dev** | All Supabase vars + `RESEND_API_KEY` | From project owner + creates Resend account |
+| **Deploy dev** | All vars | Sets them in Vercel dashboard → Settings → Environment Variables |
+
+### Security Rules
+
+- `.env.local` is in `.gitignore` (Next.js does this by default)
+- No keys committed to git history
+- `SUPABASE_SERVICE_ROLE_KEY` is NEVER used in client-side code
+- `RESEND_API_KEY` is NEVER used in client-side code
+- RLS is enabled on all tables
+- Keys are set in deployment platform (Vercel) for production
+- Keys shared via encrypted DM or password manager — NOT git, Slack, email, or plain text
+
+---
+
+## 18. BUILD ORDER & TIMELINE
 
 **Realistic estimate: 14-16 working days (1 senior dev)**
 **Or: 8-10 days with 2 devs in parallel**
@@ -1163,32 +1455,37 @@ Footer.tsx (4-column grid)
 
 ### Phase 2 — Home Page (Days 3-9)
 ```
-Day 3:   Hero.tsx (breathing glow, asymmetric layout, cursor proximity)
+Day 3:   Hero.tsx (breathing glow, asymmetric layout, cursor proximity, WaitlistForm)
 Day 4-5: TheProblem.tsx (scroll-linked dissolve, sticky architecture)
 Day 5-7: TheSystem.tsx (SVG flow diagram, scroll-driven paths) ← HARDEST
 Day 7-9: TheEngine.tsx (4 unique layouts, sticky atmosphere crossfade) ← HARDEST
 Day 9:   TheProof.tsx (counter, table rows, delta arrows)
 Day 9:   TheArchitects.tsx (featured + staggered team)
 Day 10:  YourPath.tsx (vertical timeline, deep teal band)
-Day 10:  FinalCTA.tsx (simple centered CTA)
+Day 10:  FinalCTA.tsx (simple centered CTA with WaitlistForm)
 Day 10:  page.tsx (assemble all sections)
 ```
 
 ### Phase 3 — Secondary Pages (Days 11-12)
 ```
-About page (4 sections)
+About page (4 sections, AboutCTA with WaitlistForm)
 Contact page (form + validation + Server Action)
-API route (Supabase insert + Resend notification + rate limiting)
+API routes:
+  /api/waitlist (email validation, Supabase insert, Resend welcome email)
+  /api/contact (form validation, honeypot, rate limiting, Supabase insert, Resend notification)
+  /api/og (OG image generation with bundled Days One .ttf)
+Email templates (waitlist welcome + contact notification)
 Legal pages (Privacy, Terms — real content)
 404 page
 ```
 
 ### Phase 4 — Production (Days 13-14)
 ```
-SEO (metadata, sitemap, robots, JSON-LD, OG images with bundled font)
+SEO (metadata, sitemap, robots, JSON-LD, OG images, llms.txt)
 Accessibility pass (focus rings, skip link, aria, reduced motion test)
 Responsive QA (6 device sizes × 5 pages)
 Performance audit (Lighthouse 90+ target)
+Analytics setup + event tracking
 ```
 
 ### Critical path:
@@ -1203,47 +1500,21 @@ Foundation → Navbar → Hero → Problem (scroll) → System (SVG) → Engine 
 
 ---
 
-## V2 → V3 CHANGES SUMMARY
+## CHANGES FROM V3 SPEC
 
-| # | v2 Issue | v3 Fix |
-|---|---------|--------|
-| 1 | Fake terminal block | Replaced with real before/after workflow viz |
-| 2 | "Coming Soon" footer links | Removed. Only live pages. |
-| 3 | "3.2x average" in SCALE card | Removed stat from engine card, kept only in proof |
-| 4 | Hardcoded "Q3 2026" | Evergreen: "Now accepting new engagements" |
-| 5 | CTA inconsistency | "Book Your ΔX Audit" EVERYWHERE |
-| 6 | STYLE under-specified | Defined: 50/50, word-pair contrast block, strikethrough→Days One |
-| 7 | System diagram undefined | "Three rivers" metaphor, 6 SVG paths, pill nodes, viewBox 800×600 |
-| 8 | Fixed → sticky atmospheres | Explicitly: position: sticky, scoped to container |
-| 9 | Deep teal invisible | Pushed to #0D3535 + 1px teal border at transition |
-| 10 | No micro-interactions | Full system defined: buttons, links, cards, cursor, rows |
-| 11 | "COMPOUNDING RETURNS" | Changed to "TOTAL TRANSFORMATION" |
-| 12 | Dissolve architecture | Specified: ~180vh container, sticky inner, useScroll |
-| 13 | OG font issue | Bundle .ttf in public/fonts/, read from filesystem |
-| 14 | Dropdown accessibility | Radix UI, aria-expanded, keyboard nav |
-| 15 | Timeline unrealistic | Revised to 14-16 days realistic |
-| 16 | Unhedged 10x in Before/After | Changed to "ROI: 10x scoping standard" |
-| 17 | "THAT'S THE RULE" tone | Softened to "That's the scoping standard." |
-| 18 | Before/After straw man | Replaced with specific pain points |
-| 19 | Mobile nested dropdown | Flat mobile nav |
-| 20 | No scroll orientation | Noted for implementation (progress dots) |
-| 21 | No reduced-motion on dissolve | Static split fallback |
-| 22 | No type scale | Defined modular scale (1.333 ratio) |
-| 23 | No diagram fallback | Static resting state defined |
-| 24 | Hero schematic competes | Replaced with abstract ΔX logo + breathing glow |
-| 25 | Final CTA too dense | Simplified to single teal glow, clean centered |
-| 26 | Team hierarchy 4:1 ratio | Adjusted: Dave 120px, leads 72px, supporting 48px |
-| 27 | No form placeholder | Added example text |
-| 28 | "engineered" twice | SCALE changed to "built to multiply" |
-| 29 | Sparklines low-signal | Replaced with delta arrows (↑/↓) |
-| 30 | No loading choreography | Hero staggered entrance defined |
-| 31 | Post-engine CTA soft | "Not sure which engines? The audit will tell you." |
-| 32 | Redundant system text | Collapsed to one sentence |
-| 33 | Dave bio no result | Added: "Led system architecture that cut SaaS client ops by 60%" |
-| 34 | Final CTA metaphor unclear | Changed to "YOU'VE SEEN THE SYSTEM. LET'S SCOPE YOURS." |
-| 35 | About #team skips story | Team section is self-contained |
-| 36 | 404 needs suggested links | 3 links: Home, About, Contact |
+| # | V3 Original | This Spec |
+|---|-------------|-----------|
+| 1 | CTA: "Book Your ΔX Audit" everywhere | CTA: "Join the Waitlist" everywhere |
+| 2 | No waitlist system defined | Full waitlist system (user flow, API, Supabase schema, Resend email) |
+| 3 | Contact hero: "Book Your ΔX Audit" | Contact hero: "Get In Touch" |
+| 4 | Final CTA: "LET'S SCOPE YOURS" | Final CTA: "JOIN THE WAITLIST" |
+| 5 | No env vars documentation | Full env vars section with Supabase details |
+| 6 | No contact API defined | Contact API with validation, honeypot, rate limiting |
+| 7 | Your Path Step 1: "Book Your ΔX Audit" | Your Path Step 1: "Join the Waitlist" |
+| 8 | Post-Engine CTA: "Book Your ΔX Audit" | Post-Engine CTA: email input + "Join the Waitlist" |
+| 9 | No notification email spec | Contact notification email to contact@thesx.co |
+| 10 | No analytics events defined | Waitlist + contact form event tracking |
 
 ---
 
-*This document is the build spec. 36 issues resolved across 2 review rounds. Every color is from brand DNA. Every layout is unique. Every animation is specified. Every mobile behavior is defined. Build from this.*
+*This document is the single source of truth. Every color is from brand DNA. Every layout is unique. Every animation is specified. Every mobile behavior is defined. CTA is "Join the Waitlist" — email capture driven. Build from this.*
