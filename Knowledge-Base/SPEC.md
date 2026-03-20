@@ -243,15 +243,15 @@ Spring config:    { stiffness: 100, damping: 20 }
 
 **Scroll Reveal (all sections)**
 ```
-Trigger:    whileInView, viewport={{ once: true, amount: 0.2 }}
-Initial:    { opacity: 0, y: 40 }
+Trigger:    whileInView, viewport={{ once: true, margin: "-100px" }}
+Initial:    { opacity: 0, y: 30 }
 Animate:    { opacity: 1, y: 0 }
 Duration:   0.6s, easing smooth
 ```
 
 **Stagger (groups of items)**
 ```
-staggerChildren: 0.1s
+staggerChildren: 0.08
 Each child: same scroll reveal
 ```
 
@@ -266,12 +266,11 @@ When `prefers-reduced-motion: reduce`: all animations become instant (no motion,
 
 **Loading Choreography (Hero only)**
 ```
-Background:     0ms (immediate)
-Headline:       200ms delay
-Subtext:        400ms delay
-CTA:            600ms delay
-Visual element: 800ms delay
-Qualifier:      1000ms delay
+Headline:       0ms (immediate)
+Subtext:        100ms delay
+CTA/Form:       200ms delay
+Qualifier:      250ms delay
+Logo:           400ms delay (breathing glow starts)
 ```
 
 ---
@@ -338,7 +337,7 @@ Below:      Built for companies doing $500K–$10M
 ```
 NOT a system schematic (that belongs in Section 3).
 Instead: Large ΔX logo mark, breathing teal glow behind it.
-Logo: 200x167px, white, slight slow rotation (360° per 60s).
+Logo: 120x100px, white, slight slow rotation (360° per 60s).
 Cursor proximity: teal glow follows cursor with 200ms lag.
 Abstract, atmospheric, branded — NOT a diagram.
 ```
@@ -352,7 +351,7 @@ Abstract, atmospheric, branded — NOT a diagram.
 /* Duration: 4s, ease-in-out, infinite */
 ```
 
-**Mobile:** Stacks 100%. ΔX visual hidden on mobile (< md). Headline clamps down. CTA full-width.
+**Mobile:** Stacks vertically. Logo on top (centered, 80px), content below. Headline clamps down. CTA full-width.
 
 ---
 
@@ -629,7 +628,7 @@ CTA:    [ Enter your email ] [ Join the Waitlist → ]
 ### Section 5: THE PROOF
 
 **Layout:** Centered stat + table rows below.
-**Background:** `--bg-primary`, warm-tone atmosphere, gold radial glow at 0.08, grid texture, edge vignette.
+**Background:** `--bg-secondary` (#161C19), warm-tone atmosphere, gold radial glow at 0.08, grid texture, edge vignette.
 
 **Label:** `THE PROOF` — monospace, teal, borderless
 
@@ -643,7 +642,7 @@ Body:     Every solution we scope must return at least
 Stat:     10x
           Days One, clamp(5rem, 15vw, 8.75rem), gold (#f0b429)
           Counter animation: 0→10, triggered by whileInView
-          Duration: 800ms max (fast — no misleading intermediate values)
+          Duration: 1.5s easeOut
           Start counting only when section is 50% visible
 
 Below:    Per engagement. That's the scoping standard.
@@ -696,24 +695,32 @@ Named case studies available upon request.
 
 ### Section 6: THE ARCHITECTS
 
-**Layout:** Featured founder (60/40) + staggered team below.
+**Layout:** Co-Founders (50/50) + staggered team below.
 **Background:** `--bg-secondary`, cool-tone atmosphere, navy radial glow (#4466CC at 0.08), grid texture, edge vignette.
 
 **Label:** `THE ARCHITECTS` — monospace, teal, borderless
 
 **Subtext:** `16 people. Four disciplines. One system.` — Inter 400, 1.25rem, #E8E8E8
 
-**Dave (featured — 60/40):**
+**Co-Founders (50/50):**
 ```
-Left 60%:
+Left 50% — Dave:
   Avatar:   120px circle, gradient teal→navy, white "DB" initials
             (or real photo when available)
   Name:     Dave Benrouz
             Days One, h3 scale, #FFFFFF
-  Title:    Chief System Architect
+  Title:    Co-Founder & System Architect
             Inter 400, 1rem, rgba(255,255,255,0.60)
 
-Right 40%:
+Right 50% — Ramtin:
+  Avatar:   120px circle, gradient teal→navy, white "RG" initials
+            (or real photo when available)
+  Name:     Ramtin Ghaffary
+            Days One, h3 scale, #FFFFFF
+  Title:    Co-Founder
+            Inter 400, 1rem, rgba(255,255,255,0.60)
+
+Below (full-width):
   Bio:      MSc in Computer Mathematics from Igor Sikorsky
             KPI. Designed DeltaX because he kept seeing the
             same pattern — companies spending six figures on
@@ -749,7 +756,7 @@ Badge colors match sub-brand: CORE=teal pill, CODE=grey pill, SCALE=red pill, ST
 
 **Link:** `→ Meet the full 16-person team` — links to `/about#team`
 
-**Mobile:** Dave full-width (stacks vertically). Team members: 2-column grid, leads 60px, supporting 40px.
+**Mobile:** Co-founders stack vertically (still large). Team members: 2-column grid, leads 60px, supporting 40px.
 
 ---
 
@@ -765,7 +772,7 @@ Badge colors match sub-brand: CORE=teal pill, CODE=grey pill, SCALE=red pill, ST
 Number:   01
           Days One, clamp(4rem, 10vw, 7.5rem), teal (#1A9BBF)
 
-Title:    Join the Waitlist
+Title:    JOIN THE WAITLIST
           Days One, h3 scale, #FFFFFF
 
 Body:     Secure your spot. We're onboarding in waves —
@@ -777,7 +784,7 @@ Body:     Secure your spot. We're onboarding in waves —
 ```
 Number:   02
 
-Title:    Get Your Diagnostic Report
+Title:    GET YOUR DIAGNOSTIC
 
 Body:     We analyze your business across all 4 engines.
           You get a diagnostic report + custom roadmap.
@@ -791,7 +798,7 @@ Body:     We analyze your business across all 4 engines.
 ```
 Number:   03
 
-Title:    We Deploy Your System
+Title:    DEPLOY THE SYSTEM
 
 Body:     Strategy, tech, growth, and brand — designed together,
           deployed in 90-day sprints. You see results in weeks,
@@ -808,7 +815,7 @@ Body:     Strategy, tech, growth, and brand — designed together,
 ### Section 8: FINAL CTA
 
 **Layout:** Centered. Simple. Clean.
-**Background:** `--bg-primary` with single teal radial glow (NOT all-4-colors — simplified per review feedback). Glow is slightly more intense than hero. Grid texture, edge vignette.
+**Background:** `--bg-primary`. No atmospheric glow. Quiet. Restraint. Only grid texture (atmosphere-grid), NO vignette.
 
 ```
 Logo:       ΔX mark, 80x67px, white, centered
@@ -836,7 +843,7 @@ CTA:        [ Enter your email ] [ Join the Waitlist → ]
 **Section 1 — AboutHero**
 ```
 Background: --bg-primary, teal atmosphere
-Headline:   We don't consult. We build.
+Headline:   THE SYSTEM BEHIND THE SYSTEM
             Days One, h1 scale, #FFFFFF
 Subtext:    DeltaX was born from a simple conviction: businesses
             shouldn't need 4 agencies that never talk to each other.
@@ -879,7 +886,7 @@ CTA:        [ Enter your email ] [ Join the Waitlist → ]
 **Section 1 — ContactHero**
 ```
 Background: --bg-primary, teal atmosphere
-Headline:   Get In Touch.
+Headline:   LET'S TALK
             Days One, h1 scale, #FFFFFF
 Subtext:    Have a question or want to reach out
             directly? We'd love to hear from you.
@@ -896,14 +903,14 @@ Fields:
   Name:              <input type="text"> required, maxLength 100
   Email:             <input type="email"> required, maxLength 254
   Company:           <input type="text"> optional, maxLength 100
-  Biggest challenge: <textarea rows={4}> optional, maxLength 500
+  Biggest challenge: <textarea rows={4}> required, maxLength 500
                      Placeholder: "e.g., We're doing $2M but our ops
                      can't scale past 5 team members."
                      Show character counter: {length}/500
                      resize: vertical only
   Message:           (merged into biggest challenge — one textarea, not two)
 
-Submit:     [ Send → ]
+Submit:     [ SEND MESSAGE ]
 
 Spam protection:
   - Hidden honeypot field: <input name="website" tabIndex={-1} />
@@ -957,8 +964,8 @@ Content:    ΔX logo (80px)
 Structure:  ΔX | About | Services ▾ | Contact | [Join the Waitlist]
 
 Logo:       ΔX mark (35x29px) + "ΔX" text (Days One, h3, #FFFFFF)
-Links:      Inter 400, 0.85rem, rgba(255,255,255,0.50)
-            Hover: #E8E8E8, teal underline slide-in
+Links:      Inter 400, 0.85rem, #E8E8E8
+            Hover: #FFFFFF, teal underline slide-in
 CTA:        Teal bg, py-2 px-6, smaller than hero CTA
             Text: "Join the Waitlist"
             Links to /#cta (scrolls to Final CTA section with WaitlistForm)
@@ -1002,7 +1009,7 @@ Mobile (< md):
 ## 11. FOOTER
 
 ```
-Background: --bg-primary
+Background: --bg-secondary (#161C19)
 Top border: 1px solid rgba(255,255,255,0.06)
 Padding: py-12
 Max-width: max-w-7xl
@@ -1131,7 +1138,7 @@ CREATE TABLE contacts (
   name TEXT NOT NULL,
   email TEXT NOT NULL,
   company TEXT,
-  challenge TEXT,
+  challenge TEXT NOT NULL,
   created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 
@@ -1181,7 +1188,7 @@ Validation (zod schema):
   - name: string, required, max 100
   - email: string, required, valid email, max 254
   - company: string, optional, max 100
-  - challenge: string, optional, max 500
+  - challenge: string, required, max 500
   - honeypot field "website" must be empty
 
 Rate limiting: 3 per IP per hour
@@ -1311,8 +1318,8 @@ Color contrast:         #E8E8E8 on #0A0C0B = 17.4:1 (AAA pass)
 **Per-page metadata (Next.js Metadata API):**
 ```
 Home:     "DeltaX — One System. Four Engines. Total Transformation."
-About:    "About DeltaX — The Team Behind the System"
-Contact:  "Contact DeltaX — Get In Touch"
+About:    "About DeltaX — The System Behind The System"
+Contact:  "Contact DeltaX — Let's Talk"
 Privacy:  "Privacy Policy — DeltaX"
 Terms:    "Terms of Service — DeltaX"
 ```
@@ -1364,12 +1371,12 @@ xl:    1280px+    (desktops)
 
 | Section | Desktop | Mobile |
 |---------|---------|--------|
-| Hero | 60/40 asymmetric | Stack. ΔX visual hidden. CTA full-width. |
+| Hero | 60/40 asymmetric | Stack. Logo on top (centered, 80px), content below. CTA full-width. |
 | Problem | Two columns + dissolve | Stack vertically. Static split. |
 | System | Horizontal SVG diagram | Simplified vertical SVG |
 | Engine | Sticky + scroll-linked crossfade | Full-width stack, static atmospheres |
 | Proof | Table rows (3-col grid) | Stack: stat on top, text below |
-| Architects | Featured + staggered team | Dave full-width, team 2-col grid |
+| Architects | Co-founders 50/50 + staggered team | Co-founders stacked, team 2-col grid |
 | Path | Vertical timeline | Same, numbers smaller |
 | CTA | Centered | Same |
 | Navbar | Logo + links + dropdown + CTA | Logo + hamburger |
@@ -1506,14 +1513,39 @@ Foundation → Navbar → Hero → Problem (scroll) → System (SVG) → Engine 
 |---|-------------|-----------|
 | 1 | CTA: "Book Your ΔX Audit" everywhere | CTA: "Join the Waitlist" everywhere |
 | 2 | No waitlist system defined | Full waitlist system (user flow, API, Supabase schema, Resend email) |
-| 3 | Contact hero: "Book Your ΔX Audit" | Contact hero: "Get In Touch" |
+| 3 | Contact hero: "Book Your ΔX Audit" | Contact hero: "LET'S TALK" |
 | 4 | Final CTA: "LET'S SCOPE YOURS" | Final CTA: "JOIN THE WAITLIST" |
 | 5 | No env vars documentation | Full env vars section with Supabase details |
 | 6 | No contact API defined | Contact API with validation, honeypot, rate limiting |
-| 7 | Your Path Step 1: "Book Your ΔX Audit" | Your Path Step 1: "Join the Waitlist" |
+| 7 | Your Path Step 1: "Book Your ΔX Audit" | Your Path Step 1: "JOIN THE WAITLIST" |
 | 8 | Post-Engine CTA: "Book Your ΔX Audit" | Post-Engine CTA: email input + "Join the Waitlist" |
 | 9 | No notification email spec | Contact notification email to contact@thesx.co |
 | 10 | No analytics events defined | Waitlist + contact form event tracking |
+
+## CHANGES FROM BLUEPRINT ALIGNMENT
+
+| # | Previous Spec | Updated To Match BLUEPRINT |
+|---|---------------|---------------------------|
+| 1 | Dave title: "Chief System Architect" | "Co-Founder & System Architect" |
+| 2 | Architects layout: Featured founder (60/40) | Co-Founders 50/50 (Dave + Ramtin co-equal) + staggered team |
+| 3 | About hero: "We don't consult. We build." | "THE SYSTEM BEHIND THE SYSTEM" |
+| 4 | Contact hero: "Get In Touch." | "LET'S TALK" |
+| 5 | About SEO: "The Team Behind the System" | "The System Behind The System" |
+| 6 | Contact SEO: "Get In Touch" | "Let's Talk" |
+| 7 | Hero choreography: 200ms cascades (up to 1000ms) | Faster: 0/100/200/250/400ms |
+| 8 | Hero logo: 200x167px | 120x100px |
+| 9 | Hero mobile: ΔX visual hidden | Stacks vertically, logo on top (centered, 80px) |
+| 10 | Proof bg: --bg-primary | --bg-secondary (#161C19) |
+| 11 | Final CTA bg: teal glow, more intense than hero | No glow. Quiet. Only grid texture, NO vignette. |
+| 12 | Counter animation: 800ms max | 1.5s easeOut |
+| 13 | Scroll reveal y-offset: y: 40 | y: 30 |
+| 14 | Scroll reveal viewport: amount: 0.2 | margin: "-100px" |
+| 15 | Stagger timing: 0.1s | 0.08 |
+| 16 | Footer bg: --bg-primary | --bg-secondary (#161C19) |
+| 17 | Contact challenge field: optional | required (TEXT NOT NULL) |
+| 18 | Contact submit: "Send →" | "SEND MESSAGE" |
+| 19 | Navbar link color: rgba(255,255,255,0.50) | #E8E8E8 |
+| 20 | Your Path titles: sentence case | UPPERCASE (JOIN THE WAITLIST, GET YOUR DIAGNOSTIC, DEPLOY THE SYSTEM) |
 
 ---
 

@@ -58,18 +58,38 @@ NEXT_PUBLIC_SITE_URL=https://thesx.co
 
 ---
 
-## Database Table (Backend dev creates this)
+## Database Tables (Backend dev creates these)
 
 Run this in Supabase SQL Editor (`https://supabase.com/dashboard/project/nbkbcntkqkmlpuwulmub/sql`):
 
 ```sql
--- Contact form submissions (per V3 spec)
+-- Waitlist email capture (per SPEC.md Section 12)
+CREATE TABLE waitlist (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  email TEXT UNIQUE NOT NULL,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+-- Enable Row Level Security
+ALTER TABLE waitlist ENABLE ROW LEVEL SECURITY;
+
+-- Policy: only server (service_role) can insert
+CREATE POLICY "Service role can insert" ON waitlist
+  FOR INSERT
+  WITH CHECK (true);
+
+-- Policy: only server can read
+CREATE POLICY "Service role can read" ON waitlist
+  FOR SELECT
+  USING (true);
+
+-- Contact form submissions (per SPEC.md)
 CREATE TABLE contacts (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   name TEXT NOT NULL,
   email TEXT NOT NULL,
   company TEXT,
-  challenge TEXT,
+  challenge TEXT NOT NULL,
   created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 
