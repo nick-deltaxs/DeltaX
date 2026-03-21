@@ -42,17 +42,51 @@ DeltaX-Landing/
 - **Email:** Resend
 - **Deploy:** Vercel
 
-## Quick Setup
+## Quick Setup (All Team Members)
+
+### Option A — One-click (Windows)
+
+Double-click **`setup.bat`** in the repo root. It installs everything and creates your `.env.local`.
+
+### Option B — Terminal
+
+```bash
+git clone https://github.com/Arvin-DeltaX/DeltaX-Landing.git
+cd DeltaX-Landing
+npm run setup
+```
+
+Or manually:
 
 ```bash
 cd Codebase
 npm install
-cp .env.local.template .env.local
-# Fill in Supabase + Resend keys in .env.local
+copy .env.local.template .env.local
+```
+
+Then fill in the API keys in `Codebase/.env.local`:
+- **Supabase keys** — ask Arvin
+- **Resend key** — ask Ali
+
+### Start dev server
+
+```bash
 npm run dev
 ```
 
+This works from **both** the repo root and the `Codebase/` folder.
+
 Opens at `http://localhost:3000`.
+
+### Troubleshooting
+
+| Problem | Fix |
+|---------|-----|
+| `npm install` fails at root | Run `npm run setup` instead of `npm install` |
+| Missing modules / can't find package.json | Make sure you're in `Codebase/` or use root scripts |
+| `node` not recognized | Install Node.js LTS from https://nodejs.org |
+| Permission errors | Run terminal as Administrator |
+| Stale dependencies | Delete `Codebase/node_modules` and run `npm run setup` again |
 
 ## Pages
 
