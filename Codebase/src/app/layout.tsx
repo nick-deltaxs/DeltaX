@@ -33,6 +33,36 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${daysOne.variable} ${inter.variable}`}>
       <body className="bg-primary text-text-body font-body">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "DeltaX",
+              url: "https://thesx.co",
+              logo: "https://thesx.co/logo.svg",
+              description:
+                "DeltaX replaces the 4 agencies that never talk to each other with one system where strategy, tech, growth, and brand feed into each other.",
+              foundingDate: "2025",
+              founders: [
+                { "@type": "Person", name: "Dave Benrouz" },
+                { "@type": "Person", name: "Ramtin Ghaffary" },
+              ],
+              address: {
+                "@type": "PostalAddress",
+                addressLocality: "Bali",
+                addressCountry: "ID",
+              },
+              contactPoint: {
+                "@type": "ContactPoint",
+                email: "contact@thesx.co",
+                contactType: "customer service",
+              },
+              sameAs: [],
+            }),
+          }}
+        />
         <a href="#main" className="skip-to-content">Skip to content</a>
         <MotionConfig reducedMotion="user">
           <main id="main">{children}</main>
