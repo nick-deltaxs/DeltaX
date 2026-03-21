@@ -5,6 +5,14 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Terms of Service — DeltaX",
   description: "Terms governing use of DeltaX services.",
+  openGraph: {
+    title: "Terms of Service — DeltaX",
+    description: "Terms governing use of DeltaX services.",
+    url: "https://thesx.co/terms",
+    siteName: "DeltaX",
+    images: [{ url: "/api/og?title=Terms%20of%20Service", width: 1200, height: 630 }],
+    type: "website",
+  },
 };
 
 export default function TermsPage() {
@@ -109,5 +117,6 @@ export default function TermsPage() {
 
       <Footer />
     </main>
+>>>>>>> b4286481d812493d26e5fcbd80a9540e1df9130c
   );
 }

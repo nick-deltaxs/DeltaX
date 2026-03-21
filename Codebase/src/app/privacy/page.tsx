@@ -5,6 +5,14 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Privacy Policy — DeltaX",
   description: "How DeltaX handles your data.",
+  openGraph: {
+    title: "Privacy Policy — DeltaX",
+    description: "How DeltaX handles your data.",
+    url: "https://thesx.co/privacy",
+    siteName: "DeltaX",
+    images: [{ url: "/api/og?title=Privacy%20Policy", width: 1200, height: 630 }],
+    type: "website",
+  },
 };
 
 export default function PrivacyPage() {
@@ -144,5 +152,6 @@ export default function PrivacyPage() {
 
       <Footer />
     </main>
+>>>>>>> b4286481d812493d26e5fcbd80a9540e1df9130c
   );
 }
