@@ -64,6 +64,14 @@ body {
   animation: spin 600ms linear infinite;
 }
 
+@keyframes logo-rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.logo-rotate {
+  animation: logo-rotate 60s linear infinite;
+}
+
 *:focus-visible {
   outline: 2px solid #1A9BBF;
   outline-offset: 2px;

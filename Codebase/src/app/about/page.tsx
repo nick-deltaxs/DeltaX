@@ -1,3 +1,10 @@
+import { Navbar } from "@/components/shared/Navbar";
+import { Footer } from "@/components/shared/Footer";
+import { AboutHero } from "@/components/about/AboutHero";
+import { Story } from "@/components/about/Story";
+import { TeamGrid } from "@/components/about/TeamGrid";
+import { AboutCTA } from "@/components/about/AboutCTA";
+
 export const metadata = {
   title: "About — DeltaX",
   description: "Meet the team behind the system.",
@@ -11,15 +18,15 @@ export const metadata = {
   },
 };
 
-export default function About() {
+export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-primary text-text-body">
-      <div className="container mx-auto px-4 py-16">
-        <h1 className="text-4xl font-display text-text-hero mb-8">About DeltaX</h1>
-        <p className="text-lg text-text-dim max-w-3xl">
-          Meet the team behind the system.
-        </p>
-      </div>
-    </div>
+    <main className="min-h-screen bg-primary">
+      <Navbar />
+      <AboutHero />
+      <Story />
+      <TeamGrid />
+      <AboutCTA />
+      <Footer />
+    </main>
   );
 }
