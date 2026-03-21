@@ -1,6 +1,6 @@
 import type { SectionLabelProps } from "@/types";
 
-const colorMap: Record<string, string> = {
+const colorMap = {
   core: "text-core-bright",
   code: "text-code-bright",
   scale: "text-scale-bright",
@@ -9,15 +9,9 @@ const colorMap: Record<string, string> = {
   gold: "text-gold",
 };
 
-export function SectionLabel({
-  children,
-  color = "core",
-  className = "",
-}: SectionLabelProps) {
+export function SectionLabel({ children, color = "core", className = "" }: SectionLabelProps) {
   return (
-    <span
-      className={`inline-block font-mono text-[0.85rem] font-semibold uppercase tracking-[4px] ${colorMap[color]} ${className}`}
-    >
+    <span className={`font-mono text-[0.85rem] uppercase tracking-[4px] font-semibold ${colorMap[color]} ${className}`}>
       {children}
     </span>
   );

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Days_One, Inter } from "next/font/google";
-import { Providers } from "@/components/Providers";
+import { MotionConfig } from "framer-motion";
 import "./globals.css";
 
 const daysOne = Days_One({
@@ -17,41 +17,26 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://thesx.co"),
   title: "DeltaX — One System. Four Engines. Total Transformation.",
-  description:
-    "DeltaX transforms businesses through four integrated engines: strategy, technology, growth, and brand. One system, total transformation.",
+  description: "Strategy, technology, growth, and brand — engineered into one system. Built for companies doing $500K–$10M. Join the waitlist.",
+  metadataBase: new URL("https://thesx.co"),
   openGraph: {
     title: "DeltaX — One System. Four Engines. Total Transformation.",
-    description:
-      "DeltaX transforms businesses through four integrated engines: strategy, technology, growth, and brand. One system, total transformation.",
+    description: "Strategy, technology, growth, and brand — engineered into one system.",
     url: "https://thesx.co",
     siteName: "DeltaX",
-    locale: "en_US",
     type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "DeltaX — One System. Four Engines. Total Transformation.",
-    description:
-      "DeltaX transforms businesses through four integrated engines: strategy, technology, growth, and brand.",
   },
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${daysOne.variable} ${inter.variable}`}>
-      <body className="bg-bg-primary text-text-body font-body">
-        <a href="#main" className="skip-to-content">
-          Skip to content
-        </a>
-        <Providers>
+      <body className="bg-primary text-text-body font-body">
+        <a href="#main" className="skip-to-content">Skip to content</a>
+        <MotionConfig reducedMotion="user">
           <main id="main">{children}</main>
-        </Providers>
+        </MotionConfig>
       </body>
     </html>
   );

@@ -15,23 +15,18 @@ export function Card({
   accentColor = "core",
   variant = "default",
 }: CardProps) {
-  const hoverStyles = hoverEffect
-    ? "hover:-translate-y-0.5 hover:border-opacity-100 transition-all duration-300"
-    : "";
+  const variantStyles = variant === "left-accent"
+    ? `border-l-[3px] ${accentBorderMap[accentColor]} rounded-xl p-4 pl-6`
+    : "bg-tertiary border border-white/[0.06] rounded-xl p-6 lg:p-8";
 
-  if (variant === "left-accent") {
-    return (
-      <div
-        className={`border-l-[3px] border-y-0 border-r-0 ${accentBorderMap[accentColor]} bg-gradient-to-br from-white/[0.10] to-white/[0.04] p-4 pl-6 rounded-xl ${hoverStyles} ${className}`}
-      >
-        {children}
-      </div>
-    );
-  }
+  const hoverStyles = hoverEffect
+    ? "transition-all duration-300 ease-in-out hover:-translate-y-0.5 hover:border-white/[0.12]"
+    : "";
 
   return (
     <div
-      className={`bg-bg-tertiary border border-white/[0.06] rounded-xl p-6 lg:p-8 ${hoverStyles} ${className}`}
+      className={`${variantStyles} ${hoverStyles} ${className}`}
+      style={variant === "left-accent" ? { background: "linear-gradient(135deg, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0.04) 100%)" } : undefined}
     >
       {children}
     </div>

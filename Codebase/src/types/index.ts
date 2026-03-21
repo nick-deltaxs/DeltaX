@@ -1,11 +1,5 @@
-import type { ReactNode } from "react";
-
-/* ═══════════════════════════════════════════════════════
-   UI Component Props
-   ═══════════════════════════════════════════════════════ */
-
 export interface ButtonProps {
-  children: ReactNode;
+  children: React.ReactNode;
   onClick?: () => void;
   disabled?: boolean;
   loading?: boolean;
@@ -19,7 +13,7 @@ export interface InputProps {
   placeholder?: string;
   value: string;
   onChange: (value: string) => void;
-  error?: string;
+  error?: boolean;
   className?: string;
   type?: string;
   name?: string;
@@ -31,7 +25,7 @@ export interface TextareaProps {
   placeholder?: string;
   value: string;
   onChange: (value: string) => void;
-  error?: string;
+  error?: boolean;
   className?: string;
   name?: string;
   required?: boolean;
@@ -40,7 +34,7 @@ export interface TextareaProps {
 }
 
 export interface CardProps {
-  children: ReactNode;
+  children: React.ReactNode;
   className?: string;
   hoverEffect?: boolean;
   accentColor?: "core" | "code" | "scale" | "style" | "deltax";
@@ -48,21 +42,21 @@ export interface CardProps {
 }
 
 export interface SectionWrapperProps {
-  children: ReactNode;
+  children: React.ReactNode;
   id?: string;
   className?: string;
   background?: "primary" | "secondary" | "break";
 }
 
 export interface ScrollRevealProps {
-  children: ReactNode;
+  children: React.ReactNode;
   className?: string;
   delay?: number;
   direction?: "up" | "down" | "left" | "right";
 }
 
 export interface SectionLabelProps {
-  children: ReactNode;
+  children: React.ReactNode;
   color?: "core" | "code" | "scale" | "style" | "deltax" | "gold";
   className?: string;
 }
@@ -72,15 +66,11 @@ export interface DeltaXLogoProps {
   size?: number;
 }
 
-/* ═══════════════════════════════════════════════════════
-   Domain Models
-   ═══════════════════════════════════════════════════════ */
-
 export interface TeamMember {
   name: string;
   nickname: string;
   role: string;
-  pillar: string;
+  pillar: "deltax" | "core" | "code" | "scale" | "style";
   tier: "founder" | "lead" | "support";
 }
 
@@ -89,12 +79,8 @@ export interface CaseStudy {
   stat: string;
   direction: "up" | "down";
   description: string;
-  engines: string[];
+  engines: string;
 }
-
-/* ═══════════════════════════════════════════════════════
-   Form States
-   ═══════════════════════════════════════════════════════ */
 
 export interface WaitlistFormState {
   status: "idle" | "loading" | "success" | "error" | "duplicate";
