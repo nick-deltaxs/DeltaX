@@ -15,7 +15,8 @@ export function WaitlistForm() {
 
     // Client-side validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
+    const trimmedEmail = email.trim().toLowerCase();
+    if (!emailRegex.test(trimmedEmail)) {
       setStatus("error");
       setErrorMessage("Please enter a valid email.");
       return;
@@ -27,7 +28,7 @@ export function WaitlistForm() {
       const response = await fetch("/api/waitlist", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email: trimmedEmail }),
       });
 
       if (response.status === 201) {
@@ -86,7 +87,7 @@ export function WaitlistForm() {
             transition={{ duration: 0.3, delay: 0.2 }}
             className="text-lg font-body text-success"
           >
-            You're on the list. Check your email.
+            You're in. Watch your inbox.
           </motion.p>
         )}
 

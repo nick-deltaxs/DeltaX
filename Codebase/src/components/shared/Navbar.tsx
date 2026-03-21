@@ -76,14 +76,24 @@ export function Navbar() {
     setIsMobileOpen(false);
   };
 
+  const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
+    if (pathname === "/") {
+      e.preventDefault();
+      const element = document.getElementById(targetId);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }
+  };
+
   const mobileMenuItems = [
     { label: "About", href: "/about" },
-    { label: "Core", href: "/#core" },
-    { label: "Code", href: "/#code" },
-    { label: "Scale", href: "/#scale" },
-    { label: "Style", href: "/#style" },
+    { label: "Core", href: "/#core", targetId: "core" },
+    { label: "Code", href: "/#code", targetId: "code" },
+    { label: "Scale", href: "/#scale", targetId: "scale" },
+    { label: "Style", href: "/#style", targetId: "style" },
     { label: "Contact", href: "/contact" },
-    { label: "JOIN WAITLIST", href: "/#cta", isCTA: true },
+    { label: "JOIN WAITLIST", href: "/#cta", targetId: "cta", isCTA: true },
   ];
 
   return (
@@ -167,6 +177,7 @@ export function Navbar() {
                     tabIndex={isDropdownOpen ? 0 : -1}
                     ref={(el) => { menuItemsRef.current[0] = el; }}
                     onKeyDown={(e) => handleMenuItemKeyDown(e, 0)}
+                    onClick={(e) => handleSmoothScroll(e, "core")}
                     className="block px-4 py-2 text-sm font-body text-text-dim hover:text-text-body hover:bg-white/[0.03] transition-colors duration-150 border-l-2 border-transparent hover:border-core-bright"
                   >
                     CoreX
@@ -177,6 +188,7 @@ export function Navbar() {
                     tabIndex={isDropdownOpen ? 0 : -1}
                     ref={(el) => { menuItemsRef.current[1] = el; }}
                     onKeyDown={(e) => handleMenuItemKeyDown(e, 1)}
+                    onClick={(e) => handleSmoothScroll(e, "code")}
                     className="block px-4 py-2 text-sm font-body text-text-dim hover:text-text-body hover:bg-white/[0.03] transition-colors duration-150 border-l-2 border-transparent hover:border-code-bright"
                   >
                     CodeX
@@ -187,6 +199,7 @@ export function Navbar() {
                     tabIndex={isDropdownOpen ? 0 : -1}
                     ref={(el) => { menuItemsRef.current[2] = el; }}
                     onKeyDown={(e) => handleMenuItemKeyDown(e, 2)}
+                    onClick={(e) => handleSmoothScroll(e, "scale")}
                     className="block px-4 py-2 text-sm font-body text-text-dim hover:text-text-body hover:bg-white/[0.03] transition-colors duration-150 border-l-2 border-transparent hover:border-scale-bright"
                   >
                     ScaleX
@@ -197,6 +210,7 @@ export function Navbar() {
                     tabIndex={isDropdownOpen ? 0 : -1}
                     ref={(el) => { menuItemsRef.current[3] = el; }}
                     onKeyDown={(e) => handleMenuItemKeyDown(e, 3)}
+                    onClick={(e) => handleSmoothScroll(e, "style")}
                     className="block px-4 py-2 text-sm font-body text-text-dim hover:text-text-body hover:bg-white/[0.03] transition-colors duration-150 border-l-2 border-transparent hover:border-style-bright"
                   >
                     StyleX
@@ -227,6 +241,7 @@ export function Navbar() {
           <div className="hidden md:block">
             <Link
               href="/#cta"
+              onClick={(e) => handleSmoothScroll(e, "cta")}
               className="bg-core-bright text-primary font-semibold text-sm rounded-full py-2 px-6 hover:opacity-90 transition-opacity duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-core-bright focus-visible:ring-offset-2 focus-visible:ring-offset-primary"
             >
               JOIN WAITLIST
@@ -273,7 +288,12 @@ export function Navbar() {
             >
               <Link
                 href={item.href}
-                onClick={closeMobileMenu}
+                onClick={(e) => {
+                  closeMobileMenu();
+                  if (item.targetId) {
+                    handleSmoothScroll(e, item.targetId);
+                  }
+                }}
                 className={`${
                   item.isCTA
                     ? "bg-core-bright text-primary font-semibold text-sm rounded-full py-3 px-8 mt-4 focus:outline-none focus-visible:ring-2 focus-visible:ring-core-bright focus-visible:ring-offset-2 focus-visible:ring-offset-primary"
