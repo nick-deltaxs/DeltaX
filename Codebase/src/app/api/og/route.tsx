@@ -3,14 +3,9 @@ import { NextRequest } from "next/server";
 
 export const runtime = "edge";
 
-const fontData = fetch(
-  new URL("../../../../public/fonts/DaysOne-Regular.ttf", import.meta.url)
-).then((res) => res.arrayBuffer()).catch(() => null);
-
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const title = searchParams.get("title") || "DeltaX";
-  const font = await fontData;
 
   return new ImageResponse(
     (
@@ -29,22 +24,22 @@ export async function GET(request: NextRequest) {
       >
         <div
           style={{
-            fontFamily: font ? "DaysOne" : "Arial, sans-serif",
+            fontFamily: "Arial, sans-serif",
             fontSize: 80,
             color: "#FFFFFF",
             marginBottom: 16,
-            fontWeight: font ? 400 : "bold",
+            fontWeight: "bold",
           }}
         >
           ΔX
         </div>
         <div
           style={{
-            fontFamily: font ? "DaysOne" : "Arial, sans-serif",
+            fontFamily: "Arial, sans-serif",
             fontSize: 40,
             color: "#E8E8E8",
             marginBottom: 40,
-            fontWeight: font ? 400 : "bold",
+            fontWeight: "bold",
           }}
         >
           {title}
@@ -63,14 +58,6 @@ export async function GET(request: NextRequest) {
     {
       width: 1200,
       height: 630,
-      fonts: font ? [
-        {
-          name: "DaysOne",
-          data: font,
-          style: "normal",
-          weight: 400,
-        },
-      ] : [],
       headers: {
         "Cache-Control": "public, max-age=31536000, immutable",
       },

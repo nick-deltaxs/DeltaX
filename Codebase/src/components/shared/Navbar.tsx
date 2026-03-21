@@ -95,17 +95,17 @@ export function Navbar() {
       >
         <div className="max-w-7xl mx-auto px-6 h-full flex items-center justify-between">
           {/* Logo */}
-          <Link href="/" aria-label="DeltaX home">
+          <Link href="/" aria-label="DeltaX home" className="focus:outline-none focus-visible:ring-2 focus-visible:ring-core-bright focus-visible:ring-offset-2 focus-visible:ring-offset-primary rounded">
             <DeltaXLogo size={35} />
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-8">
+          <nav className="hidden md:flex items-center gap-8" aria-label="Main navigation">
             {/* About Link */}
             <span className="group relative">
               <Link
                 href="/about"
-                className={`font-body text-sm transition-colors ${
+                className={`font-body text-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-core-bright focus-visible:ring-offset-2 focus-visible:ring-offset-primary rounded px-1 py-0.5 ${
                   pathname === "/about" ? "text-core-bright" : "text-text-dim hover:text-text-body"
                 }`}
               >
@@ -136,7 +136,7 @@ export function Navbar() {
                 }}
                 aria-expanded={isDropdownOpen}
                 aria-haspopup="menu"
-                className="font-body text-sm text-text-dim hover:text-text-body transition-colors flex items-center gap-1"
+                className="font-body text-sm text-text-dim hover:text-text-body transition-colors flex items-center gap-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-core-bright focus-visible:ring-offset-2 focus-visible:ring-offset-primary rounded px-1 py-0.5"
               >
                 Services
                 <svg
@@ -165,7 +165,7 @@ export function Navbar() {
                     href="/#core"
                     role="menuitem"
                     tabIndex={isDropdownOpen ? 0 : -1}
-                    ref={(el) => (menuItemsRef.current[0] = el)}
+                    ref={(el) => { menuItemsRef.current[0] = el; }}
                     onKeyDown={(e) => handleMenuItemKeyDown(e, 0)}
                     className="block px-4 py-2 text-sm font-body text-text-dim hover:text-text-body hover:bg-white/[0.03] transition-colors duration-150 border-l-2 border-transparent hover:border-core-bright"
                   >
@@ -175,7 +175,7 @@ export function Navbar() {
                     href="/#code"
                     role="menuitem"
                     tabIndex={isDropdownOpen ? 0 : -1}
-                    ref={(el) => (menuItemsRef.current[1] = el)}
+                    ref={(el) => { menuItemsRef.current[1] = el; }}
                     onKeyDown={(e) => handleMenuItemKeyDown(e, 1)}
                     className="block px-4 py-2 text-sm font-body text-text-dim hover:text-text-body hover:bg-white/[0.03] transition-colors duration-150 border-l-2 border-transparent hover:border-code-bright"
                   >
@@ -185,7 +185,7 @@ export function Navbar() {
                     href="/#scale"
                     role="menuitem"
                     tabIndex={isDropdownOpen ? 0 : -1}
-                    ref={(el) => (menuItemsRef.current[2] = el)}
+                    ref={(el) => { menuItemsRef.current[2] = el; }}
                     onKeyDown={(e) => handleMenuItemKeyDown(e, 2)}
                     className="block px-4 py-2 text-sm font-body text-text-dim hover:text-text-body hover:bg-white/[0.03] transition-colors duration-150 border-l-2 border-transparent hover:border-scale-bright"
                   >
@@ -195,7 +195,7 @@ export function Navbar() {
                     href="/#style"
                     role="menuitem"
                     tabIndex={isDropdownOpen ? 0 : -1}
-                    ref={(el) => (menuItemsRef.current[3] = el)}
+                    ref={(el) => { menuItemsRef.current[3] = el; }}
                     onKeyDown={(e) => handleMenuItemKeyDown(e, 3)}
                     className="block px-4 py-2 text-sm font-body text-text-dim hover:text-text-body hover:bg-white/[0.03] transition-colors duration-150 border-l-2 border-transparent hover:border-style-bright"
                   >
@@ -209,7 +209,7 @@ export function Navbar() {
             <span className="group relative">
               <Link
                 href="/contact"
-                className={`font-body text-sm transition-colors ${
+                className={`font-body text-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-core-bright focus-visible:ring-offset-2 focus-visible:ring-offset-primary rounded px-1 py-0.5 ${
                   pathname === "/contact" ? "text-core-bright" : "text-text-dim hover:text-text-body"
                 }`}
               >
@@ -227,7 +227,7 @@ export function Navbar() {
           <div className="hidden md:block">
             <Link
               href="/#cta"
-              className="bg-core-bright text-primary font-semibold text-sm rounded-full py-2 px-6 hover:opacity-90 transition-opacity duration-200"
+              className="bg-core-bright text-primary font-semibold text-sm rounded-full py-2 px-6 hover:opacity-90 transition-opacity duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-core-bright focus-visible:ring-offset-2 focus-visible:ring-offset-primary"
             >
               JOIN WAITLIST
             </Link>
@@ -236,7 +236,7 @@ export function Navbar() {
           {/* Mobile Hamburger */}
           <button
             onClick={() => setIsMobileOpen(true)}
-            className="md:hidden w-11 h-11 flex items-center justify-center text-text-body"
+            className="md:hidden w-11 h-11 flex items-center justify-center text-text-body focus:outline-none focus-visible:ring-2 focus-visible:ring-core-bright focus-visible:ring-offset-2 focus-visible:ring-offset-primary rounded"
             aria-label="Open mobile menu"
           >
             <svg width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
@@ -254,7 +254,7 @@ export function Navbar() {
           {/* Close Button */}
           <button
             onClick={closeMobileMenu}
-            className="absolute top-6 right-6 w-11 h-11 flex items-center justify-center text-text-body"
+            className="absolute top-6 right-6 w-11 h-11 flex items-center justify-center text-text-body focus:outline-none focus-visible:ring-2 focus-visible:ring-core-bright focus-visible:ring-offset-2 focus-visible:ring-offset-primary rounded"
             aria-label="Close mobile menu"
           >
             <svg width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
@@ -276,8 +276,8 @@ export function Navbar() {
                 onClick={closeMobileMenu}
                 className={`${
                   item.isCTA
-                    ? "bg-core-bright text-primary font-semibold text-sm rounded-full py-3 px-8 mt-4"
-                    : "font-body text-lg text-text-dim hover:text-text-body transition-colors"
+                    ? "bg-core-bright text-primary font-semibold text-sm rounded-full py-3 px-8 mt-4 focus:outline-none focus-visible:ring-2 focus-visible:ring-core-bright focus-visible:ring-offset-2 focus-visible:ring-offset-primary"
+                    : "font-body text-lg text-text-dim hover:text-text-body transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-core-bright focus-visible:ring-offset-2 focus-visible:ring-offset-primary rounded px-2 py-1"
                 }`}
               >
                 {item.label}

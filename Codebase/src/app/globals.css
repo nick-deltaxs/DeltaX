@@ -56,12 +56,22 @@ body {
 .glow-breathe {
   animation: breathe 4s ease-in-out infinite;
 }
+@media (prefers-reduced-motion: reduce) {
+  .glow-breathe {
+    animation: none;
+  }
+}
 
 @keyframes spin {
   to { transform: rotate(360deg); }
 }
 .spinner {
   animation: spin 600ms linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .spinner {
+    animation: none;
+  }
 }
 
 @keyframes logo-rotate {
@@ -70,6 +80,11 @@ body {
 }
 .logo-rotate {
   animation: logo-rotate 60s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .logo-rotate {
+    animation: none;
+  }
 }
 
 *:focus-visible {

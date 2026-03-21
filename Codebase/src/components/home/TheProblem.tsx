@@ -60,8 +60,8 @@ export function TheProblem() {
       <div className="relative max-w-6xl mx-auto px-6 lg:px-8">
         {/* Section label */}
         <div className="text-center mb-12 lg:mb-16">
-          <ScrollReveal color="core">
-            <SectionLabel>THE PROBLEM</SectionLabel>
+          <ScrollReveal delay={0}>
+            <SectionLabel color="core">THE PROBLEM</SectionLabel>
           </ScrollReveal>
         </div>
 
@@ -229,8 +229,8 @@ export function TheProblem() {
       <div className="relative max-w-6xl mx-auto px-6 lg:px-8">
         {/* Section label */}
         <div className="text-center mb-12 lg:mb-16">
-          <ScrollReveal color="core">
-            <SectionLabel>THE PROBLEM</SectionLabel>
+          <ScrollReveal delay={0}>
+            <SectionLabel color="core">THE PROBLEM</SectionLabel>
           </ScrollReveal>
         </div>
 

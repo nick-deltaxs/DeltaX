@@ -117,6 +117,5 @@ export default function TermsPage() {
 
       <Footer />
     </main>
->>>>>>> b4286481d812493d26e5fcbd80a9540e1df9130c
   );
 }

@@ -63,7 +63,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             }),
           }}
         />
-        <a href="#main" className="skip-to-content">Skip to content</a>
+        <a 
+          href="#main" 
+          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:bg-core-bright focus:text-bg-primary focus:px-4 focus:py-2 focus:rounded-lg font-body text-sm focus:outline-none"
+        >
+          Skip to content
+        </a>
         <MotionConfig reducedMotion="user">
           <main id="main">{children}</main>
         </MotionConfig>

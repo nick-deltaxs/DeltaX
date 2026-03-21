@@ -16,6 +16,7 @@ export interface InputProps {
   error?: boolean;
   className?: string;
   type?: string;
+  id?: string;
   name?: string;
   required?: boolean;
   maxLength?: number;
