@@ -1,0 +1,13 @@
+{
+  "name": "deltax-landing-root",
+  "private": true,
+  "description": "Root wrapper — runs all commands inside Codebase/",
+  "scripts": {
+    "install:app": "cd Codebase && npm install",
+    "dev": "cd Codebase && npm run dev",
+    "build": "cd Codebase && npm run build",
+    "start": "cd Codebase && npm run start",
+    "lint": "cd Codebase && npm run lint",
+    "setup": "cd Codebase && npm install && echo Setup complete! Run: npm run dev"
+  }
+}
