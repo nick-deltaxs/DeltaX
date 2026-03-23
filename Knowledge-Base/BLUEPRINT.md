@@ -995,7 +995,7 @@ Phase 0 (Foundation)
 
 ### Knowledge Base (Read-Only — Don't Modify)
 ```
-/Users/space/Desktop/DAVE/Projects/DeltaX-Landing/Knowledge-Base/
+/Users/space/Desktop/DAVE/Muscles/DeltaX-Landing/Knowledge-Base/
 ├── SPEC.md        — 1,521 lines, full product spec
 ├── WIREFRAMES.md  — ASCII wireframes for all pages
 ├── RULES.md       — 1,085 lines, team coordination + prompt rules
@@ -1004,7 +1004,7 @@ Phase 0 (Foundation)
 
 ### MATRIX Intelligence (Read-Only — Design Reference)
 ```
-/Users/space/Desktop/DAVE/Projects/MATRIX/Project-X/
+/Users/space/Desktop/DAVE/Muscles/MATRIX/Project-X/
 ├── Vision/v2/vision.md   — Full design bible from 32 references
 ├── tokens/tokens.css     — Design tokens (for Project-X, NOT DeltaX — use as reference only)
 ├── comparison.md         — Cross-reference scoring matrix
@@ -1014,12 +1014,12 @@ Phase 0 (Foundation)
 
 ### Brand DNA
 ```
-/Users/space/Desktop/DAVE/Projects/Leo-Ultimate/02_Brain/Brands/delta-x/delta-x.md
+/Users/space/Desktop/DAVE/13-Khayāl/Consoul/02_Brain/Brands/delta-x/delta-x.md
 ```
 
 ### Codebase (Build Here)
 ```
-/Users/space/Desktop/DAVE/Projects/DeltaX-Landing/Codebase/
+/Users/space/Desktop/DAVE/Muscles/DeltaX-Landing/Codebase/
 ```
 
 ---
