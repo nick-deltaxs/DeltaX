@@ -3,8 +3,8 @@ version: '3.8'
 services:
   deltax-app:
     build:
-      context: .
-      dockerfile: Dockerfile
+      context: ..
+      dockerfile: Infra/Dockerfile
     ports:
       - "3000:3000"
     environment:
@@ -12,24 +12,24 @@ services:
       - NEXT_PUBLIC_SITE_URL=http://localhost:3000
       # Add your environment variables here or use .env file
     env_file:
-      - Codebase/.env.local
+      - ../Codebase/.env.local
     restart: unless-stopped
     container_name: deltax-landing
 
   # Development service with hot reload
   deltax-dev:
     build:
-      context: .
-      dockerfile: Dockerfile.dev
+      context: ..
+      dockerfile: Infra/Dockerfile.dev
     ports:
       - "3000:3000"
     environment:
       - NODE_ENV=development
       - NEXT_PUBLIC_SITE_URL=http://localhost:3000
     env_file:
-      - Codebase/.env.local
+      - ../Codebase/.env.local
     volumes:
-      - ./Codebase:/app/Codebase
+      - ../Codebase:/app/Codebase
       - /app/Codebase/node_modules
       - /app/Codebase/.next
     restart: unless-stopped

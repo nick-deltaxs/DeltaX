@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Days_One, Inter } from "next/font/google";
+import { Days_One, Inter, JetBrains_Mono } from "next/font/google";
 import { MotionConfig } from "framer-motion";
 import "./globals.css";
 
@@ -16,23 +16,71 @@ const inter = Inter({
   display: "swap",
 });
 
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
-  title: "DeltaX — One System. Four Engines. Total Transformation.",
-  description: "Strategy, technology, growth, and brand — engineered into one system. Built for companies doing $500K–$10M. Join the waitlist.",
+  title: {
+    default: "DeltaX — Four engines. One system.",
+    template: "%s | DeltaX",
+  },
+  description:
+    "Strategy, engineering, design, and growth — working as one machine to build businesses that don't depend on their founders.",
   metadataBase: new URL("https://thesx.co"),
   openGraph: {
-    title: "DeltaX — One System. Four Engines. Total Transformation.",
-    description: "Strategy, technology, growth, and brand — engineered into one system.",
+    title: "DeltaX — Four engines. One system.",
+    description:
+      "Strategy, engineering, design, and growth — working as one machine.",
     url: "https://thesx.co",
     siteName: "DeltaX",
     type: "website",
+    images: [
+      {
+        url: "/api/og",
+        width: 1200,
+        height: 630,
+        alt: "DeltaX — Four engines. One system.",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "DeltaX — Four engines. One system.",
+    description:
+      "Strategy, engineering, design, and growth — working as one machine.",
+    images: ["/api/og"],
   },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <html lang="en" className={`${daysOne.variable} ${inter.variable}`}>
+    <html
+      lang="en"
+      className={`${daysOne.variable} ${inter.variable} ${jetbrainsMono.variable}`}
+    >
       <body className="bg-primary text-text-body font-body">
+        {/* Hardware gating — disable ambient effects on low-end devices (Linear pattern) */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `if(navigator.hardwareConcurrency<=4)document.body.classList.add('low-end')`,
+          }}
+        />
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:bg-accent-gold focus:text-primary focus:px-4 focus:py-2 focus:rounded-full font-body text-sm focus:outline-none"
+        >
+          Skip to content
+        </a>
+        <MotionConfig reducedMotion="user">
+          <main id="main">{children}</main>
+        </MotionConfig>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -41,37 +89,21 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               "@type": "Organization",
               name: "DeltaX",
               url: "https://thesx.co",
-              logo: "https://thesx.co/logo.svg",
               description:
-                "DeltaX replaces the 4 agencies that never talk to each other with one system where strategy, tech, growth, and brand feed into each other.",
+                "Strategy, engineering, design, and growth — working as one machine to build businesses that don't depend on their founders.",
               foundingDate: "2025",
               founders: [
                 { "@type": "Person", name: "Dave Benrouz" },
                 { "@type": "Person", name: "Ramtin Ghaffary" },
               ],
-              address: {
-                "@type": "PostalAddress",
-                addressLocality: "Bali",
-                addressCountry: "ID",
-              },
               contactPoint: {
                 "@type": "ContactPoint",
-                email: "contact@thesx.co",
+                email: "hello@thesx.co",
                 contactType: "customer service",
               },
-              sameAs: [],
             }),
           }}
         />
-        <a 
-          href="#main" 
-          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:bg-core-bright focus:text-bg-primary focus:px-4 focus:py-2 focus:rounded-lg font-body text-sm focus:outline-none"
-        >
-          Skip to content
-        </a>
-        <MotionConfig reducedMotion="user">
-          <main id="main">{children}</main>
-        </MotionConfig>
       </body>
     </html>
   );

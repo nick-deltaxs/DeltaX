@@ -3,17 +3,20 @@ export interface ButtonProps {
   onClick?: () => void;
   disabled?: boolean;
   loading?: boolean;
-  variant?: "primary" | "ghost";
-  size?: "default" | "small";
+  variant?: "primary" | "secondary" | "ghost";
+  size?: "large" | "medium" | "small";
   className?: string;
   type?: "button" | "submit";
+  href?: string;
 }
 
 export interface InputProps {
+  label: string;
   placeholder?: string;
   value: string;
   onChange: (value: string) => void;
   error?: boolean;
+  errorMessage?: string;
   className?: string;
   type?: string;
   id?: string;
@@ -23,30 +26,17 @@ export interface InputProps {
 }
 
 export interface TextareaProps {
+  label: string;
   placeholder?: string;
   value: string;
   onChange: (value: string) => void;
   error?: boolean;
+  errorMessage?: string;
   className?: string;
   name?: string;
   required?: boolean;
   maxLength?: number;
   rows?: number;
-}
-
-export interface CardProps {
-  children: React.ReactNode;
-  className?: string;
-  hoverEffect?: boolean;
-  accentColor?: "core" | "code" | "scale" | "style" | "deltax";
-  variant?: "default" | "left-accent";
-}
-
-export interface SectionWrapperProps {
-  children: React.ReactNode;
-  id?: string;
-  className?: string;
-  background?: "primary" | "secondary" | "break";
 }
 
 export interface ScrollRevealProps {
@@ -56,9 +46,17 @@ export interface ScrollRevealProps {
   direction?: "up" | "down" | "left" | "right";
 }
 
-export interface SectionLabelProps {
+export interface SectionWrapperProps {
   children: React.ReactNode;
-  color?: "core" | "code" | "scale" | "style" | "deltax" | "gold";
+  id?: string;
+  className?: string;
+  background?: "primary" | "secondary" | "deep";
+  glow?: "core" | "code" | "scale" | "style" | "deltax" | "gold" | "none";
+}
+
+export interface SectionOverlineProps {
+  number: string;
+  label: string;
   className?: string;
 }
 
@@ -69,29 +67,23 @@ export interface DeltaXLogoProps {
 
 export interface TeamMember {
   name: string;
-  nickname: string;
   role: string;
   pillar: "deltax" | "core" | "code" | "scale" | "style";
-  tier: "founder" | "lead" | "support";
+  tier: "founder" | "leader" | "team";
 }
 
 export interface CaseStudy {
-  label: string;
-  stat: string;
-  direction: "up" | "down";
-  description: string;
-  engines: string;
-}
-
-export interface WaitlistFormState {
-  status: "idle" | "loading" | "success" | "error" | "duplicate";
-  email: string;
+  client: string;
+  sector: string;
+  delivered: string;
 }
 
 export interface ContactFormState {
-  status: "idle" | "loading" | "success" | "error" | "ratelimited";
+  status: "idle" | "loading" | "success" | "error";
   name: string;
   email: string;
   company: string;
   challenge: string;
 }
+
+export type PillarColor = "core" | "code" | "scale" | "style" | "deltax";

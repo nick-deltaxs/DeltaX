@@ -6,10 +6,15 @@ Marketing website with waitlist for DeltaX. Built by 7 devs using prompt-driven 
 
 ```
 DeltaX-Landing/
-├── Knowledge-Base/   # Design specs, copy, tokens, architecture
-├── Prompts/          # Per-person prompt files (run in Windsurf)
 ├── Codebase/         # Next.js project (the actual website)
-└── Roadmap/          # Build phases and progress tracking
+├── Docs/             # All project management & documentation
+│   ├── Knowledge-Base/   # Design specs, copy, tokens, architecture
+│   ├── Prompts/          # Per-person prompt files (run in Windsurf)
+│   ├── Roadmap/          # Build phases and progress tracking
+│   └── Audits/           # Quality audit reports
+├── Infra/            # Docker, deployment, setup scripts
+├── README.md
+└── package.json      # Root convenience scripts
 ```
 
 ## Team
@@ -27,7 +32,7 @@ DeltaX-Landing/
 ## How to Build
 
 1. **Arvin runs foundation first** — project init, config, layout, UI primitives, shared components
-2. **Everyone else runs their prompts in parallel** — each dev opens Windsurf, loads their prompt file from `Prompts/`, and executes
+2. **Everyone else runs their prompts in parallel** — each dev opens Windsurf, loads their prompt file from `Docs/Prompts/`, and executes
 3. **Arvin integrates** — assembles all sections into pages, connects forms and scroll behavior
 4. **Nick runs QA** — responsive, animation, accessibility, cross-page testing
 
@@ -46,7 +51,7 @@ DeltaX-Landing/
 
 ### Option A — One-click (Windows)
 
-Double-click **`setup.bat`** in the repo root. It installs everything and creates your `.env.local`.
+Double-click **`Infra/setup.bat`** in the repo. It installs everything and creates your `.env.local`.
 
 ### Option B — Terminal
 
@@ -61,7 +66,7 @@ Or manually:
 ```bash
 cd Codebase
 npm install
-copy .env.local.template .env.local
+cp .env.local.template .env.local
 ```
 
 Then fill in the API keys in `Codebase/.env.local`:
@@ -77,6 +82,14 @@ npm run dev
 This works from **both** the repo root and the `Codebase/` folder.
 
 Opens at `http://localhost:3000`.
+
+### Docker
+
+```bash
+cd Infra
+docker compose up              # Production
+docker compose --profile dev up # Development (hot reload)
+```
 
 ### Troubleshooting
 
@@ -99,5 +112,8 @@ Opens at `http://localhost:3000`.
 ## Links
 
 - **Live site:** https://thesx.co
-- **Roadmap:** [Roadmap/ROADMAP.md](Roadmap/ROADMAP.md)
-- **Progress:** [Roadmap/PROGRESS.md](Roadmap/PROGRESS.md)
+- **Docs:** [Docs/](Docs/)
+- **Roadmap:** [Docs/Roadmap/ROADMAP.md](Docs/Roadmap/ROADMAP.md)
+- **Progress:** [Docs/Roadmap/PROGRESS.md](Docs/Roadmap/PROGRESS.md)
+- **Audit:** [Docs/Audits/AUDIT.md](Docs/Audits/AUDIT.md)
+- **Spec:** [Docs/Knowledge-Base/SPEC.md](Docs/Knowledge-Base/SPEC.md)
