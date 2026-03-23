@@ -87,7 +87,12 @@ This page doesn't exist. But we do.
 
 - bg-primary, min-h-screen, flex centered
 - Red glow: `radial-gradient(ellipse at 50% 50%, rgba(154,21,21,0.08), transparent 60%)`
-- Grid texture + vignette (atmosphere-grid + atmosphere-vignette classes)
+
+  **BACKGROUND IMAGE:** Use 404-mood.png instead of CSS-only red glow:
+  ```tsx
+  <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: "url('/images/404-mood.png')", backgroundSize: "cover", backgroundPosition: "center", opacity: 0.8 }} />
+  ```
+  This is the STUNNING red nebula fog image from Higgsfield. It transforms the 404 from "CSS gradient" to "cinematic experience."- Grid texture + vignette (atmosphere-grid + atmosphere-vignette classes)
 - Logo: DeltaXLogo size={120} className="text-text-hero opacity-40 glow-breathe mb-8"
 - Headline: `Lost in the system.` — font-display, 48px, text-hero
 - Subtext: `This page doesn't exist. But we do.` — font-body, text-lg, text-secondary, mb-8

@@ -224,3 +224,31 @@ If logo images don't load from /logos/, check that the files exist in public/log
   © DeltaX · CodeXs · "Every paste builds the future."
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  UPGRADE: USE GENERATED IMAGES INSTEAD OF CSS ART
+
+  Higgsfield generated 4 pillar visuals in public/images/.
+  Use these INSTEAD of the CSS geometric shapes on the right panel:
+
+  CoreXs tab → <img src="/images/system-core.png" /> (teal geometric lines)
+  CodeXs tab → <img src="/images/system-code.png" /> (grey circuit patterns)
+  ScaleXs tab → <img src="/images/system-scale.png" /> (red 3D angular bars)
+  StyleXs tab → <img src="/images/system-style.png" /> (blue fluid organic shape)
+
+  Replace the CSS art div with:
+  ```tsx
+  <div className="relative w-full aspect-square max-w-[300px] mx-auto rounded-lg overflow-hidden">
+    <img
+      src={`/images/system-${activePillar}.png`}
+      alt={`${activePillar} visual`}
+      className="w-full h-full object-contain transition-opacity duration-300"
+    />
+  </div>
+  ```
+
+  Where activePillar = "core" | "code" | "scale" | "style" from the active tab.
+  Images crossfade on tab switch (use AnimatePresence + opacity transition).
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

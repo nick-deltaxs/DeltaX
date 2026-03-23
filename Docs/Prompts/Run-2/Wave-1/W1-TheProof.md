@@ -81,6 +81,11 @@ DEVYN          Streetwear      Complete brand system, identity, packaging
 
 **Layout:** SectionWrapper background="primary" glow="gold"
 
+  **BACKGROUND IMAGE:** Add proof-gold-dust.png as subtle overlay:
+  ```tsx
+  <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: "url('/images/proof-gold-dust.png')", backgroundSize: "cover", opacity: 0.4 }} />
+  ```
+  Subtle gold dust particles behind the stats. Very low opacity.
 **Overline:** SectionOverline number="02" label="THE PROOF", mb-4
 
 **Headline:** font-display, text-5xl (48px), text-hero, tracking-[-0.02em], text-wrap: balance, mb-16

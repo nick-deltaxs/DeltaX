@@ -50,6 +50,11 @@ You're building two sections for the About page. The hero is short (70vh, not fu
 
 **4 corner glows:** absolute divs at 0.04 opacity each — core top-left, code top-right, scale bottom-left, style bottom-right. Each ~300px radial gradient. pointer-events-none.
 
+  **BACKGROUND IMAGE:** Instead of (or in addition to) CSS corner glows, add about-atmosphere.png:
+  ```tsx
+  <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: "url('/images/about-atmosphere.png')", backgroundSize: "cover", opacity: 0.6 }} />
+  ```
+  This image already has the 4 corner lights pre-baked by Higgsfield.
 Animation: headline fade-up 600ms, subtext 200ms delay, glows fade in 1200ms.
 Mobile: headline 36px, subtext 18px.
 

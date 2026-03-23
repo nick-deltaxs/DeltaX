@@ -68,6 +68,11 @@ The entire section has grid texture and vignette via SectionWrapper.
 
 **Layout:** SectionWrapper with glow="deltax". min-h-screen, flex flex-col items-center justify-center, text-center.
 
+  **BACKGROUND IMAGE:** Add hero-atmosphere.png as a background. Inside the SectionWrapper, add:
+  ```tsx
+  <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: "url('/images/hero-atmosphere.png')", backgroundSize: "cover", backgroundPosition: "center top", opacity: 0.7 }} />
+  ```
+  This replaces the CSS-only navy glow with a cinematic teal spotlight image from Higgsfield.
 **Logo:** `<DeltaXLogo size={160} className="text-text-hero mb-8" />`
 
 **Headline:** font-display, clamp(48px, 6vw, 64px), text-hero, tracking-[-0.03em], text-wrap: balance

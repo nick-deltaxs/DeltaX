@@ -69,6 +69,11 @@ You're building the Final CTA — the last thing visitors see before the footer.
 
 **Layout:** SectionWrapper background="primary" glow="deltax". Everything centered: flex flex-col items-center text-center.
 
+  **BACKGROUND IMAGE:** Add cta-atmosphere.png as background:
+  ```tsx
+  <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: "url('/images/cta-atmosphere.png')", backgroundSize: "cover", backgroundPosition: "center", opacity: 0.6 }} />
+  ```
+  Piano bookend — quieter than the hero atmosphere.
 **Logo:** DeltaXLogo size={80}, className="text-text-hero opacity-60 glow-breathe mb-8"
 
 **Headline:** font-display, text-5xl (48px), text-hero, tracking-[-0.02em], mb-4
