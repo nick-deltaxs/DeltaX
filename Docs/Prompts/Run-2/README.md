@@ -2,12 +2,22 @@
 
 ## Before You Start (EVERYONE)
 
+### 0. Requirements
+- **Node.js 18+** (check: `node -v`)
+- **Git** installed
+- **Windsurf IDE** installed + logged into Teams account
+
 ### 1. Clone or pull the repo
 ```bash
+# First time:
 git clone https://github.com/Arvin-DeltaX/DeltaX-Landing.git
-# or if you already have it:
-cd DeltaX-Landing    # this is the Website/ folder
-git pull origin main
+cd DeltaX-Landing
+
+# If you already have it from Run 1:
+cd DeltaX-Landing
+git stash              # save any old local changes
+git checkout main      # switch to main branch
+git pull origin main   # get Run 2 code
 ```
 
 ### 2. Install dependencies
@@ -17,11 +27,19 @@ npm run setup
 ```
 
 ### 3. Open Windsurf
-**Open the `Codebase/` folder in Windsurf** — NOT the root Website/ folder.
+**Open the `Codebase/` folder in Windsurf** — NOT the root folder.
 ```
-Windsurf → File → Open Folder → [repo]/Codebase/
+Windsurf → File → Open Folder → DeltaX-Landing/Codebase/
 ```
 This is where `.windsurfrules` lives. This is where `src/` lives. This is where you work.
+
+Your prompt files are at `DeltaX-Landing/Docs/Prompts/Run-2/` — open them in a text editor, Finder, or GitHub web. They're outside the Windsurf project on purpose (you read them, not the AI).
+
+### 3b. Windsurf shortcuts
+| Action | Mac | Windows |
+|---|---|---|
+| Open Cascade | Cmd+L | Ctrl+L |
+| Toggle Plan mode | Cmd+. | Ctrl+. |
 
 ### 4. Git commands run from WEBSITE ROOT
 ```bash

@@ -32,6 +32,7 @@ Before anything:
 ```
 git checkout main && git pull origin main
 git checkout -b integration/arvin-i1-homepage
+cd Codebase && npm install
 npm run build
 ```
 Build MUST pass before you start integration. If it fails, fix the failing component FIRST.

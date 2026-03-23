@@ -30,6 +30,7 @@
 
 Before anything: `git checkout main && git pull origin main
 git checkout -b integration/arvin-i2-otherpages
+cd Codebase && npm install
 
 ---
 

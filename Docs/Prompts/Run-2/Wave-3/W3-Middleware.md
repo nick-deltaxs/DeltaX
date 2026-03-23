@@ -30,6 +30,7 @@
 
 Before anything: `git checkout main && git pull origin main
 git checkout -b wave3/new-member-middleware
+cd Codebase && npm install
 
 ---
 

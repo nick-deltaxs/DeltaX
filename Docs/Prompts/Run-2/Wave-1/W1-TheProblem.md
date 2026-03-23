@@ -30,6 +30,7 @@
 
 Before anything: `git checkout main && git pull origin main
 git checkout -b wave1/marina-theproblem
+cd Codebase && npm install
 
 ---
 

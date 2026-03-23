@@ -35,5 +35,4 @@ Thumbs.db
 **/*.tsbuildinfo
 **/next-env.d.ts
 
-# Dev test page (local only, don't commit)
-Codebase/src/app/dev/
+# Dev test page — committed with F0, deleted before deploy in Q3

@@ -30,6 +30,7 @@
 
 Before anything: `git checkout main && git pull origin main
 git checkout -b wave2/erfan-favicon
+cd Codebase && npm install
 
 ---
 

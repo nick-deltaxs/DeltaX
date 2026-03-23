@@ -30,6 +30,7 @@
 
 Before anything: `git checkout main && git pull origin main
 git checkout -b wave2/katareina-abouthero
+cd Codebase && npm install
 
 ---
 

@@ -32,6 +32,7 @@
 ```
 git checkout main && git pull origin main
 git checkout -b qa/nick-q1-responsive
+cd Codebase && npm install
 npm run build
 npm run dev
 ```

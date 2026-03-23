@@ -30,6 +30,7 @@
 
 Before anything: `git checkout main && git pull origin main
 git checkout -b wave3/nazar-seo
+cd Codebase && npm install
 
 ---
 
