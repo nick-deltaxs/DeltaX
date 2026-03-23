@@ -4,10 +4,10 @@ import { motion } from "framer-motion";
 import type { ScrollRevealProps } from "@/types";
 
 const directionMap = {
-  up: { y: 30 },
-  down: { y: -30 },
-  left: { x: 30 },
-  right: { x: -30 },
+  up: { y: 24 },
+  down: { y: -24 },
+  left: { x: 24 },
+  right: { x: -24 },
 };
 
 export function ScrollReveal({
@@ -21,7 +21,7 @@ export function ScrollReveal({
     <motion.div
       initial={{ opacity: 0, ...offset }}
       whileInView={{ opacity: 1, x: 0, y: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
+      viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.6, delay, ease: [0.16, 1, 0.3, 1] }}
       className={className}
     >

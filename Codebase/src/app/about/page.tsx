@@ -1,32 +1,3 @@
-import { Navbar } from "@/components/shared/Navbar";
-import { Footer } from "@/components/shared/Footer";
-import { AboutHero } from "@/components/about/AboutHero";
-import { Story } from "@/components/about/Story";
-import { TeamGrid } from "@/components/about/TeamGrid";
-import { AboutCTA } from "@/components/about/AboutCTA";
-
-export const metadata = {
-  title: "About — DeltaX",
-  description: "Meet the team behind the system.",
-  openGraph: {
-    title: "About — DeltaX",
-    description: "Meet the team behind the system.",
-    url: "https://thesx.co/about",
-    siteName: "DeltaX",
-    images: [{ url: "/api/og?title=About%20DeltaX", width: 1200, height: 630 }],
-    type: "website",
-  },
-};
-
 export default function AboutPage() {
-  return (
-    <main className="min-h-screen bg-primary">
-      <Navbar />
-      <AboutHero />
-      <Story />
-      <TeamGrid />
-      <AboutCTA />
-      <Footer />
-    </main>
-  );
+  return <div className="min-h-screen" />;
 }

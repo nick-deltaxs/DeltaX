@@ -2,41 +2,56 @@
 
 import type { ButtonProps } from "@/types";
 
+const sizeMap = {
+  large: "h-[52px] px-8 text-[16px]",
+  medium: "h-[44px] px-6 text-[15px]",
+  small: "h-[36px] px-5 text-[14px]",
+};
+
+const variantMap = {
+  primary:
+    "bg-accent-gold text-primary hover:bg-accent-gold-hover font-body font-medium rounded-full transition-all duration-150",
+  secondary:
+    "bg-transparent border border-text-muted text-text-body hover:border-text-body font-body font-medium rounded-full transition-all duration-150",
+  ghost:
+    "bg-transparent text-text-secondary hover:text-text-body font-body font-medium transition-all duration-150",
+};
+
 export function Button({
   children,
   onClick,
   disabled = false,
   loading = false,
   variant = "primary",
-  size = "default",
+  size = "medium",
   className = "",
   type = "button",
+  href,
 }: ButtonProps) {
-  const baseStyles =
-    "inline-flex items-center justify-center font-semibold font-body transition-all duration-200 ease-in-out focus-visible:ring-2 focus-visible:ring-core-bright focus-visible:ring-offset-2 focus-visible:ring-offset-primary focus-visible:outline-none";
+  const classes = `${variantMap[variant]} ${sizeMap[size]} inline-flex items-center justify-center gap-2 ${
+    disabled || loading ? "opacity-50 cursor-not-allowed" : "cursor-pointer"
+  } ${className}`;
 
-  const sizeStyles =
-    size === "small" ? "py-2 px-6 text-sm" : "py-3 px-8 text-base";
-
-  const variantStyles =
-    variant === "ghost"
-      ? "bg-transparent text-text-body border border-white/[0.10] hover:border-core-bright"
-      : "bg-core-bright text-primary font-semibold hover:scale-[1.02] hover:shadow-[0_0_24px_rgba(26,155,191,0.35)]";
-
-  const stateStyles =
-    disabled || loading
-      ? "opacity-50 cursor-not-allowed"
-      : "active:scale-[0.98] cursor-pointer";
+  if (href) {
+    return (
+      <a href={href} className={classes}>
+        {children}
+      </a>
+    );
+  }
 
   return (
     <button
       type={type}
       onClick={onClick}
       disabled={disabled || loading}
-      className={`${baseStyles} ${sizeStyles} ${variantStyles} ${stateStyles} ${className} rounded-full relative`}
+      aria-busy={loading}
+      className={classes}
     >
-      {loading && <span className="absolute spinner w-4 h-4 border-2 border-white border-t-transparent rounded-full" />}
-      <span className={loading ? "opacity-0" : ""}>{children}</span>
+      {loading ? (
+        <span className="spinner w-4 h-4 border-2 border-current border-t-transparent rounded-full" />
+      ) : null}
+      {children}
     </button>
   );
 }

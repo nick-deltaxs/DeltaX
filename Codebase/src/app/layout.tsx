@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Days_One, Inter, JetBrains_Mono } from "next/font/google";
 import { MotionConfig } from "framer-motion";
+import { Navbar } from "@/components/shared/Navbar";
+import { Footer } from "@/components/shared/Footer";
 import "./globals.css";
 
 const daysOne = Days_One({
@@ -79,7 +81,9 @@ export default function RootLayout({
           Skip to content
         </a>
         <MotionConfig reducedMotion="user">
+          <Navbar />
           <main id="main">{children}</main>
+          <Footer />
         </MotionConfig>
         <script
           type="application/ld+json"

@@ -1,9 +1,9 @@
 import type { SectionWrapperProps } from "@/types";
 
-const backgroundMap: Record<string, string> = {
+const bgMap = {
   primary: "bg-primary",
   secondary: "bg-secondary",
-  break: "bg-bg-break",
+  deep: "bg-deep",
 };
 
 export function SectionWrapper({
@@ -11,13 +11,22 @@ export function SectionWrapper({
   id,
   className = "",
   background = "primary",
+  glow = "none",
 }: SectionWrapperProps) {
   return (
     <section
       id={id}
-      className={`${backgroundMap[background]} atmosphere-grid atmosphere-vignette relative`}
+      className={`relative overflow-hidden py-24 lg:py-32 ${bgMap[background]} ${className}`}
     >
-      <div className={`relative z-10 max-w-7xl mx-auto px-6 lg:px-8 py-16 lg:py-24 ${className}`}>
+      <div className="atmosphere-grid absolute inset-0 pointer-events-none" />
+      <div className="atmosphere-vignette" />
+      {glow !== "none" && (
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{ background: `var(--glow-${glow})` }}
+        />
+      )}
+      <div className="relative z-10 max-w-[1200px] mx-auto px-6">
         {children}
       </div>
     </section>
