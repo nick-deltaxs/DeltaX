@@ -8,7 +8,7 @@ import { ScrollReveal } from "@/components/ui/ScrollReveal";
 
 export function FinalCTA() {
   return (
-    <SectionWrapper id="cta" background="secondary" glow="deltax">
+    <SectionWrapper id="cta" background="primary" glow="deltax">
       {/* Background atmosphere image */}
       <div
         className="absolute inset-0 pointer-events-none"

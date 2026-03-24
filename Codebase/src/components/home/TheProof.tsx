@@ -73,7 +73,7 @@ export function TheProof() {
 
   return (
     <div ref={sectionRef}>
-      <SectionWrapper id="proof" background="primary" glow="gold">
+      <SectionWrapper id="proof" background="secondary" glow="gold">
         <div
           className="absolute inset-0 pointer-events-none"
           style={{

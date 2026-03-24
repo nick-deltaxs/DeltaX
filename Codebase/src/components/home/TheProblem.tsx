@@ -45,7 +45,7 @@ const itemVariants = {
 
 export function TheProblem() {
   return (
-    <SectionWrapper id="problem" background="secondary" glow="none" className="relative">
+    <SectionWrapper id="problem" background="primary" glow="none" className="relative">
       {/* Dual glow backgrounds */}
       <div
         className="absolute inset-0 pointer-events-none"
