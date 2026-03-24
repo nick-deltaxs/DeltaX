@@ -1,112 +1,70 @@
-import { NextRequest, NextResponse } from "next/server";
-import { supabase } from "@/lib/supabase";
-import { resend } from "@/lib/resend";
+import { createClient } from "@supabase/supabase-js";
+import { Resend } from "resend";
+import { NextResponse } from "next/server";
 
-const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000; // 1 hour
-const RATE_LIMIT_MAX_REQUESTS = 3;
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+);
 
-const rateLimitMap = new Map<string, number[]>();
+const resend = new Resend(process.env.RESEND_API_KEY);
 
-function isRateLimited(ip: string): boolean {
-  const now = Date.now();
-  const timestamps = rateLimitMap.get(ip) || [];
-  const validTimestamps = timestamps.filter(
-    (ts) => now - ts < RATE_LIMIT_WINDOW_MS
-  );
-
-  if (validTimestamps.length >= RATE_LIMIT_MAX_REQUESTS) {
-    return true;
-  }
-
-  validTimestamps.push(now);
-  rateLimitMap.set(ip, validTimestamps);
-  return false;
+function sanitize(str: string): string {
+  return str.replace(/[<>]/g, "").trim().slice(0, 1000);
 }
 
-export async function POST(request: NextRequest) {
+export async function POST(request: Request) {
   try {
     const body = await request.json();
     const { name, email, company, challenge, website } = body;
 
-    // Honeypot check
-    if (website && (website as string).trim()) {
-      return NextResponse.json({ message: "Success" }, { status: 200 });
+    if (website) {
+      return NextResponse.json({ message: "Message sent" }, { status: 201 });
     }
 
-    // Rate limiting
-    const ip = request.headers.get("x-forwarded-for") || "unknown";
-    if (isRateLimited(ip)) {
-      return NextResponse.json(
-        { error: "Too many requests. Please try again later." },
-        { status: 429 }
-      );
+    if (!name || !email || !challenge) {
+      return NextResponse.json({ error: "Name, email, and message are required" }, { status: 400 });
     }
 
-    // Validation
-    const trimmedName = (name || "").trim();
-    const trimmedEmail = (email || "").trim().toLowerCase();
-    const trimmedCompany = (company || "").trim();
-    const trimmedChallenge = (challenge || "").trim();
-
-    if (
-      !trimmedName ||
-      trimmedName.length > 100 ||
-      !trimmedEmail ||
-      trimmedEmail.length > 254 ||
-      !EMAIL_REGEX.test(trimmedEmail) ||
-      trimmedCompany.length > 100 ||
-      !trimmedChallenge ||
-      trimmedChallenge.length > 500
-    ) {
-      return NextResponse.json(
-        { error: "Invalid input." },
-        { status: 400 }
-      );
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email) || email.length > 254) {
+      return NextResponse.json({ error: "Invalid email" }, { status: 400 });
     }
 
-    // Insert into Supabase
-    const { error: insertError } = await supabase
+    const sanitizedData = {
+      name: sanitize(name),
+      email: email.toLowerCase().trim(),
+      company: company ? sanitize(company) : "",
+      challenge: sanitize(challenge),
+    };
+
+    const { error: dbError } = await supabase
       .from("contacts")
       .insert({
-        name: trimmedName,
-        email: trimmedEmail,
-        company: trimmedCompany || null,
-        challenge: trimmedChallenge,
-        created_at: new Date().toISOString(),
+        name: sanitizedData.name,
+        email: sanitizedData.email,
+        company: sanitizedData.company || "NULL",
+        challenge: sanitizedData.challenge,
       });
 
-    if (insertError) {
-      return NextResponse.json(
-        { error: "Something went wrong." },
-        { status: 500 }
-      );
+    if (dbError) {
+      console.error("Contact insert error:", dbError);
+      return NextResponse.json({ error: "Something went wrong" }, { status: 500 });
     }
 
-    // Send notification email
     try {
-      const emailText = `New contact form submission:
-
-Name: ${trimmedName}
-Email: ${trimmedEmail}
-Company: ${trimmedCompany || "N/A"}
-Challenge: ${trimmedChallenge}`;
-
       await resend.emails.send({
-        from: "DeltaX <notifications@thesx.co>",
-        to: "contact@thesx.co",
-        subject: `New contact: ${trimmedName}`,
-        text: emailText,
+        from: "DeltaX <noreply@thesx.co>",
+        to: "hello@thesx.co",
+        subject: `New contact: ${sanitizedData.name} from ${sanitizedData.company || "N/A"}`,
+        text: `Name: ${sanitizedData.name}\nEmail: ${sanitizedData.email}\nCompany: ${sanitizedData.company || "Not provided"}\nChallenge: ${sanitizedData.challenge}`,
       });
     } catch {
-      // Email sending failure should not fail the request
+      console.error("Resend error — submission saved but notification not sent");
     }
 
-    return NextResponse.json({ message: "Success" }, { status: 201 });
+    return NextResponse.json({ message: "Message sent" }, { status: 201 });
   } catch {
-    return NextResponse.json(
-      { error: "Something went wrong." },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: "Something went wrong" }, { status: 500 });
   }
 }
