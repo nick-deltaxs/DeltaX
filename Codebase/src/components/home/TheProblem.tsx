@@ -64,7 +64,7 @@ export function TheProblem() {
 
       <div className="relative z-10">
         {/* Overline */}
-        <SectionOverline number="—" label="THE PROBLEM" className="mb-4" />
+        <SectionOverline number="00" label="THE PROBLEM" className="mb-4" />
 
         {/* Headline */}
         <ScrollReveal delay={0}>

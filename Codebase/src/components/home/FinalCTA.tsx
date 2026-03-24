@@ -40,7 +40,7 @@ export function FinalCTA() {
             className="font-display text-4xl md:text-5xl text-text-hero tracking-[-0.02em] mb-4"
             style={{ textWrap: "balance" }}
           >
-            Ready to build?
+            Ready to build.
           </h2>
         </ScrollReveal>
 
