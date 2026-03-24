@@ -45,7 +45,7 @@ export function YourPath() {
   const lineScale = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
   return (
-    <SectionWrapper id="path" background="secondary" glow="gold">
+    <SectionWrapper id="path" background="primary" glow="gold">
       <div ref={containerRef}>
         <SectionOverline number="04" label="YOUR PATH" />
 
