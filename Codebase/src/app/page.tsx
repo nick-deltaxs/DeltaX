@@ -8,7 +8,7 @@ import { FinalCTA } from "@/components/home/FinalCTA";
 
 export default function HomePage() {
   return (
-    <main className="min-h-screen">
+    <div className="min-h-screen">
       <Hero />
       <TheSystem />
       <TheProblem />
@@ -16,6 +16,6 @@ export default function HomePage() {
       <TheArchitects />
       <YourPath />
       <FinalCTA />
-    </main>
+    </div>
   );
 }
