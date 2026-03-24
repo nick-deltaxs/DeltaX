@@ -93,7 +93,7 @@ export function TheArchitects() {
             >
               {dave.name}
             </h3>
-            <p className="font-body text-base font-medium text-accent-gold mt-2">
+            <p className="font-body text-base font-medium text-text-secondary mt-2">
               {dave.role}
             </p>
             <p className="font-body text-base text-text-secondary mt-4 max-w-[400px]">
@@ -115,7 +115,7 @@ export function TheArchitects() {
             >
               {ramtin.name}
             </h3>
-            <p className="font-body text-base font-medium text-accent-gold mt-2">
+            <p className="font-body text-base font-medium text-text-secondary mt-2">
               {ramtin.role}
             </p>
             <p className="font-body text-base text-text-secondary mt-4 max-w-[400px]">
@@ -126,7 +126,7 @@ export function TheArchitects() {
 
         {/* Leaders */}
         <div className="mt-16">
-          <p className="font-body text-sm uppercase font-medium text-text-muted mb-6">
+          <p className="font-mono text-xs uppercase tracking-[0.08em] text-text-muted mb-6">
             SECTION LEADERS
           </p>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-4">
@@ -161,7 +161,7 @@ export function TheArchitects() {
 
         {/* Team */}
         <div className="mt-12">
-          <p className="font-body text-sm uppercase font-medium text-text-muted mb-6">
+          <p className="font-mono text-xs uppercase tracking-[0.08em] text-text-muted mb-6">
             THE TEAM
           </p>
           <div className="flex flex-wrap gap-x-8 gap-y-3">

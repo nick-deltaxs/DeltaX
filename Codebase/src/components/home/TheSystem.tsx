@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { SectionOverline } from "@/components/ui/SectionOverline";
@@ -134,7 +135,7 @@ export function TheSystem() {
               }`}
             >
               {pillar.logo ? (
-                <img src={pillar.logo} alt={pillar.name} className="w-7 h-7 object-contain" />
+                <Image src={pillar.logo} alt={pillar.name} width={28} height={28} className="object-contain" />
               ) : (
                 <span className="font-display text-base text-style-bright">{pillar.logoText}</span>
               )}
@@ -190,10 +191,11 @@ export function TheSystem() {
               {/* Right column - image */}
               <div className="hidden md:block">
                 <div className="relative w-full aspect-square max-w-[300px] mx-auto rounded-lg overflow-hidden">
-                  <img
+                  <Image
                     src={`/images/system-${activePillar.id}.png`}
                     alt={`${activePillar.name} visual`}
-                    className="w-full h-full object-contain transition-opacity duration-300"
+                    fill
+                    className="object-contain transition-opacity duration-300"
                   />
                 </div>
               </div>

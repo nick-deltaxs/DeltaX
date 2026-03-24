@@ -56,7 +56,7 @@ function StatItem({ number, label, description, size, isInView }: StatItemProps)
         animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
         transition={{ duration: 0.5, delay: 1.4, ease: [0.16, 1, 0.3, 1] }}
       >
-        <span className="font-body text-sm font-semibold uppercase text-accent-gold tracking-[0.08em] mt-2 block">
+        <span className="font-body text-sm font-semibold uppercase text-text-muted tracking-[0.08em] mt-2 block">
           {label}
         </span>
         <span className="font-body text-base text-text-secondary mt-1 block">

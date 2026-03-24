@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import type { ButtonProps } from "@/types";
 
 const sizeMap = {
@@ -33,6 +34,14 @@ export function Button({
   } ${className}`;
 
   if (href) {
+    const isInternal = href.startsWith("/");
+    if (isInternal) {
+      return (
+        <Link href={href} className={classes}>
+          {children}
+        </Link>
+      );
+    }
     return (
       <a href={href} className={classes}>
         {children}

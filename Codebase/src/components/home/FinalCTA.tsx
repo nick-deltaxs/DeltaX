@@ -8,7 +8,7 @@ import { ScrollReveal } from "@/components/ui/ScrollReveal";
 
 export function FinalCTA() {
   return (
-    <SectionWrapper id="cta" background="primary" glow="deltax">
+    <SectionWrapper id="cta" background="secondary" glow="deltax">
       {/* Background atmosphere image */}
       <div
         className="absolute inset-0 pointer-events-none"
@@ -67,7 +67,7 @@ export function FinalCTA() {
             <span className="font-body text-sm text-text-muted">or email </span>
             <a
               href="mailto:hello@thesx.co"
-              className="font-body text-sm text-accent-gold hover:underline"
+              className="font-body text-sm text-text-body hover:underline"
             >
               hello@thesx.co
             </a>

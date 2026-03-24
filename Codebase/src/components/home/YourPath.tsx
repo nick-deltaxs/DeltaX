@@ -27,8 +27,8 @@ const steps = [
   {
     number: "03",
     label: "STEP 03",
-    colorClass: "text-accent-gold",
-    circleClass: "bg-accent-gold",
+    colorClass: "text-style-bright",
+    circleClass: "bg-style-bright",
     title: "We build the machine.",
     description:
       "All four engines activate. You watch the system work while you focus on what matters.",

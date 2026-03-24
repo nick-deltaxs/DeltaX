@@ -2,6 +2,7 @@
 
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
+import { SectionOverline } from "@/components/ui/SectionOverline";
 import { motion } from "framer-motion";
 
 const leftItems = [
@@ -44,7 +45,7 @@ const itemVariants = {
 
 export function TheProblem() {
   return (
-    <SectionWrapper id="problem" background="primary" glow="none" className="relative">
+    <SectionWrapper id="problem" background="secondary" glow="none" className="relative">
       {/* Dual glow backgrounds */}
       <div
         className="absolute inset-0 pointer-events-none"
@@ -62,6 +63,9 @@ export function TheProblem() {
       />
 
       <div className="relative z-10">
+        {/* Overline */}
+        <SectionOverline number="—" label="THE PROBLEM" className="mb-4" />
+
         {/* Headline */}
         <ScrollReveal delay={0}>
           <h2
