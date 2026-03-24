@@ -91,6 +91,9 @@ export function TeamTable() {
 
   return (
     <SectionWrapper id="team" background="primary">
+      <span className="font-mono text-xs uppercase text-text-muted tracking-[0.12em] block mb-4">
+        [04] TEAM
+      </span>
       <h2 className="font-display text-5xl text-text-hero tracking-[-0.03em] mb-12">
         The People.
       </h2>
