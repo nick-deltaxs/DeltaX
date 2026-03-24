@@ -1,70 +1,60 @@
+import { createClient } from "@supabase/supabase-js";
 import { NextResponse } from "next/server";
-import { supabase } from "@/lib/supabase";
-import { resend } from "@/lib/resend";
 
-const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-const WELCOME_EMAIL_TEXT = `You've secured your spot.
-
-DeltaX is building something different — a system that connects strategy, tech, growth, and brand into one engine for your business.
-
-We're onboarding in waves. When it's your turn, you'll be the first to know.
-
-— The ΔX Team
-thesx.co`;
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+);
 
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const email = (body.email || "").trim().toLowerCase();
+    const { email, website } = body;
 
-    if (!email || email.length > 254 || !EMAIL_REGEX.test(email)) {
-      return NextResponse.json(
-        { error: "Please enter a valid email." },
-        { status: 400 }
-      );
+    if (website) {
+      return NextResponse.json({ message: "Success" }, { status: 201 });
     }
 
-    const { data: existing } = await supabase
+    if (!email || typeof email !== "string") {
+      return NextResponse.json({ error: "Email is required" }, { status: 400 });
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email) || email.length > 254) {
+      return NextResponse.json({ error: "Invalid email" }, { status: 400 });
+    }
+
+    const sanitizedEmail = email.toLowerCase().trim();
+    const ip =
+      request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+      "unknown";
+
+    const { data: recent } = await supabase
       .from("waitlist")
-      .select("email")
-      .eq("email", email)
-      .single();
+      .select("created_at")
+      .eq("ip_address", ip)
+      .gte("created_at", new Date(Date.now() - 60000).toISOString())
+      .limit(1);
 
-    if (existing) {
+    if (recent && recent.length > 0) {
       return NextResponse.json(
-        { error: "Email already exists." },
-        { status: 409 }
+        { error: "Please wait before submitting again" },
+        { status: 429 }
       );
     }
 
-    const { error: insertError } = await supabase
-      .from("waitlist")
-      .insert({ email, created_at: new Date().toISOString() });
+    const { error } = await supabase.from("waitlist").upsert(
+      { email: sanitizedEmail, ip_address: ip },
+      { onConflict: "email", ignoreDuplicates: true }
+    );
 
-    if (insertError) {
-      return NextResponse.json(
-        { error: "Something went wrong." },
-        { status: 500 }
-      );
-    }
-
-    try {
-      await resend.emails.send({
-        from: "DeltaX <hello@thesx.co>",
-        to: email,
-        subject: "You're on the list. ΔX is coming.",
-        text: WELCOME_EMAIL_TEXT,
-      });
-    } catch {
-      // Email sending failure should not fail the request
+    if (error) {
+      console.error("Waitlist insert error:", error);
+      return NextResponse.json({ error: "Something went wrong" }, { status: 500 });
     }
 
     return NextResponse.json({ message: "Success" }, { status: 201 });
   } catch {
-    return NextResponse.json(
-      { error: "Something went wrong." },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: "Something went wrong" }, { status: 500 });
   }
 }
