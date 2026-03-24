@@ -65,7 +65,7 @@ export function TheProblem() {
         {/* Headline */}
         <ScrollReveal delay={0}>
           <h2
-            className="font-display text-5xl text-hero tracking-[-0.02em] mb-16"
+            className="font-display text-5xl text-text-hero tracking-[-0.02em] mb-16"
             style={{ textWrap: "balance" }}
           >
             Most agencies are a black box.
@@ -90,7 +90,7 @@ export function TheProblem() {
                 variants={itemVariants}
                 className="border-l-[3px] border-scale-bright/30 pl-4 mb-6"
               >
-                <p className="font-body text-lg text-secondary leading-[1.8]">
+                <p className="font-body text-lg text-text-secondary leading-[1.8]">
                   {item}
                 </p>
               </motion.div>
@@ -114,7 +114,7 @@ export function TheProblem() {
                 variants={itemVariants}
                 className="border-l-[3px] border-core-bright/30 pl-4 mb-6"
               >
-                <p className="font-body text-lg text-body leading-[1.8]">
+                <p className="font-body text-lg text-text-body leading-[1.8]">
                   {item}
                 </p>
               </motion.div>

@@ -48,7 +48,7 @@ function StatItem({ number, label, description, size, isInView }: StatItemProps)
 
   return (
     <div className="flex flex-col items-start">
-      <span className={`font-mono tabular-nums ${sizeClasses[size]} text-hero tracking-[-0.02em] leading-none`}>
+      <span className={`font-mono tabular-nums ${sizeClasses[size]} text-text-hero tracking-[-0.02em] leading-none`}>
         {displayValue}
       </span>
       <motion.div
@@ -86,7 +86,7 @@ export function TheProof() {
         <SectionOverline number="02" label="THE PROOF" className="mb-4" />
 
         <h2
-          className="font-display text-5xl text-hero tracking-[-0.02em] mb-16"
+          className="font-display text-5xl text-text-hero tracking-[-0.02em] mb-16"
           style={{ textWrap: "balance" as const }}
         >
           Numbers don&apos;t need decoration.
@@ -139,7 +139,7 @@ export function TheProof() {
               <div className="md:hidden mb-2">
                 <span className="font-mono text-xs uppercase text-text-muted tracking-[0.08em]">CLIENT</span>
               </div>
-              <span className="font-body text-base font-medium text-hero block md:mb-0 mb-4">
+              <span className="font-body text-base font-medium text-text-hero block md:mb-0 mb-4">
                 {study.client}
               </span>
 

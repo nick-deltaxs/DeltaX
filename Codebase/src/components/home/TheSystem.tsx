@@ -109,14 +109,14 @@ export function TheSystem() {
 
         {/* Headline */}
         <h2
-          className="font-display text-4xl md:text-5xl text-hero tracking-[-0.02em] mb-4"
+          className="font-display text-4xl md:text-5xl text-text-hero tracking-[-0.02em] mb-4"
           style={{ textWrap: "balance" }}
         >
           One company. Four engines.
         </h2>
 
         {/* Subtext */}
-        <p className="font-body text-lg text-secondary max-w-[640px] mb-12">
+        <p className="font-body text-lg text-text-secondary max-w-[640px] mb-12">
           Each engine operates independently. Together, they form a system no single agency can
           replicate.
         </p>
@@ -130,7 +130,7 @@ export function TheSystem() {
               className={`flex items-center gap-2 px-4 py-3 cursor-pointer transition-all duration-300 whitespace-nowrap ${
                 activeTab === index
                   ? `${pillar.brightClass} ${pillar.borderClass} border-b-2`
-                  : "text-muted"
+                  : "text-text-muted"
               }`}
             >
               {pillar.logo ? (
@@ -161,17 +161,17 @@ export function TheSystem() {
                 >
                   {activePillar.title}
                 </h3>
-                <p className="font-body text-base text-body leading-[1.6] mb-8">
+                <p className="font-body text-base text-text-body leading-[1.6] mb-8">
                   {activePillar.description}
                 </p>
 
                 {/* Capability table */}
                 <div>
                   <div className="grid grid-cols-[1fr_2fr] gap-4 pb-3 border-b border-elevated">
-                    <span className="font-mono text-xs uppercase text-muted tracking-[0.08em]">
+                    <span className="font-mono text-xs uppercase text-text-muted tracking-[0.08em]">
                       Capability
                     </span>
-                    <span className="font-mono text-xs uppercase text-muted tracking-[0.08em]">
+                    <span className="font-mono text-xs uppercase text-text-muted tracking-[0.08em]">
                       Detail
                     </span>
                   </div>
@@ -180,8 +180,8 @@ export function TheSystem() {
                       key={idx}
                       className="grid grid-cols-[1fr_2fr] gap-4 py-3 border-b border-elevated"
                     >
-                      <span className="font-body text-sm font-medium text-hero">{cap.name}</span>
-                      <span className="font-body text-sm text-secondary">{cap.detail}</span>
+                      <span className="font-body text-sm font-medium text-text-hero">{cap.name}</span>
+                      <span className="font-body text-sm text-text-secondary">{cap.detail}</span>
                     </div>
                   ))}
                 </div>

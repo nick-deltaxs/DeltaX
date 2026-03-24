@@ -61,7 +61,7 @@ export function TheArchitects() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          className="font-mono text-xs uppercase tracking-[0.12em] text-muted"
+          className="font-mono text-xs uppercase tracking-[0.12em] text-text-muted"
         >
           [03] THE ARCHITECTS
         </motion.p>
@@ -71,7 +71,7 @@ export function TheArchitects() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          className="font-display text-[32px] text-hero mt-4"
+          className="font-display text-[32px] text-text-hero mt-4"
           style={{ letterSpacing: "-0.03em", textWrap: "balance" }}
         >
           Built by founders who build.
@@ -88,7 +88,7 @@ export function TheArchitects() {
             className="md:border-r md:border-elevated md:pr-8 pb-8 md:pb-0 border-b md:border-b-0 border-elevated"
           >
             <h3
-              className="font-display text-[32px] text-hero"
+              className="font-display text-[32px] text-text-hero"
               style={{ letterSpacing: "-0.03em" }}
             >
               {dave.name}
@@ -96,7 +96,7 @@ export function TheArchitects() {
             <p className="font-body text-base font-medium text-accent-gold mt-2">
               {dave.role}
             </p>
-            <p className="font-body text-base text-secondary mt-4 max-w-[400px]">
+            <p className="font-body text-base text-text-secondary mt-4 max-w-[400px]">
               {founderBios[dave.name]}
             </p>
           </motion.div>
@@ -110,7 +110,7 @@ export function TheArchitects() {
             className="md:pl-8"
           >
             <h3
-              className="font-display text-[32px] text-hero"
+              className="font-display text-[32px] text-text-hero"
               style={{ letterSpacing: "-0.03em" }}
             >
               {ramtin.name}
@@ -118,7 +118,7 @@ export function TheArchitects() {
             <p className="font-body text-base font-medium text-accent-gold mt-2">
               {ramtin.role}
             </p>
-            <p className="font-body text-base text-secondary mt-4 max-w-[400px]">
+            <p className="font-body text-base text-text-secondary mt-4 max-w-[400px]">
               {founderBios[ramtin.name]}
             </p>
           </motion.div>
@@ -126,7 +126,7 @@ export function TheArchitects() {
 
         {/* Leaders */}
         <div className="mt-16">
-          <p className="font-body text-sm uppercase font-medium text-muted mb-6">
+          <p className="font-body text-sm uppercase font-medium text-text-muted mb-6">
             SECTION LEADERS
           </p>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-4">
@@ -147,10 +147,10 @@ export function TheArchitects() {
                   className={`w-2 h-2 rounded-full ${pillarColors[leader.pillar]}`}
                 />
                 <div>
-                  <p className="font-body text-base font-medium text-hero">
+                  <p className="font-body text-base font-medium text-text-hero">
                     {leader.name}
                   </p>
-                  <p className="font-body text-sm text-secondary">
+                  <p className="font-body text-sm text-text-secondary">
                     {leader.role}
                   </p>
                 </div>
@@ -161,7 +161,7 @@ export function TheArchitects() {
 
         {/* Team */}
         <div className="mt-12">
-          <p className="font-body text-sm uppercase font-medium text-muted mb-6">
+          <p className="font-body text-sm uppercase font-medium text-text-muted mb-6">
             THE TEAM
           </p>
           <div className="flex flex-wrap gap-x-8 gap-y-3">
@@ -181,7 +181,7 @@ export function TheArchitects() {
                 <span
                   className={`w-2 h-2 rounded-full ${pillarColors[member.pillar]}`}
                 />
-                <p className="font-body text-sm text-body">
+                <p className="font-body text-sm text-text-body">
                   {member.name} · {member.role}
                 </p>
               </motion.div>
