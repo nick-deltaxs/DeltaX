@@ -60,7 +60,7 @@ export function YourPath() {
           {/* Vertical line */}
           <div className="absolute left-[11px] md:left-[15px] top-0 bottom-0 w-px bg-elevated">
             <motion.div
-              className="absolute inset-0 bg-elevated origin-top"
+              className="absolute inset-0 bg-text-hero origin-top"
               style={{ scaleY: lineScale }}
             />
           </div>
