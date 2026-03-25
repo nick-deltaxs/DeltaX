@@ -57,7 +57,7 @@ export function TheArchitects() {
   }, []);
 
   return (
-    <SectionWrapper id="architects" background="secondary" glow="none">
+    <SectionWrapper id="architects" background="primary" glow="none">
       {/* Multi-pillar glow */}
       <div
         className="absolute top-0 left-0 w-1/2 h-1/2 pointer-events-none"

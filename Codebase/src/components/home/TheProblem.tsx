@@ -4,7 +4,39 @@ import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { SectionOverline } from "@/components/ui/SectionOverline";
 import { motion } from "framer-motion";
 
+<<<<<<< HEAD
 const EASE_OUT = [0.25, 0.1, 0.25, 1] as const;
+=======
+// Inline SVG icons (avoids lucide-react dependency)
+const XIcon = ({ className }: { className?: string }) => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+  >
+    <path d="M18 6 6 18" />
+    <path d="m6 6 12 12" />
+  </svg>
+);
+
+const CheckIcon = ({ className }: { className?: string }) => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+  >
+    <path d="M20 6 9 17l-5-5" />
+  </svg>
+);
+>>>>>>> Widi-azm
 
 const leftItems = [
   "Endless meetings with no outcomes.",
@@ -98,53 +130,67 @@ export function TheProblem() {
         </motion.h2>
 
         {/* Two columns */}
-        <div className="grid grid-cols-1 md:grid-cols-[55fr_45fr] gap-12">
-          {/* Left column - red */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+          {/* Left column - problems with X icons */}
           <motion.div
             variants={leftContainerVariants}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
           >
+<<<<<<< HEAD
             <motion.p
               variants={itemVariants}
               className="font-body text-sm font-medium uppercase text-scale-bright mb-6"
             >
+=======
+            <p className="font-mono text-xs uppercase tracking-[0.12em] text-scale-bright mb-8">
+>>>>>>> Widi-azm
               What you get today
             </motion.p>
             {leftItems.map((item, index) => (
               <motion.div
                 key={index}
                 variants={itemVariants}
-                className="border-l-[3px] border-scale-bright/30 pl-4 mb-6"
+                className="group flex items-start gap-4 mb-6 p-3 -ml-3 rounded-lg transition-colors duration-300 hover:bg-scale-bright/5"
               >
-                <p className="font-body text-lg text-text-secondary leading-[1.8]">
+                <div className="flex-shrink-0 w-6 h-6 rounded-full bg-scale-bright/10 flex items-center justify-center mt-0.5 transition-transform duration-300 group-hover:scale-110 group-hover:bg-scale-bright/20">
+                  <XIcon className="w-4 h-4 text-scale-bright" />
+                </div>
+                <p className="font-body text-lg text-text-secondary leading-[1.6]">
                   {item}
                 </p>
               </motion.div>
             ))}
           </motion.div>
 
-          {/* Right column - teal */}
+          {/* Right column - solutions with check icons */}
           <motion.div
             variants={rightContainerVariants}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
           >
+<<<<<<< HEAD
             <motion.p
               variants={itemVariants}
               className="font-body text-sm font-medium uppercase text-core-bright mb-6"
             >
+=======
+            <p className="font-mono text-xs uppercase tracking-[0.12em] text-core-bright mb-8">
+>>>>>>> Widi-azm
               What you actually need
             </motion.p>
             {rightItems.map((item, index) => (
               <motion.div
                 key={index}
                 variants={itemVariants}
-                className="border-l-[3px] border-core-bright/30 pl-4 mb-6"
+                className="group flex items-start gap-4 mb-6 p-3 -ml-3 rounded-lg transition-colors duration-300 hover:bg-core-bright/5"
               >
-                <p className="font-body text-lg text-text-body leading-[1.8]">
+                <div className="flex-shrink-0 w-6 h-6 rounded-full bg-core-bright/10 flex items-center justify-center mt-0.5 transition-transform duration-300 group-hover:scale-110 group-hover:bg-core-bright/20">
+                  <CheckIcon className="w-4 h-4 text-core-bright" />
+                </div>
+                <p className="font-body text-lg text-text-body leading-[1.6]">
                   {item}
                 </p>
               </motion.div>

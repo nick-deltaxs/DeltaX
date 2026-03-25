@@ -11,6 +11,7 @@ export function Hero() {
     <SectionWrapper
       id="hero"
       background="primary"
+<<<<<<< HEAD
       glow="none"
       className="min-h-screen flex flex-col items-center justify-center text-center pt-16 lg:pt-16 pb-12 md:pb-20 lg:pb-20"
     >
@@ -34,6 +35,11 @@ export function Hero() {
         }}
       />
 
+=======
+      glow="deltax"
+      className="min-h-screen flex flex-col items-center justify-center text-center pt-16 pb-12 md:pb-20"
+    >
+>>>>>>> Widi-azm
       <div className="relative z-10 flex flex-col items-center">
         {/* Logo */}
         <motion.div

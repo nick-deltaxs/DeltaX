@@ -97,7 +97,19 @@ export function TheSystem() {
   const activePillar = pillars[activeTab];
 
   return (
+<<<<<<< HEAD
     <SectionWrapper id="system" background="secondary" glow="none">
+=======
+    <SectionWrapper id="system" background="primary" glow="none">
+      {/* Active pillar glow background */}
+      <div
+        className="absolute inset-0 pointer-events-none transition-all duration-300"
+        style={{
+          background: `radial-gradient(ellipse at 50% 60%, ${activePillar.glowColor}, transparent 60%)`,
+        }}
+      />
+
+>>>>>>> Widi-azm
       <div className="relative z-10">
         {/* Overline */}
         <SectionOverline number="01" label="THE SYSTEM" className="mb-4" />
