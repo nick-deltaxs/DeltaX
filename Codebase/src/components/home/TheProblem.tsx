@@ -1,9 +1,10 @@
 "use client";
 
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
-import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { SectionOverline } from "@/components/ui/SectionOverline";
 import { motion } from "framer-motion";
+
+const EASE_OUT = [0.25, 0.1, 0.25, 1] as const;
 
 const leftItems = [
   "Endless meetings with no outcomes.",
@@ -21,24 +22,34 @@ const rightItems = [
   "A partner who builds the machine.",
 ];
 
-const containerVariants = {
-  hidden: { opacity: 0 },
+const leftContainerVariants = {
+  hidden: {},
   visible: {
-    opacity: 1,
     transition: {
       staggerChildren: 0.08,
+      delayChildren: 0.2,
+    },
+  },
+};
+
+const rightContainerVariants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.08,
+      delayChildren: 0.4,
     },
   },
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 16 },
+  hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
       duration: 0.5,
-      ease: [0.16, 1, 0.3, 1] as const,
+      ease: EASE_OUT,
     },
   },
 };
@@ -64,30 +75,43 @@ export function TheProblem() {
 
       <div className="relative z-10">
         {/* Overline */}
-        <SectionOverline number="00" label="THE PROBLEM" className="mb-4" />
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4, ease: EASE_OUT }}
+          className="mb-4"
+        >
+          <SectionOverline number="00" label="THE PROBLEM" />
+        </motion.div>
 
         {/* Headline */}
-        <ScrollReveal delay={0}>
-          <h2
-            className="font-display text-5xl text-text-hero tracking-[-0.02em] mb-16"
-            style={{ textWrap: "balance" }}
-          >
-            Most agencies are a black box.
-          </h2>
-        </ScrollReveal>
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, ease: EASE_OUT, delay: 0 }}
+          className="font-display text-5xl text-text-hero tracking-[-0.02em] mb-16"
+          style={{ textWrap: "balance" }}
+        >
+          Most agencies are a black box.
+        </motion.h2>
 
         {/* Two columns */}
         <div className="grid grid-cols-1 md:grid-cols-[55fr_45fr] gap-12">
           {/* Left column - red */}
           <motion.div
-            variants={containerVariants}
+            variants={leftContainerVariants}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
           >
-            <p className="font-body text-sm font-medium uppercase text-scale-bright mb-6">
+            <motion.p
+              variants={itemVariants}
+              className="font-body text-sm font-medium uppercase text-scale-bright mb-6"
+            >
               What you get today
-            </p>
+            </motion.p>
             {leftItems.map((item, index) => (
               <motion.div
                 key={index}
@@ -103,15 +127,17 @@ export function TheProblem() {
 
           {/* Right column - teal */}
           <motion.div
-            variants={containerVariants}
+            variants={rightContainerVariants}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
-            transition={{ delay: 0.2 }}
           >
-            <p className="font-body text-sm font-medium uppercase text-core-bright mb-6">
+            <motion.p
+              variants={itemVariants}
+              className="font-body text-sm font-medium uppercase text-core-bright mb-6"
+            >
               What you actually need
-            </p>
+            </motion.p>
             {rightItems.map((item, index) => (
               <motion.div
                 key={index}

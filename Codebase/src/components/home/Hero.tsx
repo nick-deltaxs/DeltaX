@@ -11,9 +11,18 @@ export function Hero() {
     <SectionWrapper
       id="hero"
       background="primary"
-      glow="deltax"
-      className="min-h-screen flex flex-col items-center justify-center text-center py-0 lg:py-0"
+      glow="none"
+      className="min-h-screen flex flex-col items-center justify-center text-center pt-16 lg:pt-16 pb-12 md:pb-20 lg:pb-20"
     >
+      {/* Teal radial glow — centered behind the logo */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(ellipse at 50% 50%, rgba(21,51,154,0.14) 0%, transparent 60%)",
+        }}
+      />
+
       {/* Background atmosphere image */}
       <div
         className="absolute inset-0 pointer-events-none"
@@ -33,8 +42,8 @@ export function Hero() {
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
           <DeltaXLogo
-            size={160}
-            className="text-text-hero mb-8 w-[120px] md:w-[160px] h-auto"
+            size={120}
+            className="text-text-hero mb-6 w-[90px] md:w-[120px] h-auto"
           />
         </motion.div>
 

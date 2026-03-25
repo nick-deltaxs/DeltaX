@@ -77,16 +77,18 @@ const pillars = [
   },
 ];
 
+const EASE_OUT: [number, number, number, number] = [0.25, 0.1, 0.25, 1];
+
 const contentVariants = {
   hidden: { opacity: 0, y: 8 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.3, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] },
+    transition: { duration: 0.3, ease: EASE_OUT },
   },
   exit: {
     opacity: 0,
-    transition: { duration: 0.2 },
+    transition: { duration: 0.2, ease: EASE_OUT },
   },
 };
 
@@ -96,14 +98,6 @@ export function TheSystem() {
 
   return (
     <SectionWrapper id="system" background="secondary" glow="none">
-      {/* Active pillar glow background */}
-      <div
-        className="absolute inset-0 pointer-events-none transition-all duration-300"
-        style={{
-          background: `radial-gradient(ellipse at 50% 60%, ${activePillar.glowColor}, transparent 60%)`,
-        }}
-      />
-
       <div className="relative z-10">
         {/* Overline */}
         <SectionOverline number="01" label="THE SYSTEM" className="mb-4" />
@@ -123,29 +117,53 @@ export function TheSystem() {
         </p>
 
         {/* Tab row */}
-        <div className="flex gap-1 border-b border-elevated overflow-x-auto flex-nowrap">
-          {pillars.map((pillar, index) => (
-            <button
-              key={pillar.id}
-              onClick={() => setActiveTab(index)}
-              className={`flex items-center gap-2 px-4 py-3 cursor-pointer transition-all duration-300 whitespace-nowrap ${
-                activeTab === index
-                  ? `${pillar.brightClass} ${pillar.borderClass} border-b-2`
-                  : "text-text-muted"
-              }`}
-            >
-              {pillar.logo ? (
-                <Image src={pillar.logo} alt={pillar.name} width={28} height={28} className="object-contain" />
-              ) : (
-                <span className="font-display text-base text-style-bright">{pillar.logoText}</span>
-              )}
-              <span className="font-body text-sm font-medium">{pillar.name}</span>
-            </button>
-          ))}
+        <div
+          className="flex gap-1 border-b border-elevated overflow-x-auto flex-nowrap [&::-webkit-scrollbar]:hidden"
+          style={{ scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' }}
+        >
+          {pillars.map((pillar, index) => {
+            const isActive = activeTab === index;
+            return (
+              <button
+                key={pillar.id}
+                onClick={() => setActiveTab(index)}
+                className={`group flex items-center gap-2 px-4 py-3 cursor-pointer whitespace-nowrap shrink-0 transition-all duration-150 ${
+                  isActive
+                    ? `${pillar.borderClass} border-b-2`
+                    : "text-white/[0.45] hover:text-white/[0.75]"
+                }`}
+                style={isActive ? { color: pillar.cssColor } : undefined}
+              >
+                {pillar.logo ? (
+                  <Image
+                    src={pillar.logo}
+                    alt={pillar.name}
+                    width={28}
+                    height={28}
+                    className={`object-contain transition-opacity duration-150 ${
+                      isActive ? 'opacity-100' : 'opacity-[0.45] group-hover:opacity-75'
+                    }`}
+                  />
+                ) : (
+                  <span className="font-display text-base">{pillar.logoText}</span>
+                )}
+                <span className="font-body text-sm font-medium">{pillar.name}</span>
+              </button>
+            );
+          })}
         </div>
 
         {/* Content panel */}
-        <div className="mt-8 min-h-[400px]">
+        <div className="relative mt-8 min-h-[400px] overflow-hidden pb-20">
+          {/* Pillar glow behind content */}
+          <div
+            className="absolute inset-0 pointer-events-none z-0"
+            style={{
+              background: `radial-gradient(ellipse at 30% 50%, ${activePillar.glowColor}, transparent 70%)`,
+              transition: 'background 300ms ease',
+            }}
+          />
+
           <AnimatePresence mode="wait">
             <motion.div
               key={activeTab}
@@ -153,7 +171,7 @@ export function TheSystem() {
               initial="hidden"
               animate="visible"
               exit="exit"
-              className="grid grid-cols-1 md:grid-cols-[55fr_45fr] gap-12"
+              className="relative z-[1] grid grid-cols-1 md:grid-cols-[55fr_45fr] gap-12"
             >
               {/* Left column - text content */}
               <div>
@@ -188,14 +206,14 @@ export function TheSystem() {
                 </div>
               </div>
 
-              {/* Right column - image */}
-              <div className="hidden md:block">
-                <div className="relative w-full aspect-square max-w-[300px] mx-auto rounded-lg overflow-hidden">
+              {/* Right column - decorative illustration */}
+              <div className="hidden md:block pointer-events-none">
+                <div className="relative w-full aspect-square max-w-[300px] mx-auto rounded-lg overflow-hidden opacity-30">
                   <Image
                     src={`/images/system-${activePillar.id}.png`}
                     alt={`${activePillar.name} visual`}
                     fill
-                    className="object-contain transition-opacity duration-300"
+                    className="object-contain"
                   />
                 </div>
               </div>

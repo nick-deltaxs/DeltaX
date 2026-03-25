@@ -215,8 +215,8 @@ export function Navbar() {
             className="flex items-center gap-2.5 shrink-0"
             aria-label="DeltaX home"
           >
-            <DeltaXLogo size={28} className="text-text-hero" />
-            <span className="font-display text-[16px] text-text-hero tracking-[0.08em] uppercase">
+            <DeltaXLogo size={32} className="text-text-hero" />
+            <span className="font-display text-[16px] text-text-hero tracking-[0.08em] uppercase ml-2">
               DELTAX
             </span>
           </Link>
@@ -360,8 +360,8 @@ export function Navbar() {
               className="flex items-center gap-2.5"
               aria-label="DeltaX home"
             >
-              <DeltaXLogo size={28} className="text-text-hero" />
-              <span className="font-display text-[16px] text-text-hero tracking-[0.08em] uppercase">
+              <DeltaXLogo size={32} className="text-text-hero" />
+              <span className="font-display text-[16px] text-text-hero tracking-[0.08em] uppercase ml-2">
                 DELTAX
               </span>
             </Link>

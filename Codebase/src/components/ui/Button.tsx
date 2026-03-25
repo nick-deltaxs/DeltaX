@@ -13,7 +13,7 @@ const variantMap = {
   primary:
     "bg-accent-gold text-primary hover:bg-accent-gold-hover font-body font-medium rounded-full transition-all duration-150",
   secondary:
-    "bg-transparent border border-text-muted text-text-body hover:border-text-body font-body font-medium rounded-full transition-all duration-150",
+    "border border-white/35 bg-white/[0.06] text-text-hero backdrop-blur-[4px] hover:border-white/60 hover:bg-white/10 font-body font-medium rounded-full transition-all duration-200",
   ghost:
     "bg-transparent text-text-secondary hover:text-text-body font-body font-medium transition-all duration-150",
 };

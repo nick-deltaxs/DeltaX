@@ -52,14 +52,14 @@ function StatItem({ number, label, description, size, isInView }: StatItemProps)
         {displayValue}
       </span>
       <motion.div
-        initial={{ opacity: 0, y: 12 }}
-        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
-        transition={{ duration: 0.5, delay: 1.4, ease: [0.16, 1, 0.3, 1] }}
+        initial={{ opacity: 0, y: 8 }}
+        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
+        transition={{ duration: 0.4, delay: 1.4, ease: [0.25, 0.1, 0.25, 1] }}
       >
-        <span className="font-body text-sm font-semibold uppercase text-text-muted tracking-[0.08em] mt-2 block">
+        <span className="font-mono text-[11px] font-medium uppercase text-white/50 tracking-[0.12em] mt-2 block">
           {label}
         </span>
-        <span className="font-body text-base text-text-secondary mt-1 block">
+        <span className="font-body text-sm text-white/40 mt-1 block">
           {description}
         </span>
       </motion.div>
@@ -92,7 +92,7 @@ export function TheProof() {
           Numbers don&apos;t need decoration.
         </h2>
 
-        <div className="flex flex-wrap justify-between items-start gap-12 md:gap-8 lg:gap-0 mb-16">
+        <div className="flex flex-col md:flex-row md:justify-between items-start gap-12 md:gap-8 lg:gap-0 mb-16">
           <StatItem
             number={4}
             label="ENGINES"
@@ -117,13 +117,13 @@ export function TheProof() {
         </div>
 
         <div className="mt-16">
-          <div className="hidden md:grid grid-cols-[1fr_1fr_2fr] gap-4 font-mono text-xs uppercase text-text-muted tracking-[0.08em] pb-3 border-b border-elevated">
+          <div className="hidden md:grid grid-cols-[1fr_1fr_2fr] gap-4 font-mono text-[11px] uppercase text-white/35 tracking-[0.1em] pb-3 border-b border-white/[0.08]">
             <span>CLIENT</span>
             <span>SECTOR</span>
             <span>DELIVERED</span>
           </div>
 
-          <div className="md:hidden font-mono text-xs uppercase text-text-muted tracking-[0.08em] pb-3 border-b border-elevated">
+          <div className="md:hidden font-mono text-[11px] uppercase text-white/35 tracking-[0.1em] pb-3 border-b border-white/[0.08]">
             CASE STUDIES
           </div>
 
@@ -133,32 +133,44 @@ export function TheProof() {
               initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="py-4 border-b border-elevated hover:bg-tertiary transition-colors duration-150 md:grid md:grid-cols-[1fr_1fr_2fr] md:gap-4"
+              transition={{ duration: 0.5, delay: index * 0.1, ease: [0.25, 0.1, 0.25, 1] }}
+              className="hidden md:grid grid-cols-[1fr_1fr_2fr] gap-4 py-4 border-b border-white/[0.08] last:border-b-0"
             >
-              <div className="md:hidden mb-2">
-                <span className="font-mono text-xs uppercase text-text-muted tracking-[0.08em]">CLIENT</span>
-              </div>
-              <span className="font-body text-base font-medium text-text-hero block md:mb-0 mb-4">
+              <span className="font-body text-base font-medium text-text-hero">
                 {study.client}
               </span>
-
-              <div className="md:hidden mb-2">
-                <span className="font-mono text-xs uppercase text-text-muted tracking-[0.08em]">SECTOR</span>
-              </div>
-              <span className="font-body text-sm text-text-secondary block md:mb-0 mb-4">
+              <span className="font-body text-sm text-white/60">
                 {study.sector}
               </span>
-
-              <div className="md:hidden mb-2">
-                <span className="font-mono text-xs uppercase text-text-muted tracking-[0.08em]">DELIVERED</span>
-              </div>
-              <span className="font-body text-sm text-text-body">
+              <span className="font-body text-sm text-white/60">
                 {study.delivered}
               </span>
             </motion.div>
           ))}
+
+          {/* Mobile case study cards */}
+          <div className="md:hidden flex flex-col gap-3 mt-4">
+            {caseStudies.map((study, index) => (
+              <motion.div
+                key={study.client}
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1, ease: [0.25, 0.1, 0.25, 1] }}
+                className="border border-white/10 rounded p-4"
+              >
+                <p className="font-mono text-[11px] text-white/35 uppercase tracking-[0.1em] mb-1">Client</p>
+                <p className="font-body text-base font-medium text-text-hero">{study.client}</p>
+                <p className="font-mono text-[11px] text-white/35 uppercase tracking-[0.1em] mt-3 mb-1">Sector</p>
+                <p className="font-body text-sm text-white/60">{study.sector}</p>
+                <p className="font-mono text-[11px] text-white/35 uppercase tracking-[0.1em] mt-3 mb-1">Delivered</p>
+                <p className="font-body text-sm text-white/60">{study.delivered}</p>
+              </motion.div>
+            ))}
+          </div>
         </div>
+
+        <div className="pb-20" />
       </SectionWrapper>
     </div>
   );

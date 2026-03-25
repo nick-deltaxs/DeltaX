@@ -1,119 +1,140 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { motion } from "framer-motion";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { SectionOverline } from "@/components/ui/SectionOverline";
 
-const steps = [
+const EASE_OUT: [number, number, number, number] = [0.25, 0.1, 0.25, 1];
+
+const STEPS = [
   {
-    number: "01",
-    label: "STEP 01",
-    colorClass: "text-core-bright",
-    circleClass: "bg-core-bright",
-    title: "Talk to us.",
-    description:
-      "A 30-minute call. No pitch deck. Just your challenges and our honest assessment.",
+    id: "step-01",
+    number: "STEP 01",
+    headline: "Talk to us.",
+    body: "A 30-minute call. No pitch deck. Just your challenges and our honest assessment.",
+    color: "#00B4D8",
   },
   {
-    number: "02",
-    label: "STEP 02",
-    colorClass: "text-code-bright",
-    circleClass: "bg-code-bright",
-    title: "We audit your system.",
-    description:
-      "CoreXs maps your business. Where you're leaking time, money, and opportunity.",
+    id: "step-02",
+    number: "STEP 02",
+    headline: "We audit your system.",
+    body: "CoreXs maps your business. Where you\u2019re leaking time, money, and opportunity.",
+    color: "#8A8A8A",
   },
   {
-    number: "03",
-    label: "STEP 03",
-    colorClass: "text-style-bright",
-    circleClass: "bg-style-bright",
-    title: "We build the machine.",
-    description:
-      "All four engines activate. You watch the system work while you focus on what matters.",
+    id: "step-03",
+    number: "STEP 03",
+    headline: "We build the machine.",
+    body: "All four engines activate. You watch the system work while you focus on what matters.",
+    color: "#D4AF37",
   },
 ];
 
+const STEP_DELAYS = [0.1, 0.5, 0.9];
+
 export function YourPath() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start 0.9", "start 0.2"],
-  });
-
-  const lineScale = useTransform(scrollYProgress, [0, 1], [0, 1]);
-
   return (
     <SectionWrapper id="path" background="primary" glow="gold">
-      <div ref={containerRef}>
-        <SectionOverline number="04" label="YOUR PATH" />
-
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, ease: EASE_OUT }}
+      >
+        <SectionOverline number="04" label="YOUR PATH" className="mb-4" />
         <h2
-          className="font-display text-2xl text-text-hero mt-4"
+          className="font-display text-2xl md:text-4xl text-text-hero"
           style={{ textWrap: "balance", letterSpacing: "-0.03em" }}
         >
           Three steps. One conversation.
         </h2>
+      </motion.div>
 
-        <div className="relative mt-12 pl-8 md:pl-12">
-          {/* Vertical line */}
-          <div className="absolute left-[11px] md:left-[15px] top-0 bottom-0 w-px bg-elevated">
-            <motion.div
-              className="absolute inset-0 bg-text-hero origin-top"
-              style={{ scaleY: lineScale }}
-            />
-          </div>
+      <div className="relative mt-12 pl-8 md:pl-12">
+        {/* Timeline — static background track */}
+        <div
+          className="absolute top-0 w-px"
+          style={{
+            left: 5,
+            height: "100%",
+            backgroundColor: "rgba(255,255,255,0.08)",
+          }}
+        />
 
-          {/* Steps */}
-          <div className="space-y-16">
-            {steps.map((step, index) => (
+        {/* Timeline — animated fill line */}
+        <motion.div
+          initial={{ scaleY: 0 }}
+          whileInView={{ scaleY: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1.2, ease: EASE_OUT }}
+          className="absolute top-0 w-px"
+          style={{
+            left: 5,
+            height: "100%",
+            background: "linear-gradient(to bottom, #00B4D8, #8A8A8A, #D4AF37)",
+            transformOrigin: "top",
+            maskImage: "linear-gradient(to bottom, black 85%, transparent 100%)",
+            WebkitMaskImage: "linear-gradient(to bottom, black 85%, transparent 100%)",
+          }}
+        />
+
+        {/* Steps */}
+        <div className="space-y-16">
+          {STEPS.map((step, index) => (
+            <div key={step.id} className="relative">
+              {/* Dot */}
               <motion.div
-                key={step.number}
-                className="relative"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.5 }}
+                initial={{ scale: 0 }}
+                whileInView={{ scale: 1 }}
+                viewport={{ once: true }}
                 transition={{
-                  duration: 0.6,
-                  delay: index * 0.3,
-                  ease: [0.16, 1, 0.3, 1],
+                  type: "spring",
+                  stiffness: 400,
+                  damping: 15,
+                  delay: STEP_DELAYS[index],
                 }}
-              >
-                {/* Circle */}
-                <motion.div
-                  className={`absolute left-0 md:left-[4px] top-[6px] w-3 h-3 rounded-full ${step.circleClass}`}
-                  initial={{ scale: 0 }}
-                  whileInView={{ scale: 1 }}
-                  viewport={{ once: true, amount: 0.5 }}
-                  transition={{
-                    type: "spring",
-                    stiffness: 300,
-                    damping: 15,
-                    delay: index * 0.3 + 0.2,
-                  }}
-                />
+                className="absolute top-[6px] rounded-full"
+                style={{
+                  left: -1,
+                  width: 12,
+                  height: 12,
+                  backgroundColor: step.color,
+                }}
+              />
 
-                {/* Content */}
-                <div className="pl-8">
-                  <span
-                    className={`font-mono text-xs uppercase tracking-[0.08em] ${step.colorClass}`}
-                  >
-                    {step.label}
-                  </span>
-                  <h3
-                    className="font-display text-2xl text-text-hero mt-2"
-                    style={{ letterSpacing: "-0.02em" }}
-                  >
-                    {step.title}
-                  </h3>
-                  <p className="font-body text-base text-text-secondary mt-2 max-w-[480px]" style={{ textWrap: "balance" }}>
-                    {step.description}
-                  </p>
-                </div>
+              {/* Content */}
+              <motion.div
+                initial={{ opacity: 0, x: 16 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{
+                  duration: 0.5,
+                  ease: EASE_OUT,
+                  delay: STEP_DELAYS[index],
+                }}
+                className="pl-8"
+              >
+                <span
+                  className="font-mono text-xs uppercase tracking-[0.12em]"
+                  style={{ color: step.color }}
+                >
+                  {step.number}
+                </span>
+                <h3
+                  className="font-display text-2xl text-text-hero mt-2"
+                  style={{ letterSpacing: "-0.02em" }}
+                >
+                  {step.headline}
+                </h3>
+                <p
+                  className="font-body text-base text-text-secondary mt-2 max-w-[480px]"
+                  style={{ textWrap: "balance" }}
+                >
+                  {step.body}
+                </p>
               </motion.div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
       </div>
     </SectionWrapper>
