@@ -48,7 +48,7 @@ function FooterLinkList({
 
 export function Footer() {
   return (
-    <footer className="bg-deep pt-16 pb-8" role="contentinfo">
+    <footer className="bg-primary pt-16 pb-8" role="contentinfo">
       <div className="max-w-[1200px] mx-auto px-6">
         <nav
           aria-label="Footer navigation"

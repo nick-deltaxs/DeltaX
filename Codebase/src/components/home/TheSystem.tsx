@@ -95,7 +95,7 @@ export function TheSystem() {
   const activePillar = pillars[activeTab];
 
   return (
-    <SectionWrapper id="system" background="secondary" glow="none">
+    <SectionWrapper id="system" background="primary" glow="none">
       {/* Active pillar glow background */}
       <div
         className="absolute inset-0 pointer-events-none transition-all duration-300"

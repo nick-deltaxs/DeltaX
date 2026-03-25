@@ -12,19 +12,8 @@ export function Hero() {
       id="hero"
       background="primary"
       glow="deltax"
-      className="min-h-screen flex flex-col items-center justify-center text-center py-0 lg:py-0"
+      className="min-h-screen flex flex-col items-center justify-center text-center pt-16 pb-12 md:pb-20"
     >
-      {/* Background atmosphere image */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          backgroundImage: "url('/images/hero-atmosphere.png')",
-          backgroundSize: "cover",
-          backgroundPosition: "center top",
-          opacity: 0.7,
-        }}
-      />
-
       <div className="relative z-10 flex flex-col items-center">
         {/* Logo */}
         <motion.div
