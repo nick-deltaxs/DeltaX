@@ -1,26 +1,60 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
+import { SectionOverline } from "@/components/ui/SectionOverline";
 import { founders, leaders, members } from "@/data/team";
 
-const pillarColors: Record<string, string> = {
-  deltax: "bg-deltax-bright",
-  core: "bg-core-bright",
-  code: "bg-code-bright",
-  scale: "bg-scale-bright",
-  style: "bg-style-bright",
+const EASE_OUT: [number, number, number, number] = [0.25, 0.1, 0.25, 1];
+
+const PILLAR_COLORS: Record<string, string> = {
+  deltax: "var(--deltax-bright)",
+  core: "var(--core-bright)",
+  code: "var(--code-bright)",
+  scale: "var(--scale-bright)",
+  style: "var(--style-bright)",
 };
 
-const founderBios: Record<string, string> = {
-  "Dave Benrouz":
-    "Systems thinker who builds companies like machines. Former engineer turned architect — designs the system before writing a single line of code.",
-  "Ramtin Ghaffary":
-    "Strategy mind who finds the signal in the noise. Leads CoreXs — mapping every business before the engines activate.",
+const FOUNDER_META: Record<string, { initials: string; bio: string }> = {
+  "Dave Benrouz": {
+    initials: "DB",
+    bio: "Systems thinker who builds companies like machines. Former engineer turned architect — designs the system before writing a single line of code.",
+  },
+  "Ramtin Ghaffary": {
+    initials: "RG",
+    bio: "Strategy mind who finds the signal in the noise. Leads CoreXs — mapping every business before the engines activate.",
+  },
+};
+
+const leaderContainerVariants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.1, delayChildren: 0.2 } },
+};
+
+const teamContainerVariants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.04, delayChildren: 0.1 } },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 16 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.4, ease: EASE_OUT },
+  },
 };
 
 export function TheArchitects() {
-  const [dave, ramtin] = founders;
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
 
   return (
     <SectionWrapper id="architects" background="secondary" glow="none">
@@ -56,137 +90,162 @@ export function TheArchitects() {
 
       <div className="relative z-10">
         {/* Header */}
-        <motion.p
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          className="font-mono text-xs uppercase tracking-[0.12em] text-text-muted"
-        >
-          [03] THE ARCHITECTS
-        </motion.p>
-
-        <motion.h2
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          className="font-display text-[32px] text-text-hero mt-4"
-          style={{ letterSpacing: "-0.03em", textWrap: "balance" }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, ease: EASE_OUT }}
         >
-          Built by founders who build.
-        </motion.h2>
+          <SectionOverline number="03" label="THE ARCHITECTS" className="mb-4" />
+          <h2
+            className="font-display text-[32px] md:text-5xl text-text-hero"
+            style={{ letterSpacing: "-0.03em", textWrap: "balance" }}
+          >
+            Built by founders who build.
+          </h2>
+        </motion.div>
 
         {/* Co-founders */}
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-0">
-          {/* Dave */}
-          <motion.div
-            initial={{ opacity: 0, x: -24 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="md:border-r md:border-elevated md:pr-8 pb-8 md:pb-0 border-b md:border-b-0 border-elevated"
-          >
-            <h3
-              className="font-display text-[32px] text-text-hero"
-              style={{ letterSpacing: "-0.03em" }}
-            >
-              {dave.name}
-            </h3>
-            <p className="font-body text-base font-medium text-text-secondary mt-2">
-              {dave.role}
-            </p>
-            <p className="font-body text-base text-text-secondary mt-4 max-w-[400px]">
-              {founderBios[dave.name]}
-            </p>
-          </motion.div>
+        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-0">
+          {founders.map((founder, index) => {
+            const meta = FOUNDER_META[founder.name];
+            return (
+              <motion.div
+                key={founder.name}
+                initial={{
+                  opacity: 0,
+                  x: isMobile ? 0 : index === 0 ? -40 : 40,
+                  y: isMobile ? 20 : 0,
+                }}
+                whileInView={{ opacity: 1, x: 0, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, ease: EASE_OUT }}
+                className={
+                  index === 0
+                    ? "md:border-r md:border-white/[0.1] md:pr-8 pb-8 md:pb-0 border-b md:border-b-0 border-white/[0.08]"
+                    : "md:pl-8"
+                }
+              >
+                {/* Initials avatar */}
+                <div
+                  className="flex items-center justify-center rounded-full font-mono text-[13px] font-semibold tracking-[0.05em] mb-4"
+                  style={{
+                    width: 40,
+                    height: 40,
+                    border: "1.5px solid rgba(240, 180, 41, 0.4)",
+                    color: "var(--accent-gold)",
+                    backgroundColor: "rgba(240, 180, 41, 0.06)",
+                  }}
+                >
+                  {meta?.initials}
+                </div>
 
-          {/* Ramtin */}
-          <motion.div
-            initial={{ opacity: 0, x: 24 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="md:pl-8"
-          >
-            <h3
-              className="font-display text-[32px] text-text-hero"
-              style={{ letterSpacing: "-0.03em" }}
-            >
-              {ramtin.name}
-            </h3>
-            <p className="font-body text-base font-medium text-text-secondary mt-2">
-              {ramtin.role}
-            </p>
-            <p className="font-body text-base text-text-secondary mt-4 max-w-[400px]">
-              {founderBios[ramtin.name]}
-            </p>
-          </motion.div>
+                <h3
+                  className="font-display text-2xl text-text-hero"
+                  style={{ letterSpacing: "-0.02em" }}
+                >
+                  {founder.name}
+                </h3>
+
+                <p
+                  className="font-mono text-[13px] tracking-[0.08em] mt-2"
+                  style={{ color: "var(--accent-gold)" }}
+                >
+                  {founder.role}
+                </p>
+
+                <p className="font-body text-sm text-white/50 leading-[1.6] mt-4 max-w-[400px]">
+                  {meta?.bio}
+                </p>
+              </motion.div>
+            );
+          })}
         </div>
 
-        {/* Leaders */}
-        <div className="mt-16">
-          <p className="font-mono text-xs uppercase tracking-[0.08em] text-text-muted mb-6">
+        {/* Tier divider 1 */}
+        <div className="pt-16 border-b border-white/[0.08]" />
+
+        {/* Section Leaders */}
+        <div className="pt-12">
+          <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-white/35 mb-6">
             SECTION LEADERS
           </p>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-4">
-            {leaders.map((leader, index) => (
+          <motion.div
+            variants={leaderContainerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            className="grid grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-5"
+          >
+            {leaders.map((leader) => (
               <motion.div
                 key={leader.name}
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{
-                  duration: 0.5,
-                  delay: index * 0.1,
-                  ease: [0.16, 1, 0.3, 1],
-                }}
-                className="flex items-center gap-3"
+                variants={itemVariants}
+                className="flex items-start gap-2.5"
               >
-                <span
-                  className={`w-2 h-2 rounded-full ${pillarColors[leader.pillar]}`}
+                <div
+                  className="rounded-full shrink-0"
+                  style={{
+                    width: 8,
+                    height: 8,
+                    backgroundColor: PILLAR_COLORS[leader.pillar],
+                    marginTop: 5,
+                  }}
                 />
                 <div>
-                  <p className="font-body text-base font-medium text-text-hero">
+                  <p className="font-body text-sm font-semibold text-text-hero">
                     {leader.name}
                   </p>
-                  <p className="font-body text-sm text-text-secondary">
+                  <p className="font-body text-xs text-white/45">
                     {leader.role}
                   </p>
                 </div>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
 
-        {/* Team */}
-        <div className="mt-12">
-          <p className="font-mono text-xs uppercase tracking-[0.08em] text-text-muted mb-6">
+        {/* Tier divider 2 */}
+        <div className="pt-12 border-b border-white/[0.08]" />
+
+        {/* The Team */}
+        <div className="pt-8">
+          <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-white/35 mb-6">
             THE TEAM
           </p>
-          <div className="flex flex-wrap gap-x-8 gap-y-3">
-            {members.map((member, index) => (
+          <motion.div
+            variants={teamContainerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            className="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-4"
+          >
+            {members.map((member) => (
               <motion.div
                 key={member.name}
-                initial={{ opacity: 0, y: 12 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{
-                  duration: 0.4,
-                  delay: index * 0.04,
-                  ease: [0.16, 1, 0.3, 1],
-                }}
-                className="flex items-center gap-2"
+                variants={itemVariants}
+                className="flex items-start gap-2"
               >
-                <span
-                  className={`w-2 h-2 rounded-full ${pillarColors[member.pillar]}`}
+                <div
+                  className="rounded-full shrink-0"
+                  style={{
+                    width: 6,
+                    height: 6,
+                    backgroundColor: PILLAR_COLORS[member.pillar],
+                    marginTop: 6,
+                  }}
                 />
-                <p className="font-body text-sm text-text-body">
-                  {member.name} · {member.role}
-                </p>
+                <div>
+                  <p className="font-body text-[13px] font-medium text-white/75">
+                    {member.name}
+                  </p>
+                  <p className="font-body text-[11px] text-white/35">
+                    {member.role}
+                  </p>
+                </div>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </div>
     </SectionWrapper>

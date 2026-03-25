@@ -24,13 +24,13 @@ export function AboutCTA() {
         {/* Logo - dimmed with pulse */}
         <motion.div
           initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
+          whileInView={{ opacity: 0.6 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         >
           <DeltaXLogo
             size={80}
-            className="text-text-hero opacity-60 glow-breathe mb-8 md:w-[80px] w-[60px]"
+            className="text-text-hero glow-breathe mb-8 md:w-[80px] w-[60px]"
           />
         </motion.div>
 

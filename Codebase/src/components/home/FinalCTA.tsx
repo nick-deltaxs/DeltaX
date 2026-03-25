@@ -4,7 +4,8 @@ import { motion } from "framer-motion";
 import { DeltaXLogo } from "@/components/ui/DeltaXLogo";
 import { Button } from "@/components/ui/Button";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
-import { ScrollReveal } from "@/components/ui/ScrollReveal";
+
+const EASE_OUT: [number, number, number, number] = [0.25, 0.1, 0.25, 1];
 
 export function FinalCTA() {
   return (
@@ -20,60 +21,80 @@ export function FinalCTA() {
         }}
       />
 
-      <div className="relative z-10 flex flex-col items-center text-center">
+      {/* Card wrapper — scale entrance */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.97 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: true, margin: "-80px" }}
+        transition={{ duration: 0.6, ease: EASE_OUT }}
+        className="relative z-10 flex flex-col items-center text-center"
+      >
         {/* Logo - dimmed with pulse */}
         <motion.div
           initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          whileInView={{ opacity: 0.6 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, ease: EASE_OUT }}
         >
           <DeltaXLogo
             size={80}
-            className="text-text-hero opacity-60 glow-breathe mb-8 md:w-[80px] w-[60px]"
+            className="text-text-hero glow-breathe mb-8 md:w-[80px] w-[60px]"
           />
         </motion.div>
 
         {/* Headline */}
-        <ScrollReveal delay={0.2}>
-          <h2
-            className="font-display text-4xl md:text-5xl text-text-hero tracking-[-0.02em] mb-4"
-            style={{ textWrap: "balance" }}
-          >
-            Ready to build.
-          </h2>
-        </ScrollReveal>
+        <motion.h2
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, ease: EASE_OUT, delay: 0.15 }}
+          className="font-display text-4xl md:text-5xl text-text-hero tracking-[-0.02em] mb-4"
+          style={{ textWrap: "balance" }}
+        >
+          Ready to build.
+        </motion.h2>
 
         {/* Subtext */}
-        <ScrollReveal delay={0.4}>
-          <p
-            className="font-body text-lg text-text-secondary mb-8"
-            style={{ textWrap: "balance" }}
-          >
-            One conversation. No commitments. Just clarity.
-          </p>
-        </ScrollReveal>
+        <motion.p
+          initial={{ opacity: 0, y: 8 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, ease: EASE_OUT, delay: 0.28 }}
+          className="font-body text-lg text-text-secondary mb-8"
+          style={{ textWrap: "balance" }}
+        >
+          One conversation. No commitments. Just clarity.
+        </motion.p>
 
         {/* CTA Button */}
-        <ScrollReveal delay={0.6}>
+        <motion.div
+          initial={{ opacity: 0, y: 8 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, ease: EASE_OUT, delay: 0.42 }}
+        >
           <Button variant="primary" size="large" href="/contact">
             Start a Project
           </Button>
-        </ScrollReveal>
+        </motion.div>
 
         {/* Email fallback */}
-        <ScrollReveal delay={0.8}>
-          <div className="mt-4">
-            <span className="font-body text-sm text-text-muted">or email </span>
-            <a
-              href="mailto:hello@thesx.co"
-              className="font-body text-sm text-text-body hover:underline"
-            >
-              hello@thesx.co
-            </a>
-          </div>
-        </ScrollReveal>
-      </div>
+        <motion.div
+          initial={{ opacity: 0, y: 8 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, ease: EASE_OUT, delay: 0.55 }}
+          className="mt-4"
+        >
+          <span className="font-body text-sm text-text-muted">or email </span>
+          <a
+            href="mailto:hello@thesx.co"
+            className="font-body text-sm text-text-body hover:underline"
+          >
+            hello@thesx.co
+          </a>
+        </motion.div>
+      </motion.div>
     </SectionWrapper>
   );
 }
