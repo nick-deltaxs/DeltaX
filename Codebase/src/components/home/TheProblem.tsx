@@ -69,7 +69,7 @@ export function TheProblem() {
         {/* Headline */}
         <ScrollReveal delay={0}>
           <h2
-            className="font-display text-5xl text-text-hero tracking-[-0.02em] mb-16"
+            className="font-display text-4xl md:text-5xl text-text-hero tracking-[-0.02em] mb-16"
             style={{ textWrap: "balance" }}
           >
             Most agencies are a black box.

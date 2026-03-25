@@ -86,7 +86,7 @@ export function TheProof() {
         <SectionOverline number="02" label="THE PROOF" className="mb-4" />
 
         <h2
-          className="font-display text-5xl text-text-hero tracking-[-0.02em] mb-16"
+          className="font-display text-4xl md:text-5xl text-text-hero tracking-[-0.02em] mb-16"
           style={{ textWrap: "balance" as const }}
         >
           Numbers don&apos;t need decoration.
