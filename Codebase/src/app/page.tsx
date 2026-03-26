@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { Hero } from "@/components/home/Hero";
 import { TheProblem } from "@/components/home/TheProblem";
 import { TheSystem } from "@/components/home/TheSystem";
@@ -11,7 +12,9 @@ export default function HomePage() {
     <>
       <Hero />
       <TheProblem />
-      <TheSystem />
+      <Suspense fallback={<div className="min-h-[400px]" />}>
+        <TheSystem />
+      </Suspense>
       <TheProof />
       <TheArchitects />
       <YourPath />

@@ -1,10 +1,10 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { SectionOverline } from "@/components/ui/SectionOverline";
 
@@ -98,6 +98,17 @@ export function TheSystem() {
   const [activeTab, setActiveTab] = useState(0);
   const [expandedDesc, setExpandedDesc] = useState(false);
   const searchParams = useSearchParams();
+  const sectionRef = useRef<HTMLElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+
+  // Parallax: glow moves at 0.4x speed, max 30px
+  const glowY = useTransform(scrollYProgress, [0, 1], [-30, 30]);
+
+  const activePillar = pillars[activeTab];
 
   // Read URL search param to set active tab
   useEffect(() => {
@@ -124,10 +135,8 @@ export function TheSystem() {
     }
   }, [searchParams]);
 
-  const activePillar = pillars[activeTab];
-
   return (
-    <SectionWrapper id="system" background="primary" glow="none">
+    <SectionWrapper ref={sectionRef} id="system" background="primary" glow="none">
       <div className="relative z-10">
         {/* Overline */}
         <SectionOverline number="01" label="THE SYSTEM" className="mb-4" />
@@ -187,12 +196,12 @@ export function TheSystem() {
 
         {/* Content panel - Card Style */}
         <div className="relative overflow-hidden rounded-xl border border-elevated bg-secondary/30 p-6 md:p-8">
-          {/* Pillar glow behind content */}
-          <div
+          {/* Pillar glow behind content with parallax */}
+          <motion.div
             className="absolute inset-0 pointer-events-none z-0"
             style={{
+              y: glowY,
               background: `radial-gradient(ellipse at 20% 50%, ${activePillar.glowColor}, transparent 60%)`,
-              transition: 'background 300ms ease',
             }}
           />
 

@@ -3,6 +3,7 @@ import { Days_One, Inter, JetBrains_Mono } from "next/font/google";
 import { MotionConfig } from "framer-motion";
 import { Navbar } from "@/components/shared/Navbar";
 import { Footer } from "@/components/shared/Footer";
+import { CursorSpotlight } from "@/components/ui/CursorSpotlight";
 import "./globals.css";
 
 const daysOne = Days_One({
@@ -81,6 +82,7 @@ export default function RootLayout({
           Skip to content
         </a>
         <MotionConfig reducedMotion="user">
+          <CursorSpotlight />
           <Navbar />
           <main id="main">{children}</main>
           <Footer />

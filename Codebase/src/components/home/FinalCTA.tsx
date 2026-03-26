@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { DeltaXLogo } from "@/components/ui/DeltaXLogo";
 import { Button } from "@/components/ui/Button";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
@@ -8,12 +9,22 @@ import { SectionWrapper } from "@/components/ui/SectionWrapper";
 const EASE_OUT: [number, number, number, number] = [0.25, 0.1, 0.25, 1];
 
 export function FinalCTA() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+
+  // Parallax: glow moves at 0.4x speed, max 30px
+  const glowY = useTransform(scrollYProgress, [0, 1], [-30, 30]);
+
   return (
-    <SectionWrapper id="cta" background="primary" glow="none">
-      {/* Teal radial glow - centered behind content */}
-      <div
+    <SectionWrapper ref={sectionRef} id="cta" background="primary" glow="none">
+      {/* Teal radial glow - centered behind content with parallax */}
+      <motion.div
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] pointer-events-none z-0"
         style={{
+          y: glowY,
           background:
             "radial-gradient(ellipse at center, rgba(26,155,191,0.12) 0%, transparent 60%)",
         }}

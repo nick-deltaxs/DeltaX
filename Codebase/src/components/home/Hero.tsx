@@ -1,23 +1,35 @@
 "use client";
 
+import { useRef } from "react";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { DeltaXLogo } from "@/components/ui/DeltaXLogo";
 import { Button } from "@/components/ui/Button";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 export function Hero() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+  });
+
+  // Parallax: glow moves at 0.2x speed, max 30px
+  const glowY = useTransform(scrollYProgress, [0, 1], [0, 30]);
+
   return (
     <SectionWrapper
+      ref={sectionRef}
       id="hero"
       background="primary"
       glow="none"
       className="min-h-screen flex flex-col items-center justify-center text-center pt-20 lg:pt-24 pb-16 md:pb-24 lg:pb-24"
     >
-      {/* Teal radial glow — centered behind the logo */}
-      <div
+      {/* Teal radial glow — centered behind the logo with parallax */}
+      <motion.div
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] pointer-events-none z-0"
         style={{
+          y: glowY,
           background:
             "radial-gradient(ellipse at center, rgba(26,155,191,0.12) 0%, transparent 60%)",
         }}
@@ -68,31 +80,39 @@ export function Hero() {
             </Button>
           </div>
         </ScrollReveal>
-      </div>
 
-      {/* Scroll indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.6, delay: 1.2, ease: [0.16, 1, 0.3, 1] }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:block"
-      >
-        <a href="#system" className="block text-text-muted hover:text-text-body transition-colors duration-150">
-          <svg
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="bounce-indicator"
+        {/* Scroll indicator — below buttons, centered, with bounce */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.5 }}
+          transition={{ duration: 0.6, delay: 1.2, ease: [0.16, 1, 0.3, 1] }}
+          className="mt-8 cursor-pointer"
+          onClick={() => {
+            document.getElementById("problem")?.scrollIntoView({ behavior: "smooth" });
+          }}
+        >
+          <motion.div
+            animate={{ y: [0, 6, 0] }}
+            transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
           >
-            <path d="m6 9 6 6 6-6" />
-          </svg>
-        </a>
-      </motion.div>
+            <svg
+              width="20"
+              height="12"
+              viewBox="0 0 20 12"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M1 1L10 10L19 1"
+                stroke="white"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </motion.div>
+        </motion.div>
+      </div>
     </SectionWrapper>
   );
 }

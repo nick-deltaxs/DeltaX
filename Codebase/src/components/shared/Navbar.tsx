@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { DeltaXLogo } from "@/components/ui/DeltaXLogo";
 import { Button } from "@/components/ui/Button";
 
@@ -9,28 +10,32 @@ const PILLARS = [
   {
     name: "CoreXs",
     description: "Strategy & Audit",
-    href: "/#system",
+    href: "#",
+    tab: "core",
     color: "text-core-bright",
     icon: "core",
   },
   {
     name: "CodeXs",
     description: "Engineering & Build",
-    href: "/#system",
+    href: "#",
+    tab: "code",
     color: "text-code-bright",
     icon: "code",
   },
   {
     name: "ScaleXs",
     description: "Growth & Marketing",
-    href: "/#system",
+    href: "#",
+    tab: "scale",
     color: "text-scale-bright",
     icon: "scale",
   },
   {
     name: "StyleXs",
     description: "Design & Brand",
-    href: "/#system",
+    href: "#",
+    tab: "style",
     color: "text-style-bright",
     icon: "style",
   },
@@ -72,6 +77,7 @@ function PillarIcon({ icon, className }: { icon: string; className?: string }) {
 }
 
 export function Navbar() {
+  const router = useRouter();
   const [scrolled, setScrolled] = useState(false);
   const [megaOpen, setMegaOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -191,7 +197,14 @@ export function Navbar() {
     }
   };
 
-  // --- Mobile menu ---
+  // Handle service click with tab navigation (same as Footer)
+  const handleServiceClick = useCallback((tab: string, closeMenu: () => void) => {
+    return (e: React.MouseEvent) => {
+      e.preventDefault();
+      closeMenu();
+      router.push(`/?tab=${tab}#system`);
+    };
+  }, [router]);
   const closeMobileMenu = useCallback(() => {
     setMobileOpen(false);
     setMobileServicesOpen(false);
@@ -268,14 +281,14 @@ export function Navbar() {
                     {PILLARS.map((pillar, i) => (
                       <Link
                         key={pillar.name}
-                        href={pillar.href}
+                        href="#"
                         role="menuitem"
                         tabIndex={0}
                         ref={(el) => {
                           megaItemsRef.current[i] = el;
                         }}
                         onKeyDown={(e) => handleMegaItemKeyDown(e, i)}
-                        onClick={() => setMegaOpen(false)}
+                        onClick={handleServiceClick(pillar.tab, () => setMegaOpen(false))}
                         className="flex items-center gap-3 rounded-lg p-4 hover:bg-tertiary transition-colors duration-200 group"
                       >
                         <div className={`w-10 h-10 rounded-lg bg-tertiary border border-elevated flex items-center justify-center ${pillar.color} group-hover:border-current transition-colors`}>
@@ -433,8 +446,8 @@ export function Navbar() {
                   {PILLARS.map((pillar) => (
                     <Link
                       key={pillar.name}
-                      href={pillar.href}
-                      onClick={closeMobileMenu}
+                      href="#"
+                      onClick={handleServiceClick(pillar.tab, closeMobileMenu)}
                       className="flex items-center gap-3 h-11 font-body text-[16px] text-text-secondary hover:text-text-body transition-colors duration-150"
                     >
                       <span className={pillar.color}>

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import type { ButtonProps } from "@/types";
+import { MagneticButton } from "./MagneticButton";
 
 const sizeMap = {
   large: "h-[52px] px-8 text-[16px]",
@@ -37,30 +38,36 @@ export function Button({
     const isInternal = href.startsWith("/");
     if (isInternal) {
       return (
-        <Link href={href} className={classes}>
-          {children}
-        </Link>
+        <MagneticButton>
+          <Link href={href} className={classes}>
+            {children}
+          </Link>
+        </MagneticButton>
       );
     }
     return (
-      <a href={href} className={classes}>
-        {children}
-      </a>
+      <MagneticButton>
+        <a href={href} className={classes}>
+          {children}
+        </a>
+      </MagneticButton>
     );
   }
 
   return (
-    <button
-      type={type}
-      onClick={onClick}
-      disabled={disabled || loading}
-      aria-busy={loading}
-      className={classes}
-    >
-      {loading ? (
-        <span className="spinner w-4 h-4 border-2 border-current border-t-transparent rounded-full" />
-      ) : null}
-      {children}
-    </button>
+    <MagneticButton>
+      <button
+        type={type}
+        onClick={onClick}
+        disabled={disabled || loading}
+        aria-busy={loading}
+        className={classes}
+      >
+        {loading ? (
+          <span className="spinner w-4 h-4 border-2 border-current border-t-transparent rounded-full" />
+        ) : null}
+        {children}
+      </button>
+    </MagneticButton>
   );
 }
