@@ -4,9 +4,8 @@ import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { SectionOverline } from "@/components/ui/SectionOverline";
 import { motion } from "framer-motion";
 
-<<<<<<< HEAD
 const EASE_OUT = [0.25, 0.1, 0.25, 1] as const;
-=======
+
 // Inline SVG icons (avoids lucide-react dependency)
 const XIcon = ({ className }: { className?: string }) => (
   <svg
@@ -36,7 +35,6 @@ const CheckIcon = ({ className }: { className?: string }) => (
     <path d="M20 6 9 17l-5-5" />
   </svg>
 );
->>>>>>> Widi-azm
 
 const leftItems = [
   "Endless meetings with no outcomes.",
@@ -138,14 +136,10 @@ export function TheProblem() {
             whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
           >
-<<<<<<< HEAD
             <motion.p
               variants={itemVariants}
               className="font-body text-sm font-medium uppercase text-scale-bright mb-6"
             >
-=======
-            <p className="font-mono text-xs uppercase tracking-[0.12em] text-scale-bright mb-8">
->>>>>>> Widi-azm
               What you get today
             </motion.p>
             {leftItems.map((item, index) => (
@@ -171,14 +165,10 @@ export function TheProblem() {
             whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
           >
-<<<<<<< HEAD
             <motion.p
               variants={itemVariants}
               className="font-body text-sm font-medium uppercase text-core-bright mb-6"
             >
-=======
-            <p className="font-mono text-xs uppercase tracking-[0.12em] text-core-bright mb-8">
->>>>>>> Widi-azm
               What you actually need
             </motion.p>
             {rightItems.map((item, index) => (

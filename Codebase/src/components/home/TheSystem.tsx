@@ -1,7 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { SectionOverline } from "@/components/ui/SectionOverline";
@@ -94,22 +96,38 @@ const contentVariants = {
 
 export function TheSystem() {
   const [activeTab, setActiveTab] = useState(0);
+  const [expandedDesc, setExpandedDesc] = useState(false);
+  const searchParams = useSearchParams();
+
+  // Read URL search param to set active tab
+  useEffect(() => {
+    const tabParam = searchParams.get('tab');
+    if (tabParam) {
+      const tabIndex = pillars.findIndex(p => p.id === tabParam);
+      if (tabIndex !== -1) {
+        setActiveTab(tabIndex);
+      }
+    }
+  }, [searchParams]);
+
+  // Handle scroll to section when tab is set from URL
+  useEffect(() => {
+    const tabParam = searchParams.get('tab');
+    if (tabParam && pillars.findIndex(p => p.id === tabParam) !== -1) {
+      // Scroll to section
+      setTimeout(() => {
+        const section = document.getElementById('system');
+        if (section) {
+          section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
+    }
+  }, [searchParams]);
+
   const activePillar = pillars[activeTab];
 
   return (
-<<<<<<< HEAD
-    <SectionWrapper id="system" background="secondary" glow="none">
-=======
     <SectionWrapper id="system" background="primary" glow="none">
-      {/* Active pillar glow background */}
-      <div
-        className="absolute inset-0 pointer-events-none transition-all duration-300"
-        style={{
-          background: `radial-gradient(ellipse at 50% 60%, ${activePillar.glowColor}, transparent 60%)`,
-        }}
-      />
-
->>>>>>> Widi-azm
       <div className="relative z-10">
         {/* Overline */}
         <SectionOverline number="01" label="THE SYSTEM" className="mb-4" />
@@ -128,50 +146,52 @@ export function TheSystem() {
           replicate.
         </p>
 
-        {/* Tab row */}
-        <div
-          className="flex gap-1 border-b border-elevated overflow-x-auto flex-nowrap [&::-webkit-scrollbar]:hidden"
-          style={{ scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' }}
-        >
+        {/* Tab row - Card Style */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">
           {pillars.map((pillar, index) => {
             const isActive = activeTab === index;
             return (
               <button
                 key={pillar.id}
                 onClick={() => setActiveTab(index)}
-                className={`group flex items-center gap-2 px-4 py-3 cursor-pointer whitespace-nowrap shrink-0 transition-all duration-150 ${
+                className={`group flex flex-col items-center justify-center gap-3 px-4 py-5 cursor-pointer rounded-lg transition-all duration-200 ${
                   isActive
-                    ? `${pillar.borderClass} border-b-2`
-                    : "text-white/[0.45] hover:text-white/[0.75]"
+                    ? `${pillar.borderClass} border-2 bg-tertiary/50`
+                    : "border border-elevated bg-secondary/50 hover:bg-tertiary/30"
                 }`}
-                style={isActive ? { color: pillar.cssColor } : undefined}
               >
                 {pillar.logo ? (
                   <Image
                     src={pillar.logo}
                     alt={pillar.name}
-                    width={28}
-                    height={28}
-                    className={`object-contain transition-opacity duration-150 ${
-                      isActive ? 'opacity-100' : 'opacity-[0.45] group-hover:opacity-75'
-                    }`}
+                    width={32}
+                    height={32}
+                    className={`object-contain transition-all duration-200 ${
+                      isActive ? 'opacity-100 scale-105' : 'opacity-60 group-hover:opacity-80'
+                    } ${isActive ? pillar.brightClass : ''}`}
                   />
                 ) : (
-                  <span className="font-display text-base">{pillar.logoText}</span>
+                  <span className={`font-display text-xl ${isActive ? pillar.brightClass : 'text-text-secondary'}`}>
+                    {pillar.logoText}
+                  </span>
                 )}
-                <span className="font-body text-sm font-medium">{pillar.name}</span>
+                <span className={`font-body text-sm font-medium transition-colors duration-200 ${
+                  isActive ? 'text-text-hero' : 'text-text-secondary group-hover:text-text-body'
+                }`}>
+                  {pillar.name}
+                </span>
               </button>
             );
           })}
         </div>
 
-        {/* Content panel */}
-        <div className="relative mt-8 min-h-[400px] overflow-hidden pb-20">
+        {/* Content panel - Card Style */}
+        <div className="relative overflow-hidden rounded-xl border border-elevated bg-secondary/30 p-6 md:p-8">
           {/* Pillar glow behind content */}
           <div
             className="absolute inset-0 pointer-events-none z-0"
             style={{
-              background: `radial-gradient(ellipse at 30% 50%, ${activePillar.glowColor}, transparent 70%)`,
+              background: `radial-gradient(ellipse at 20% 50%, ${activePillar.glowColor}, transparent 60%)`,
               transition: 'background 300ms ease',
             }}
           />
@@ -183,51 +203,78 @@ export function TheSystem() {
               initial="hidden"
               animate="visible"
               exit="exit"
-              className="relative z-[1] grid grid-cols-1 md:grid-cols-[55fr_45fr] gap-12"
+              className="relative z-[1] grid grid-cols-1 md:grid-cols-2 gap-8"
             >
-              {/* Left column - text content */}
-              <div>
-                <h3
-                  className={`font-display text-2xl md:text-[28px] ${activePillar.brightClass} mb-4`}
-                >
-                  {activePillar.title}
-                </h3>
-                <p className="font-body text-base text-text-body leading-[1.6] mb-8">
-                  {activePillar.description}
-                </p>
-
-                {/* Capability table */}
-                <div>
-                  <div className="grid grid-cols-[1fr_2fr] gap-4 pb-3 border-b border-elevated">
-                    <span className="font-mono text-xs uppercase text-text-muted tracking-[0.08em]">
-                      Capability
+              {/* Left column - main content */}
+              <div className="space-y-6">
+                {/* Icon */}
+                <div className={`w-12 h-12 rounded-lg bg-tertiary flex items-center justify-center ${activePillar.borderClass} border`}>
+                  {activePillar.logo ? (
+                    <Image
+                      src={activePillar.logo}
+                      alt={activePillar.name}
+                      width={28}
+                      height={28}
+                      className={`object-contain ${activePillar.brightClass}`}
+                    />
+                  ) : (
+                    <span className={`font-display text-lg ${activePillar.brightClass}`}>
+                      {activePillar.logoText}
                     </span>
-                    <span className="font-mono text-xs uppercase text-text-muted tracking-[0.08em]">
-                      Detail
-                    </span>
-                  </div>
-                  {activePillar.capabilities.map((cap, idx) => (
-                    <div
-                      key={idx}
-                      className="grid grid-cols-[1fr_2fr] gap-4 py-3 border-b border-elevated"
-                    >
-                      <span className="font-body text-sm font-medium text-text-hero">{cap.name}</span>
-                      <span className="font-body text-sm text-text-secondary">{cap.detail}</span>
-                    </div>
-                  ))}
+                  )}
                 </div>
+
+                {/* Title */}
+                <h3 className={`font-display text-2xl md:text-3xl ${activePillar.brightClass}`}>
+                  {activePillar.title.split(' — ')[0]}
+                </h3>
+
+                {/* Description - Expandable */}
+                <div className="space-y-3">
+                  <motion.p
+                    className="font-body text-base text-text-body leading-relaxed cursor-pointer"
+                    onClick={() => setExpandedDesc(!expandedDesc)}
+                    animate={{ height: expandedDesc ? 'auto' : '4.5rem' }}
+                    style={{ overflow: 'hidden' }}
+                  >
+                    {activePillar.description}
+                  </motion.p>
+                  <button
+                    onClick={() => setExpandedDesc(!expandedDesc)}
+                    className={`font-body text-sm ${activePillar.brightClass} hover:opacity-80 transition-opacity flex items-center gap-1`}
+                  >
+                    {expandedDesc ? 'Show less' : 'Read more'}
+                    <motion.span
+                      animate={{ rotate: expandedDesc ? 180 : 0 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      ↓
+                    </motion.span>
+                  </button>
+                </div>
+
+                {/* CTA Link */}
+                <Link
+                  href="/contact"
+                  className={`inline-flex items-center gap-2 font-body text-sm ${activePillar.brightClass} hover:opacity-80 transition-opacity`}
+                >
+                  Start a Project
+                  <span>→</span>
+                </Link>
               </div>
 
-              {/* Right column - decorative illustration */}
-              <div className="hidden md:block pointer-events-none">
-                <div className="relative w-full aspect-square max-w-[300px] mx-auto rounded-lg overflow-hidden opacity-30">
-                  <Image
-                    src={`/images/system-${activePillar.id}.png`}
-                    alt={`${activePillar.name} visual`}
-                    fill
-                    className="object-contain"
-                  />
-                </div>
+              {/* Right column - capability list */}
+              <div className="space-y-6">
+                {activePillar.capabilities.map((cap, idx) => (
+                  <div key={idx} className="space-y-2">
+                    <h4 className={`font-mono text-xs uppercase tracking-[0.08em] ${activePillar.brightClass}`}>
+                      {cap.name}
+                    </h4>
+                    <p className="font-body text-sm text-text-secondary leading-relaxed">
+                      {cap.detail}
+                    </p>
+                  </div>
+                ))}
               </div>
             </motion.div>
           </AnimatePresence>

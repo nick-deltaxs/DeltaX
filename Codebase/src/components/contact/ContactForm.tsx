@@ -172,7 +172,7 @@ export function ContactForm() {
           {/* Success message */}
           {formState.status === "success" && (
             <p aria-live="polite" className="mt-3 text-sm text-success font-body">
-              Message sent. We&apos;ll be in touch within 24 hours.
+              Message sent. We'll be in touch within 24 hours.
             </p>
           )}
 
@@ -215,7 +215,7 @@ export function ContactForm() {
               <motion.div variants={timelineItemVariants} className="flex items-start gap-4">
                 <div className="relative z-10 w-2 h-2 rounded-full bg-code-bright mt-1.5 flex-shrink-0" />
                 <p className="font-body text-[14px] text-text-secondary ml-2">
-                  If there&apos;s a fit, we schedule a call.
+                  If there's a fit, we schedule a call.
                 </p>
               </motion.div>
 

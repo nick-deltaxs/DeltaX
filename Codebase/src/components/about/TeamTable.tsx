@@ -1,139 +1,254 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
-import { team } from "@/data/team";
-import type { TeamMember } from "@/types";
+import { SectionOverline } from "@/components/ui/SectionOverline";
+import { founders, leaders, members } from "@/data/team";
 
-const pillarColors: Record<TeamMember["pillar"], string> = {
-  core: "bg-core-bright",
-  code: "bg-code-bright",
-  scale: "bg-scale-bright",
-  style: "bg-style-bright",
-  deltax: "bg-deltax-bright",
+const EASE_OUT: [number, number, number, number] = [0.25, 0.1, 0.25, 1];
+
+const PILLAR_COLORS: Record<string, string> = {
+  deltax: "var(--deltax-bright)",
+  core: "var(--core-bright)",
+  code: "var(--code-bright)",
+  scale: "var(--scale-bright)",
+  style: "var(--style-bright)",
 };
 
-const pillarTextColors: Record<TeamMember["pillar"], string> = {
-  core: "text-core-bright",
-  code: "text-code-bright",
-  scale: "text-scale-bright",
-  style: "text-style-bright",
-  deltax: "text-deltax-bright",
+const FOUNDER_META: Record<string, { initials: string; bio: string }> = {
+  "Dave Benrouz": {
+    initials: "DB",
+    bio: "Systems thinker who builds companies like machines. Former engineer turned architect — designs the system before writing a single line of code.",
+  },
+  "Ramtin Ghaffary": {
+    initials: "RG",
+    bio: "Strategy mind who finds the signal in the noise. Leads CoreXs — mapping every business before the engines activate.",
+  },
 };
 
-const pillarLabels: Record<TeamMember["pillar"], string> = {
-  core: "CoreXs",
-  code: "CodeXs",
-  scale: "ScaleXs",
-  style: "StyleXs",
-  deltax: "DeltaX",
+const leaderContainerVariants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.1, delayChildren: 0.2 } },
 };
 
-function TeamRow({
-  member,
-  index,
-  isLastInTier,
-}: {
-  member: TeamMember;
-  index: number;
-  isLastInTier: boolean;
-}) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 12 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{
-        duration: 0.4,
-        delay: index * 0.06,
-        ease: [0.16, 1, 0.3, 1],
-      }}
-      className={`py-4 border-b ${isLastInTier ? "border-b-2 border-elevated" : "border-elevated"} hover:bg-tertiary transition-colors duration-150`}
-    >
-      {/* Desktop: Grid layout */}
-      <div className="hidden md:grid grid-cols-[8px_1fr_1.5fr_1fr] gap-4 items-center">
-        <div className={`w-2 h-2 rounded-full ${pillarColors[member.pillar]}`} />
-        <span className="font-body text-base font-medium text-text-hero">
-          {member.name}
-        </span>
-        <span className="font-body text-sm text-text-body">{member.role}</span>
-        <span
-          className={`font-body text-sm ${pillarTextColors[member.pillar]}`}
-        >
-          {pillarLabels[member.pillar]}
-        </span>
-      </div>
+const teamContainerVariants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.04, delayChildren: 0.1 } },
+};
 
-      {/* Mobile: Stacked layout */}
-      <div className="md:hidden flex items-center gap-3">
-        <div className={`w-2 h-2 rounded-full ${pillarColors[member.pillar]}`} />
-        <div className="flex flex-col gap-0.5">
-          <span className="font-body text-base font-medium text-text-hero">
-            {member.name}
-          </span>
-          <span className="font-body text-sm text-text-body">
-            {member.role}
-          </span>
-        </div>
-      </div>
-    </motion.div>
-  );
-}
+const itemVariants = {
+  hidden: { opacity: 0, y: 16 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.4, ease: EASE_OUT },
+  },
+};
 
 export function TeamTable() {
-  const founders = team.filter((m) => m.tier === "founder");
-  const leaders = team.filter((m) => m.tier === "leader");
-  const members = team.filter((m) => m.tier === "team");
+  const [isMobile, setIsMobile] = useState(false);
 
-  const orderedTeam = [...founders, ...leaders, ...members];
-
-  let rowIndex = 0;
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
 
   return (
-    <SectionWrapper id="team" background="primary">
-      <span className="font-mono text-xs uppercase text-text-muted tracking-[0.12em] block mb-4">
-        [04] TEAM
-      </span>
-      <h2 className="font-display text-4xl md:text-5xl text-text-hero tracking-[-0.03em] mb-12">
-        The People.
-      </h2>
+    <SectionWrapper id="team" background="primary" glow="none">
+      {/* Multi-pillar glow */}
+      <div
+        className="absolute top-0 left-0 w-1/2 h-1/2 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(ellipse at 0% 0%, rgba(68, 102, 204, 0.04) 0%, transparent 60%)",
+        }}
+      />
+      <div
+        className="absolute top-0 right-0 w-1/2 h-1/2 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(ellipse at 100% 0%, rgba(138, 138, 138, 0.04) 0%, transparent 60%)",
+        }}
+      />
+      <div
+        className="absolute bottom-0 left-0 w-1/2 h-1/2 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(ellipse at 0% 100%, rgba(217, 64, 64, 0.04) 0%, transparent 60%)",
+        }}
+      />
+      <div
+        className="absolute bottom-0 right-0 w-1/2 h-1/2 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(ellipse at 100% 100%, rgba(110, 117, 255, 0.04) 0%, transparent 60%)",
+        }}
+      />
 
-      {/* Table Header - Desktop only */}
-      <div className="hidden md:grid grid-cols-[8px_1fr_1.5fr_1fr] gap-4 items-center pb-3 border-b border-elevated">
-        <span />
-        <span className="font-mono text-xs uppercase text-text-muted tracking-[0.08em]">
-          NAME
-        </span>
-        <span className="font-mono text-xs uppercase text-text-muted tracking-[0.08em]">
-          ROLE
-        </span>
-        <span className="font-mono text-xs uppercase text-text-muted tracking-[0.08em]">
-          SECTION
-        </span>
-      </div>
+      <div className="relative z-10">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, ease: EASE_OUT }}
+        >
+          <SectionOverline number="04" label="THE TEAM" className="mb-4" />
+          <h2
+            className="font-display text-[32px] md:text-5xl text-text-hero"
+            style={{ letterSpacing: "-0.03em", textWrap: "balance" }}
+          >
+            The People.
+          </h2>
+        </motion.div>
 
-      {/* Team Rows */}
-      <div>
-        {orderedTeam.map((member, idx) => {
-          const isLastInTier =
-            (member.tier === "founder" && idx === founders.length - 1) ||
-            (member.tier === "leader" &&
-              idx === founders.length + leaders.length - 1) ||
-            (member.tier === "team" &&
-              idx === orderedTeam.length - 1);
+        {/* Co-founders */}
+        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-0">
+          {founders.map((founder, index) => {
+            const meta = FOUNDER_META[founder.name];
+            return (
+              <motion.div
+                key={founder.name}
+                initial={{
+                  opacity: 0,
+                  x: isMobile ? 0 : index === 0 ? -40 : 40,
+                  y: isMobile ? 20 : 0,
+                }}
+                whileInView={{ opacity: 1, x: 0, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, ease: EASE_OUT }}
+                className={
+                  index === 0
+                    ? "md:border-r md:border-white/[0.1] md:pr-8 pb-8 md:pb-0 border-b md:border-b-0 border-white/[0.08]"
+                    : "md:pl-8"
+                }
+              >
+                {/* Initials avatar */}
+                <div
+                  className="flex items-center justify-center rounded-full font-mono text-[13px] font-semibold tracking-[0.05em] mb-4"
+                  style={{
+                    width: 40,
+                    height: 40,
+                    border: "1.5px solid rgba(240, 180, 41, 0.4)",
+                    color: "var(--accent-gold)",
+                    backgroundColor: "rgba(240, 180, 41, 0.06)",
+                  }}
+                >
+                  {meta?.initials}
+                </div>
 
-          const currentRow = rowIndex++;
+                <h3
+                  className="font-display text-2xl text-text-hero"
+                  style={{ letterSpacing: "-0.02em" }}
+                >
+                  {founder.name}
+                </h3>
 
-          return (
-            <TeamRow
-              key={member.name}
-              member={member}
-              index={currentRow}
-              isLastInTier={isLastInTier}
-            />
-          );
-        })}
+                <p
+                  className="font-mono text-[13px] tracking-[0.08em] mt-2"
+                  style={{ color: "var(--accent-gold)" }}
+                >
+                  {founder.role}
+                </p>
+
+                <p className="font-body text-sm text-white/50 leading-[1.6] mt-4 max-w-[400px]">
+                  {meta?.bio}
+                </p>
+              </motion.div>
+            );
+          })}
+        </div>
+
+        {/* Tier divider 1 */}
+        <div className="pt-16 border-b border-white/[0.08]" />
+
+        {/* Section Leaders */}
+        <div className="pt-12">
+          <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-white/35 mb-6">
+            SECTION LEADERS
+          </p>
+          <motion.div
+            variants={leaderContainerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            className="grid grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-5"
+          >
+            {leaders.map((leader) => (
+              <motion.div
+                key={leader.name}
+                variants={itemVariants}
+                className="flex items-start gap-2.5"
+              >
+                <div
+                  className="rounded-full shrink-0"
+                  style={{
+                    width: 8,
+                    height: 8,
+                    backgroundColor: PILLAR_COLORS[leader.pillar],
+                    marginTop: 5,
+                  }}
+                />
+                <div>
+                  <p className="font-body text-sm font-semibold text-text-hero">
+                    {leader.name}
+                  </p>
+                  <p className="font-body text-xs text-white/45">
+                    {leader.role}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+
+        {/* Tier divider 2 */}
+        <div className="pt-12 border-b border-white/[0.08]" />
+
+        {/* The Team */}
+        <div className="pt-8">
+          <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-white/35 mb-6">
+            THE TEAM
+          </p>
+          <motion.div
+            variants={teamContainerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            className="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-4"
+          >
+            {members.map((member) => (
+              <motion.div
+                key={member.name}
+                variants={itemVariants}
+                className="flex items-start gap-2"
+              >
+                <div
+                  className="rounded-full shrink-0"
+                  style={{
+                    width: 6,
+                    height: 6,
+                    backgroundColor: PILLAR_COLORS[member.pillar],
+                    marginTop: 6,
+                  }}
+                />
+                <div>
+                  <p className="font-body text-[13px] font-medium text-white/75">
+                    {member.name}
+                  </p>
+                  <p className="font-body text-[11px] text-white/35">
+                    {member.role}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
       </div>
     </SectionWrapper>
   );
 }
+

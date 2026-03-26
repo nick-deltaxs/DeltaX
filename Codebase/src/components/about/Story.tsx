@@ -21,7 +21,7 @@ export function Story() {
         {/* Paragraph 2 */}
         <ScrollReveal delay={0.2}>
           <p className="font-body text-base text-text-body leading-[1.6]">
-            The answer wasn&apos;t better agencies. It was a system. Four engines — CoreXs for strategy, CodeXs for engineering, ScaleXs for growth, StyleXs for design — built to operate independently but feed into each other. Inside CodeXs, two dev teams compete on every build. The best code wins. Quality isn&apos;t a process — it&apos;s a structure.
+            The answer wasn't better agencies. It was a system. Four engines — CoreXs for strategy, CodeXs for engineering, ScaleXs for growth, StyleXs for design — built to operate independently but feed into each other. Inside CodeXs, two dev teams compete on every build. The best code wins. Quality isn't a process — it's a structure.
           </p>
         </ScrollReveal>
 
@@ -37,7 +37,7 @@ export function Story() {
           className="border-l-[3px] border-accent-gold pl-6 max-w-[600px]"
         >
           <p className="font-body italic text-2xl text-text-body leading-[1.5]">
-            &ldquo;We don&apos;t hire people to fill roles. We build engines that make roles unnecessary.&rdquo;
+            "We don't hire people to fill roles. We build engines that make roles unnecessary."
           </p>
         </motion.div>
 
@@ -47,7 +47,7 @@ export function Story() {
         {/* Paragraph 3 */}
         <ScrollReveal delay={0.6}>
           <p className="font-body text-base text-text-body leading-[1.6]">
-            Today, DeltaX is a team of 16 specialists across four countries. Every engine has a lead. Every project runs through the same system. And every founder who works with us gets one thing they&apos;ve never had before: time to focus on what actually matters.
+            Today, DeltaX is a team of 16 specialists across four countries. Every engine has a lead. Every project runs through the same system. And every founder who works with us gets one thing they've never had before: time to focus on what actually matters.
           </p>
         </ScrollReveal>
       </div>

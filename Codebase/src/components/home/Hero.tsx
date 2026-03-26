@@ -11,35 +11,18 @@ export function Hero() {
     <SectionWrapper
       id="hero"
       background="primary"
-<<<<<<< HEAD
       glow="none"
-      className="min-h-screen flex flex-col items-center justify-center text-center pt-16 lg:pt-16 pb-12 md:pb-20 lg:pb-20"
+      className="min-h-screen flex flex-col items-center justify-center text-center pt-20 lg:pt-24 pb-16 md:pb-24 lg:pb-24"
     >
       {/* Teal radial glow — centered behind the logo */}
       <div
-        className="absolute inset-0 pointer-events-none"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] pointer-events-none z-0"
         style={{
           background:
-            "radial-gradient(ellipse at 50% 50%, rgba(21,51,154,0.14) 0%, transparent 60%)",
+            "radial-gradient(ellipse at center, rgba(26,155,191,0.12) 0%, transparent 60%)",
         }}
       />
 
-      {/* Background atmosphere image */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          backgroundImage: "url('/images/hero-atmosphere.png')",
-          backgroundSize: "cover",
-          backgroundPosition: "center top",
-          opacity: 0.7,
-        }}
-      />
-
-=======
-      glow="deltax"
-      className="min-h-screen flex flex-col items-center justify-center text-center pt-16 pb-12 md:pb-20"
-    >
->>>>>>> Widi-azm
       <div className="relative z-10 flex flex-col items-center">
         {/* Logo */}
         <motion.div
@@ -70,7 +53,7 @@ export function Hero() {
         <ScrollReveal delay={0.4}>
           <p className="font-body text-lg md:text-xl text-text-body max-w-[600px] mx-auto leading-[1.6] mt-6">
             Strategy, engineering, design, and growth — working as one machine
-            to build businesses that don&apos;t depend on their founders.
+            to build businesses that don't depend on their founders.
           </p>
         </ScrollReveal>
 

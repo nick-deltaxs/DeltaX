@@ -17,7 +17,7 @@ export function ContactHero() {
           className="font-display text-text-hero text-[56px] tracking-[-0.03em]"
           style={{ textWrap: "balance" }}
         >
-          Let&apos;s talk.
+          Let's talk.
         </motion.h1>
 
         {/* Info row */}

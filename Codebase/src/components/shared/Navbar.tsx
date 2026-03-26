@@ -262,34 +262,36 @@ export function Navbar() {
               {megaOpen && (
                 <div
                   role="menu"
-                  className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-[480px] bg-secondary border border-elevated rounded-lg p-6 shadow-lg grid grid-cols-2 gap-6"
+                  className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-[520px] bg-secondary border border-elevated rounded-xl p-5 shadow-2xl"
                 >
-                  {PILLARS.map((pillar, i) => (
-                    <Link
-                      key={pillar.name}
-                      href={pillar.href}
-                      role="menuitem"
-                      tabIndex={0}
-                      ref={(el) => {
-                        megaItemsRef.current[i] = el;
-                      }}
-                      onKeyDown={(e) => handleMegaItemKeyDown(e, i)}
-                      onClick={() => setMegaOpen(false)}
-                      className="flex items-start gap-3 rounded-md p-2 -m-2 hover:bg-elevated/50 transition-colors duration-150 group"
-                    >
-                      <div className={`${pillar.color} shrink-0 mt-0.5`}>
-                        <PillarIcon icon={pillar.icon} />
-                      </div>
-                      <div>
-                        <span className="font-body text-[16px] font-medium text-text-hero block">
-                          {pillar.name}
-                        </span>
-                        <span className="font-body text-[14px] text-text-secondary">
-                          {pillar.description}
-                        </span>
-                      </div>
-                    </Link>
-                  ))}
+                  <div className="grid grid-cols-2 gap-3">
+                    {PILLARS.map((pillar, i) => (
+                      <Link
+                        key={pillar.name}
+                        href={pillar.href}
+                        role="menuitem"
+                        tabIndex={0}
+                        ref={(el) => {
+                          megaItemsRef.current[i] = el;
+                        }}
+                        onKeyDown={(e) => handleMegaItemKeyDown(e, i)}
+                        onClick={() => setMegaOpen(false)}
+                        className="flex items-center gap-3 rounded-lg p-4 hover:bg-tertiary transition-colors duration-200 group"
+                      >
+                        <div className={`w-10 h-10 rounded-lg bg-tertiary border border-elevated flex items-center justify-center ${pillar.color} group-hover:border-current transition-colors`}>
+                          <PillarIcon icon={pillar.icon} />
+                        </div>
+                        <div>
+                          <span className="font-body text-[15px] font-medium text-text-hero block">
+                            {pillar.name}
+                          </span>
+                          <span className="font-body text-[13px] text-text-secondary">
+                            {pillar.description}
+                          </span>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
                 </div>
               )}
             </div>

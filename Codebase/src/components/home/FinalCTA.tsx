@@ -9,15 +9,13 @@ const EASE_OUT: [number, number, number, number] = [0.25, 0.1, 0.25, 1];
 
 export function FinalCTA() {
   return (
-    <SectionWrapper id="cta" background="primary" glow="deltax">
-      {/* Background atmosphere image */}
+    <SectionWrapper id="cta" background="primary" glow="none">
+      {/* Teal radial glow - centered behind content */}
       <div
-        className="absolute inset-0 pointer-events-none"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] pointer-events-none z-0"
         style={{
-          backgroundImage: "url('/images/cta-atmosphere.png')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          opacity: 0.6,
+          background:
+            "radial-gradient(ellipse at center, rgba(26,155,191,0.12) 0%, transparent 60%)",
         }}
       />
 
