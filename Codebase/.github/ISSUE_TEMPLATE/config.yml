@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: DeltaX Support
+    url: mailto:hello@deltax.dev
+    about: For security issues or private inquiries, please email us directly.
+  - name: DeltaX Website
+    url: https://deltax.dev
+    about: Visit our website for more information.

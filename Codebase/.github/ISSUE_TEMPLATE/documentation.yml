@@ -1,0 +1,35 @@
+---
+name: Documentation
+description: Report an issue or suggest improvements to documentation
+title: '[DOCS] '
+labels: ['documentation']
+assignees: []
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: What needs to be documented?
+      description: Describe the documentation issue or improvement
+    validations:
+      required: true
+
+  - type: textarea
+    id: location
+    attributes:
+      label: Where is this documentation located?
+      description: File path, URL, or section reference
+
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: Suggested changes
+      description: What should the documentation say instead?
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code of Conduct
+      description: By submitting this issue, you agree to follow our [Code of Conduct](CODE_OF_CONDUCT.md)
+      options:
+        - label: I agree to follow this project's Code of Conduct
+          required: true
