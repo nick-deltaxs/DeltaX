@@ -1,6 +1,7 @@
+import { Suspense } from "react";
 import { Hero } from "@/components/home/Hero";
 import { TheProblem } from "@/components/home/TheProblem";
-import { TheSystem } from "@/components/home/TheSystem";
+import { Ecosystem } from "@/components/home/Ecosystem";
 import { TheProof } from "@/components/home/TheProof";
 import { TheArchitects } from "@/components/home/TheArchitects";
 import { YourPath } from "@/components/home/YourPath";
@@ -11,7 +12,7 @@ export default function HomePage() {
     <>
       <Hero />
       <TheProblem />
-      <TheSystem />
+      <Ecosystem />
       <TheProof />
       <TheArchitects />
       <YourPath />

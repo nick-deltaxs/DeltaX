@@ -1,0 +1,6 @@
+<svg viewBox="0 0 112 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="DeltaX logo" role="img">
+  <!-- Left triangle with rounded corners -->
+  <path d="M20 10 L40 10 L50 30 L30 50 Z" fill="currentColor"/>
+  <!-- Right diagonal bar -->
+  <rect x="55" y="15" width="12" height="70" rx="2" fill="currentColor" transform="rotate(15 61 50)"/>
+</svg>

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import type { ButtonProps } from "@/types";
+import { MagneticButton } from "./MagneticButton";
 
 const sizeMap = {
   large: "h-[52px] px-8 text-[16px]",
@@ -13,7 +14,7 @@ const variantMap = {
   primary:
     "bg-accent-gold text-primary hover:bg-accent-gold-hover font-body font-medium rounded-full transition-all duration-150",
   secondary:
-    "bg-transparent border border-text-muted text-text-body hover:border-text-body font-body font-medium rounded-full transition-all duration-150",
+    "border-[1.5px] border-white/[0.35] bg-white/[0.06] text-white backdrop-blur-[4px] hover:border-white/[0.60] hover:bg-white/[0.10] font-body font-medium rounded-full transition-all duration-200",
   ghost:
     "bg-transparent text-text-secondary hover:text-text-body font-body font-medium transition-all duration-150",
 };
@@ -37,30 +38,36 @@ export function Button({
     const isInternal = href.startsWith("/");
     if (isInternal) {
       return (
-        <Link href={href} className={classes}>
-          {children}
-        </Link>
+        <MagneticButton>
+          <Link href={href} className={classes}>
+            {children}
+          </Link>
+        </MagneticButton>
       );
     }
     return (
-      <a href={href} className={classes}>
-        {children}
-      </a>
+      <MagneticButton>
+        <a href={href} className={classes}>
+          {children}
+        </a>
+      </MagneticButton>
     );
   }
 
   return (
-    <button
-      type={type}
-      onClick={onClick}
-      disabled={disabled || loading}
-      aria-busy={loading}
-      className={classes}
-    >
-      {loading ? (
-        <span className="spinner w-4 h-4 border-2 border-current border-t-transparent rounded-full" />
-      ) : null}
-      {children}
-    </button>
+    <MagneticButton>
+      <button
+        type={type}
+        onClick={onClick}
+        disabled={disabled || loading}
+        aria-busy={loading}
+        className={classes}
+      >
+        {loading ? (
+          <span className="spinner w-4 h-4 border-2 border-current border-t-transparent rounded-full" />
+        ) : null}
+        {children}
+      </button>
+    </MagneticButton>
   );
 }

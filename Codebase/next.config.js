@@ -1,6 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   poweredByHeader: false,
+  output: 'export',
+  distDir: 'dist',
+  images: {
+    unoptimized: true,
+  },
   async headers() {
     return [
       {
