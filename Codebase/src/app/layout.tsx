@@ -3,8 +3,11 @@ import { Days_One, Inter, JetBrains_Mono } from "next/font/google";
 import { MotionConfig } from "framer-motion";
 import { Navbar } from "@/components/shared/Navbar";
 import { Footer } from "@/components/shared/Footer";
+import { Preloader } from "@/components/shared/Preloader";
 import { CursorSpotlight } from "@/components/ui/CursorSpotlight";
+import { SmoothScroll } from "@/components/ui/SmoothScroll";
 import "./globals.css";
+import "./preloader.css";
 
 const daysOne = Days_One({
   weight: "400",
@@ -68,7 +71,15 @@ export default function RootLayout({
       lang="en"
       className={`${daysOne.variable} ${inter.variable} ${jetbrainsMono.variable}`}
     >
-      <body className="bg-primary text-text-body font-body">
+      <body className="bg-primary text-text-body font-body" suppressHydrationWarning>
+        {/* Synchronous script — runs before React hydrates, injects dark backdrop instantly */}
+        <script dangerouslySetInnerHTML={{ __html:
+          `(function(){if(sessionStorage.getItem('dx_preloader'))return;var d=document.createElement('div');d.id='preloader-backdrop';document.body.appendChild(d);})();`
+        }} />
+        {/* Preloader React overlay — first interactive element in <body> */}
+        <MotionConfig reducedMotion="user">
+          <Preloader />
+        </MotionConfig>
         {/* Hardware gating — disable ambient effects on low-end devices (Linear pattern) */}
         <script
           dangerouslySetInnerHTML={{
@@ -82,10 +93,12 @@ export default function RootLayout({
           Skip to content
         </a>
         <MotionConfig reducedMotion="user">
-          <CursorSpotlight />
-          <Navbar />
-          <main id="main">{children}</main>
-          <Footer />
+          <SmoothScroll>
+            <CursorSpotlight />
+            <Navbar />
+            <main id="main">{children}</main>
+            <Footer />
+          </SmoothScroll>
         </MotionConfig>
         <script
           type="application/ld+json"

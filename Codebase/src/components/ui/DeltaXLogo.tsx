@@ -1,23 +1,23 @@
 import type { DeltaXLogoProps } from "@/types";
 
 export function DeltaXLogo({ className = "", size = 80 }: DeltaXLogoProps) {
-  const height = Math.round(size * 0.893);
+  const height = Math.round(size * 0.8026);
   return (
     <svg
       width={size}
       height={height}
-      viewBox="0 0 112 100"
+      viewBox="0 0 2429 1949"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={className}
       aria-label="DeltaX logo"
       role="img"
     >
-      <polygon points="0,0 34,0 50,24 33,50" fill="currentColor" />
-      <polygon points="66,0 100,0 67,50 50,24" fill="currentColor" />
-      <polygon points="33,50 0,100 34,100 50,76" fill="currentColor" />
-      <polygon points="50,76 66,100 100,100 67,50" fill="currentColor" />
-      <rect x="103" y="88" width="8" height="9" fill="currentColor" />
+      <path d="M922.978 1002.55C903.577 1031.95 860.679 1032.61 840.385 1003.82L385.554 358.749C362.402 325.911 385.476 280.559 425.65 279.942L1315.27 266.272C1355.45 265.654 1379.91 310.276 1357.77 343.809L922.978 1002.55Z" fill="currentColor" />
+      <path d="M548.877 1074.75C549.062 1074.47 549.375 1074.3 549.711 1074.3H1115.39C1116.19 1074.3 1116.67 1075.2 1116.21 1075.87L549.471 1904.67C549.285 1904.94 548.976 1905.1 548.646 1905.1H1.85974C1.06282 1905.1 0.586075 1904.22 1.02552 1903.55L548.877 1074.75Z" fill="currentColor" />
+      <path d="M1623.19 243.943C1623.38 243.663 1623.69 243.495 1624.03 243.495H2189.71C2190.51 243.495 2190.98 244.395 2190.53 245.059L1623.79 1073.86C1623.6 1074.13 1623.29 1074.3 1622.96 1074.3H1076.18C1075.38 1074.3 1074.9 1073.41 1075.34 1072.74L1623.19 243.943Z" fill="currentColor" />
+      <path d="M1609.12 1947.6C1609.3 1947.9 1609.62 1948.08 1609.97 1948.08H2161.13C2161.92 1948.08 2162.4 1947.21 2161.98 1946.54L1609.7 1074.77C1609.52 1074.48 1609.2 1074.3 1608.86 1074.3H1076.1C1075.32 1074.3 1074.84 1075.16 1075.25 1075.83L1609.12 1947.6Z" fill="currentColor" />
+      <rect x="2234" y="1745" width="195" height="203" rx="29" fill="currentColor" />
     </svg>
   );
 }

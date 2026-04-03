@@ -8,6 +8,14 @@ import { caseStudies } from "@/data/caseStudies";
 
 const EASE_OUT: [number, number, number, number] = [0.25, 0.1, 0.25, 1];
 
+// Color mapping for case studies
+const CASE_COLORS: Record<string, { primary: string; glow: string }> = {
+  DEVYN: { primary: "#f0b429", glow: "rgba(240, 180, 41, 0.3)" },
+  MINTBOX: { primary: "#1A9BBF", glow: "rgba(26, 155, 191, 0.3)" },
+  ORACLE: { primary: "#6E75FF", glow: "rgba(110, 117, 255, 0.3)" },
+  DAVE: { primary: "#D94040", glow: "rgba(217, 64, 64, 0.3)" },
+};
+
 const contentVariants = {
   hidden: { opacity: 0, y: 8 },
   visible: {
@@ -46,6 +54,7 @@ const CASE_STUDY_ROWS = [
 export function TheProof() {
   const [activeTab, setActiveTab] = useState(0);
   const activeCase = caseStudies[activeTab];
+  const activeColors = CASE_COLORS[activeCase.client];
   const sectionRef = useRef<HTMLElement>(null);
 
   // Parallax: glow moves at 0.4x speed, max 30px
@@ -146,19 +155,26 @@ export function TheProof() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-3 mt-12 mb-8">
           {caseStudies.map((study, index) => {
             const isActive = activeTab === index;
+            const colors = CASE_COLORS[study.client];
             return (
               <button
                 key={study.client}
                 onClick={() => setActiveTab(index)}
                 className={`group flex flex-col items-center justify-center gap-3 px-4 py-5 cursor-pointer rounded-lg transition-all duration-200 hover:translate-x-1 ${
                   isActive
-                    ? "border-2 border-accent-gold bg-tertiary/50"
+                    ? "border-2 bg-tertiary/50"
                     : "border border-elevated bg-secondary/50 hover:bg-tertiary/30"
                 }`}
+                style={{
+                  borderColor: isActive ? colors.primary : undefined,
+                }}
               >
-                <span className={`font-display text-xl transition-colors duration-200 ${
-                  isActive ? 'text-accent-gold' : 'text-text-secondary'
-                }`}>
+                <span 
+                  className={`font-display text-xl transition-colors duration-200 ${
+                    isActive ? '' : 'text-text-secondary'
+                  }`}
+                  style={{ color: isActive ? colors.primary : undefined }}
+                >
                   {study.client}
                 </span>
                 <span className={`font-body text-sm font-medium transition-colors duration-200 ${
@@ -173,12 +189,12 @@ export function TheProof() {
 
         {/* Content panel - Card Style */}
         <div className="relative overflow-hidden rounded-xl border border-elevated bg-secondary/30 p-6 md:p-8">
-          {/* Gold glow behind content with parallax */}
+          {/* Dynamic glow behind content with parallax */}
           <motion.div
             className="absolute inset-0 pointer-events-none z-0"
             style={{
               y: glowY,
-              background: `radial-gradient(ellipse at 20% 50%, rgba(240,180,41,0.08), transparent 60%)`,
+              background: `radial-gradient(ellipse at 20% 50%, ${activeColors.glow}, transparent 60%)`,
             }}
           />
 
@@ -196,14 +212,23 @@ export function TheProof() {
                 {/* Left column - main content */}
                 <div className="space-y-6">
                   {/* Client badge */}
-                  <div className="w-12 h-12 rounded-lg bg-tertiary flex items-center justify-center border border-accent-gold">
-                    <span className="font-display text-lg text-accent-gold">
+                  <div 
+                    className="w-12 h-12 rounded-lg bg-tertiary flex items-center justify-center border"
+                    style={{ borderColor: activeColors.primary }}
+                  >
+                    <span 
+                      className="font-display text-lg"
+                      style={{ color: activeColors.primary }}
+                    >
                       {activeCase.client.charAt(0)}
                     </span>
                   </div>
 
                   {/* Title */}
-                  <h3 className="font-display text-2xl md:text-3xl text-accent-gold">
+                  <h3 
+                    className="font-display text-2xl md:text-3xl"
+                    style={{ color: activeColors.primary }}
+                  >
                     {activeCase.client}
                   </h3>
 
@@ -221,7 +246,10 @@ export function TheProof() {
                 {/* Right column - stats */}
                 <div className="space-y-6">
                   <div className="space-y-2">
-                    <h4 className="font-mono text-xs uppercase tracking-[0.08em] text-accent-gold">
+                    <h4 
+                      className="font-mono text-xs uppercase tracking-[0.08em]"
+                      style={{ color: activeColors.primary }}
+                    >
                       Impact
                     </h4>
                     <p className="font-body text-sm text-text-secondary leading-relaxed">
@@ -229,7 +257,10 @@ export function TheProof() {
                     </p>
                   </div>
                   <div className="space-y-2">
-                    <h4 className="font-mono text-xs uppercase tracking-[0.08em] text-accent-gold">
+                    <h4 
+                      className="font-mono text-xs uppercase tracking-[0.08em]"
+                      style={{ color: activeColors.primary }}
+                    >
                       Timeline
                     </h4>
                     <p className="font-body text-sm text-text-secondary leading-relaxed">
@@ -258,7 +289,10 @@ export function TheProof() {
                       {row.label}
                     </span>
                     <div className="flex items-center gap-1">
-                      <span className="font-display text-2xl text-accent-gold">
+                      <span 
+                        className="font-display text-2xl"
+                        style={{ color: activeColors.primary }}
+                      >
                         {row.stat}
                       </span>
                       <span className="text-success ml-1">{row.arrow}</span>
